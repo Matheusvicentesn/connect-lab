@@ -20,4 +20,9 @@ export const HeaderStyled = styled.header`
     list-style: none;
     gap: 20px;
   }
+
+  a {
+    text-decoration: none;
+    color: #92c1d4;
+  }
 `;
