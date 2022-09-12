@@ -10,9 +10,13 @@ export const Header = () => {
           <img src={logo} alt="" />
           <nav>
             <ul>
-              <li>Início</li>
+              <li>
+                <Link to={"/inicio"}>Inicio</Link>
+              </li>
               <li>Dispositivos</li>
-              <li><Link to={'/perfil'}>Perfil</Link></li>
+              <li>
+                <Link to={"/perfil"}>Perfil</Link>
+              </li>
             </ul>
           </nav>
         </header>
