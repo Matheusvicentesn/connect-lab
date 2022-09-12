@@ -1,15 +1,18 @@
 // import "./App.css";
 import { Header } from "./components/Header/Header";
-import { Form } from "./components/Form/Form";
 import { GlobalStyle } from "./components/Theme/GlobalStyle";
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./router/Router";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Form />
-      <GlobalStyle />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <Router />
+        <GlobalStyle />
+      </div>
+    </BrowserRouter>
   );
 }
 

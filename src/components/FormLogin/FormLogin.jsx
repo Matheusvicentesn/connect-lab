@@ -1,6 +1,7 @@
-import { FormStyled } from "./Form.styles";
+import { Link } from "react-router-dom";
+import { FormStyled } from "./FormLogin.styles";
 
-export const Form = () => {
+export const FormLogin = () => {
   return (
     <>
       <FormStyled>
@@ -19,10 +20,10 @@ export const Form = () => {
             <button>Acessar</button>
             <br />
             <br />
-            <a href="link">
+            <Link to={'/cadastro'}>
               Cadastrar &nbsp;
               <i className="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+            </Link>
           </form>
         </div>
       </FormStyled>
