@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Cadastro } from "../pages/Cadastro/Cadastro";
+import { Dispositivos } from "../pages/Dispositivos/Dispositivos";
 import { Home } from "../pages/Home/Home";
 import { Inicio } from "../pages/Inicio/Inicio";
 import { Perfil } from "../pages/Perfil/Perfil";
@@ -10,6 +11,7 @@ export const Router = () => (
     <Route path="/cadastro" element={<Cadastro />}></Route>
     <Route path="/perfil" element={<Perfil />}></Route>
     <Route path="/inicio" element={<Inicio />}></Route>
+    <Route path="/dispositivos" element={<Dispositivos />}></Route>
     <Route path="*" element={<p>Erro 404</p>}></Route>
   </Routes>
 );
