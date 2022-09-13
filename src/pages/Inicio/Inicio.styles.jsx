@@ -10,7 +10,7 @@ export const CardStyled = styled.html`
     text-align: center;
   }
 
-   .busca {
+  .busca {
     margin-top: 50px;
     text-align: center;
   }
@@ -24,13 +24,14 @@ export const CardStyled = styled.html`
     display: grid;
     grid-template-columns: repeat(
       auto-fill,
-      minmax(350px, 1fr)
+      minmax(400px, 1fr)
     ); /* see notes below */
-    grid-auto-rows: minmax(200px, auto);
+    grid-auto-rows: minmax(100px, auto);
     grid-gap: 1rem;
   }
 
   .card {
+    height: 100px;
     display: grid;
     grid-template-rows: max-content 200px 1fr;
     -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
@@ -72,5 +73,10 @@ export const CardStyled = styled.html`
   .myButton:active {
     position: relative;
     top: 1px;
+  }
+
+  img {
+    width: 70px;
+    height: auto;
   }
 `;
