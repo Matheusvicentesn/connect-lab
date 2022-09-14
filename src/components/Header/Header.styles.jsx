@@ -6,12 +6,14 @@ export const HeaderStyled = styled.header`
     display: flex;
     padding: 18px 34px;
     align-items: center;
-    background-color: #002630;
-    color: #92c1d4;
+    background-color: #21495a;
+    color: #21495a;
+    font-weight: 500;
   }
 
   img {
     height: 70px;
+    width: auto;
   }
 
   ul {
@@ -23,6 +25,6 @@ export const HeaderStyled = styled.header`
 
   a {
     text-decoration: none;
-    color: #92c1d4;
+    color: #00a335;
   }
 `;

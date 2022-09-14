@@ -3,7 +3,7 @@ import { CardStyled } from "./Inicio.styles";
 // import api from "../../services/api";
 import { Fragment } from "react";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMDg5MDQxfQ.ME9UaSCqWvqDb9AOoLLd-kvguIhOl-7VaDQBQuq58pc";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMTEyNTczfQ.3yesy0i3iwwUJ14AppzxqVBjyVWU1ZRX3WZKywhGfO8";
 
 let lista = [];
 
@@ -50,7 +50,10 @@ export const Inicio = () => {
                 <>
                   <Fragment key={objeto.id}>
                     <article className="card">
-                      <img className="img" alt="foto" src={objeto.photoUrl} />
+                      <div className="info">
+                        <img className="img" alt="foto" src={objeto.photoUrl} />
+                      </div>
+
                       <div className="info">
                         <h2 className="infoTitulo">{objeto.name}</h2>
 
@@ -58,7 +61,6 @@ export const Inicio = () => {
                       </div>
                       <div className="footer">
                         <strong className="footerValor">{objeto.madeBy}</strong>
-
                       </div>
                     </article>
                   </Fragment>
