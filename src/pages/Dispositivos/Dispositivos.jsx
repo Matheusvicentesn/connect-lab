@@ -25,6 +25,12 @@ console.log(lista);
 export const Dispositivos = () => {
   const [busca, setBusca] = useState("");
   const listaFiltradas = lista.filter((item) => item.name.includes(busca));
+
+  function HandleSelecionar(event, param) {
+    console.log(event);
+    console.log(param);
+  }
+
   return (
     <main>
       <Card>
@@ -59,7 +65,12 @@ export const Dispositivos = () => {
                           <h2 className="infoTitulo">{objeto.name}</h2>
                         </div>
                         <div className="info">
-                          <button>Adicionar</button>
+                          <button
+                            id={objeto.id}
+                            onClick={(event) => HandleSelecionar(event, objeto)}
+                          >
+                            Adicionar
+                          </button>
                         </div>
                       </article>
                     </Fragment>

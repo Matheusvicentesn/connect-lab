@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
+
 export const GlobalStyle = createGlobalStyle`
     * {
         padding:0;
@@ -7,7 +8,10 @@ export const GlobalStyle = createGlobalStyle`
         vertical-align:baseline;
         list-style:none;
         border:0;
+
 }
+
+
 #root{     
     height: 100vh;
     width: 100%;
