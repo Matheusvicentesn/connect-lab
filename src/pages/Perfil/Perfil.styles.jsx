@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardStyled = styled.html`
+export const CardStyled = styled.div`
   h2 {
     margin-bottom: 15px;
     color: white;

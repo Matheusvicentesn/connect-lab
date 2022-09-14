@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardStyled = styled.html`
+export const CardStyled = styled.div`
   .Previsao {
     /* border: solid 1px red; */
     height: 150px;

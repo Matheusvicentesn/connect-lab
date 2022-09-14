@@ -2,6 +2,7 @@ import { Card } from "../../components/Card/Card";
 import { CardStyled } from "./Dispositivos.style";
 import { Fragment, useState } from "react";
 
+
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMTEyNTczfQ.3yesy0i3iwwUJ14AppzxqVBjyVWU1ZRX3WZKywhGfO8";
 
@@ -27,7 +28,7 @@ export const Dispositivos = () => {
   const listaFiltradas = lista.filter((item) => item.name.includes(busca));
 
   function HandleSelecionar(event, param) {
-    console.log(event);
+    // console.log(event);
     console.log(param);
   }
 
