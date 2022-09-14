@@ -1,6 +1,6 @@
 import { Card } from "../../components/Card/Card";
 import { CardStyled } from "./Dispositivos.style";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMTEyNTczfQ.3yesy0i3iwwUJ14AppzxqVBjyVWU1ZRX3WZKywhGfO8";
@@ -23,6 +23,8 @@ lista = await fetch("https://connectlab.onrender.com/devices", {
 console.log(lista);
 
 export const Dispositivos = () => {
+  const [busca, setBusca] = useState("");
+  const listaFiltradas = lista.filter((item) => item.name.includes(busca));
   return (
     <main>
       <Card>
@@ -33,11 +35,16 @@ export const Dispositivos = () => {
             </div>
             <hr />
             <div className="busca">
-              <input type="text" /> <button>Pesquisar</button>
+              <input
+                type="text"
+                value={busca}
+                onChange={(e) => setBusca(e.target.value)}
+              />{" "}
+              <button>Pesquisar</button>
             </div>
             <div className="displaycards">
               <section className="cards">
-                {lista.map((objeto) => (
+                {listaFiltradas.map((objeto) => (
                   <>
                     <Fragment key={objeto.id}>
                       <article className="card">
