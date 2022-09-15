@@ -61,9 +61,9 @@ export const Dispositivos = () => {
           <label htmlFor="local">local</label>
           <select>
             {locais.map((objeto) => (
-              <>
+              <Fragment key={objeto.description}>
                 <option value="">{objeto.description}</option>
-              </>
+              </Fragment>
             ))}
           </select>
           <label htmlFor="comodo">Cômodo</label>
@@ -88,33 +88,27 @@ export const Dispositivos = () => {
             <div className="displaycards">
               <section className="cards">
                 {listaFiltradas.map((objeto) => (
-                  <>
-                    <Fragment key={objeto.id}>
-                      <article className="card">
-                        <div className="info">
-                          <img
-                            className="img"
-                            alt="foto"
-                            src={objeto.photoUrl}
-                          />
-                        </div>
-                        <div className="info">
-                          <h2 className="infoTitulo">{objeto.name}</h2>
-                        </div>
-                        <div className="info">
-                          {/* Aqui Mika */}
-                          <button
-                            onClick={(event) => {
-                              HandleSelecionar(event, objeto);
-                              HandleModal();
-                            }}
-                          >
-                            Adicionar
-                          </button>
-                        </div>
-                      </article>
-                    </Fragment>
-                  </>
+                  <Fragment key={objeto._id}>
+                    <article className="card">
+                      <div className="info">
+                        <img className="img" alt="foto" src={objeto.photoUrl} />
+                      </div>
+                      <div className="info">
+                        <h2 className="infoTitulo">{objeto.name}</h2>
+                      </div>
+                      <div className="info">
+                        {/* Aqui Mika */}
+                        <button
+                          onClick={(event) => {
+                            HandleSelecionar(event, objeto);
+                            HandleModal();
+                          }}
+                        >
+                          Adicionar
+                        </button>
+                      </div>
+                    </article>
+                  </Fragment>
                 ))}
               </section>
             </div>
