@@ -7,7 +7,7 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMTEyNTczfQ.3yesy0i3iwwUJ14AppzxqVBjyVWU1ZRX3WZKywhGfO8";
 
 let lista = [];
-let locais = []
+let locais = [];
 
 lista = await fetch("https://connectlab.onrender.com/devices", {
   method: "get",
@@ -36,16 +36,16 @@ locais = await fetch("https://connectlab.onrender.com/locals", {
   .then((data) => {
     return data;
   });
-console.log(locais)
+console.log(locais);
 
 export const Dispositivos = () => {
   const [busca, setBusca] = useState("");
   const listaFiltradas = lista.filter((item) => item.name.includes(busca));
 
+  // Aqui Mika
   function HandleSelecionar(event, param) {
     console.log(param);
   }
-
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -60,11 +60,11 @@ export const Dispositivos = () => {
         <form action="">
           <label htmlFor="local">local</label>
           <select>
-            {locais.map((objeto => (
+            {locais.map((objeto) => (
               <>
-              <option value="">{objeto.description}</option>
+                <option value="">{objeto.description}</option>
               </>
-            )))}
+            ))}
           </select>
           <label htmlFor="comodo">Cômodo</label>
           <input type="text" />
@@ -102,6 +102,7 @@ export const Dispositivos = () => {
                           <h2 className="infoTitulo">{objeto.name}</h2>
                         </div>
                         <div className="info">
+                          {/* Aqui Mika */}
                           <button
                             onClick={(event) => {
                               HandleSelecionar(event, objeto);
