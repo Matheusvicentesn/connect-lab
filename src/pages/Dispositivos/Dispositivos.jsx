@@ -3,11 +3,11 @@ import { CardStyled } from "./Dispositivos.style";
 import { Fragment, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 
-
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMTEyNTczfQ.3yesy0i3iwwUJ14AppzxqVBjyVWU1ZRX3WZKywhGfO8";
 
 let lista = [];
+let locais = []
 
 lista = await fetch("https://connectlab.onrender.com/devices", {
   method: "get",
@@ -24,18 +24,52 @@ lista = await fetch("https://connectlab.onrender.com/devices", {
 
 console.log(lista);
 
+locais = await fetch("https://connectlab.onrender.com/locals", {
+  method: "get",
+  headers: new Headers({
+    Authorization: `Bearer ${token}`,
+  }),
+})
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    return data;
+  });
+console.log(locais)
+
 export const Dispositivos = () => {
   const [busca, setBusca] = useState("");
   const listaFiltradas = lista.filter((item) => item.name.includes(busca));
 
   function HandleSelecionar(event, param) {
-    // console.log(event);
     console.log(param);
+  }
+
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  function HandleModal() {
+    setIsOpen(true);
   }
 
   return (
     <main>
-      <Modal>Francy</Modal>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+        <h2>Nome do dispositivo</h2>
+        <form action="">
+          <label htmlFor="local">local</label>
+          <select>
+            {locais.map((objeto => (
+              <>
+              <option value="">{objeto.description}</option>
+              </>
+            )))}
+          </select>
+          <label htmlFor="comodo">Cômodo</label>
+          <input type="text" />
+        </form>
+      </Modal>
       <Card>
         <CardStyled>
           <div className="container">
@@ -69,8 +103,10 @@ export const Dispositivos = () => {
                         </div>
                         <div className="info">
                           <button
-                            id={objeto.id}
-                            onClick={(event) => HandleSelecionar(event, objeto)}
+                            onClick={(event) => {
+                              HandleSelecionar(event, objeto);
+                              HandleModal();
+                            }}
                           >
                             Adicionar
                           </button>

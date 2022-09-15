@@ -107,3 +107,16 @@ export const CardStyled = styled.div`
     cursor: pointer;
   }
 `;
+
+export const ModalTest = styled.div`
+  .buttonWrapperStyles {
+    position: relative;
+    z-index: 1;
+  }
+  .otherContentStyles {
+    position: relative;
+    z-index: 2;
+    background-color: red;
+    padding: 10;
+  }
+`;
