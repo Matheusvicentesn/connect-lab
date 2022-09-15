@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
-          <Router />
+        <Router />
         <GlobalStyle />
       </div>
     </BrowserRouter>

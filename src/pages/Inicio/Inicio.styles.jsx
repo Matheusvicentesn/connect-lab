@@ -13,31 +13,36 @@ export const CardStyled = styled.div`
   .busca {
     margin-top: 50px;
     text-align: center;
+    margin-bottom: 50px;
   }
 
-  .displaycards {
-    /* border: solid 1px red; */
-    margin-top: 50px;
+  img {
+    width: 70px;
+    height: auto;
+    float: left;
   }
 
   .cards {
     display: grid;
     grid-template-columns: repeat(
       auto-fill,
-      minmax(400px, 1fr)
+      minmax(600px, 1fr)
     ); /* see notes below */
     grid-auto-rows: minmax(100px, auto);
     grid-gap: 1rem;
   }
 
   .card {
-    height: 100px;
-    display: grid;
-    grid-template-rows: max-content 200px 1fr;
+    position: relative;
+    border: solid 1px red;
+    display: inline-block;
+    border: 1px solid red;
+    margin: 10px;
+    grid-template-rows: max-content 50px 1fr;
     -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
     padding: 16px;
-    background-color: #323232;
+    background-color: #fff;
     border-radius: 10px;
     /* border: 1px solid red; */
     transition: all 0.2s;
@@ -46,37 +51,23 @@ export const CardStyled = styled.div`
     transform: scale(1.04);
   }
 
-  .card h1 {
-    text-align: center;
-  }
-
-  .card p {
-    font-size: large;
+  .card h2 {
     margin-top: 0px;
+    font-size: 18px;
   }
 
-  .myButton {
-    box-shadow: 0px 0px 0px 2px #eaebf0;
-    background-color: transparent;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 19px;
-    padding: 12px 37px;
+  Button {
+    background-color: #d37b16;
+    border-radius: 18px;
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
     text-decoration: none;
-    text-shadow: 0px 1px 0px #283966;
-  }
-  .myButton:hover {
-    background-color: transparent;
-  }
-  .myButton:active {
-    position: relative;
-    top: 1px;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
   }
 
-  img {
-    width: 70px;
-    height: auto;
-  }
 `;
