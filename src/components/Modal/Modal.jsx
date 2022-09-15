@@ -9,7 +9,7 @@ const Modal = ({ open, children, onClose }) => {
         <div>
           <ModalStyled>
             {children}
-            <button onClick={onClose}> Close 2</button>
+            <button onClick={onClose}> Fechar</button>
           </ModalStyled>
         </div>
       </Overlay>
