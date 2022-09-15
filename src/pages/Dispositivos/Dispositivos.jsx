@@ -1,6 +1,7 @@
 import { Card } from "../../components/Card/Card";
 import { CardStyled } from "./Dispositivos.style";
 import { Fragment, useState } from "react";
+import Modal from "../../components/Modal/Modal";
 
 
 const token =
@@ -34,6 +35,7 @@ export const Dispositivos = () => {
 
   return (
     <main>
+      <Modal>Francy</Modal>
       <Card>
         <CardStyled>
           <div className="container">
