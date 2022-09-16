@@ -4,10 +4,10 @@ import Modal from "../../components/Modal/Modal";
 
 import { Fragment, useState } from "react";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMjc2ODM5fQ.QdsQ3p1saOE3GTm4wsHmSYNDw44R-YSloAOGXovW6gg";
-let lista2 = [];
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMzM4MDkyfQ.V6y5mEdl9Dyz6SbQPO5HeZ6l4kuDYWtCpp9WiEQDE2U";
+let lista = [];
 
-lista2 = await fetch(
+lista = await fetch(
   "https://connectlab.onrender.com/userDevices/user/631fd7c1ee4b688499a77759",
   {
     method: "get",
@@ -33,11 +33,15 @@ export const Inicio = () => {
   // Preenchimento do Modal
   const [modalInfo, setModalInfo] = useState({});
   function HandleSelecionar(event, param) {
-    console.log(param);
     setModalInfo(param);
   }
 
-  console.log(modalInfo);
+  // Filtro de dispositivos
+  const [filter, setFilter] = useState(null);
+  function handleFiltro(filtro) {
+    setFilter(filtro);
+  }
+
   return (
     <main>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
@@ -56,37 +60,70 @@ export const Inicio = () => {
           <div className="container">
             <div className="Previsao">DATA HORA E PREVISÃO DO TEMPO</div>
             <div className="busca">
-              <button className="myButton">Todos</button>
-              <button className="myButton">Casa</button>
-              <button className="myButton">Escritóro</button>
+              <button
+                className="myButton"
+                onClick={(event) => {
+                  handleFiltro(null);
+                }}
+              >
+                Todos
+              </button>
+              <button
+                className="myButton"
+                onClick={(event) => {
+                  handleFiltro("Casa");
+                }}
+              >
+                Casa
+              </button>
+              <button
+                className="myButton"
+                onClick={(event) => {
+                  handleFiltro("Escritório");
+                }}
+              >
+                Escritóro
+              </button>
+              <button
+                className="myButton"
+                onClick={(event) => {
+                  handleFiltro("Fábrica");
+                }}
+              >
+                Fábrica
+              </button>
             </div>
             <section className="cards">
-              {lista2.map((objeto, id) => (
+              {lista.map((objeto, id) => (
                 <Fragment key={id}>
-                  <article
-                    className="card"
-                    onClick={(event) => {
-                      HandleSelecionar(event, objeto);
-                      HandleModal();
-                    }}
-                  >
-                    <div className="info">
-                      <img
-                        className="img"
-                        alt="foto"
-                        src={objeto.device.photoUrl}
-                      />
-                    </div>
+                  {(!filter || filter === objeto.local?.description) && (
+                    <article
+                      className="card"
+                      onClick={(event) => {
+                        HandleSelecionar(event, objeto);
+                        HandleModal();
+                      }}
+                    >
+                      <div className="info">
+                        <img
+                          className="img"
+                          alt="foto"
+                          src={objeto.device.photoUrl}
+                        />
+                      </div>
 
-                    <div className="infoText">
-                      <h2 className="infoTitulo">{objeto.device.name}</h2>
-                    </div>
-                    <div className="btn">
-                      <button className="btnOn">
-                        <i className="fa-solid fa-power-off"></i>
-                      </button>
-                    </div>
-                  </article>
+                      <div className="infoText">
+                        <h2 className="infoTitulo">{objeto.device.name}</h2>
+                        <p>{objeto.local?.description}</p>
+                        <p>{objeto.room}</p>
+                      </div>
+                      <div className="btn">
+                        <button className="btnOn">
+                          <i className="fa-solid fa-power-off"></i>
+                        </button>
+                      </div>
+                    </article>
+                  )}
                 </Fragment>
               ))}
             </section>

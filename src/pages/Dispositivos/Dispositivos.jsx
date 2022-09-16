@@ -5,7 +5,8 @@ import Modal from "../../components/Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMjgwNjIwfQ.WwFhU9F8smptibR-VB-5ZZwhCDzpleSle6myBBJbmS0"
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMzM4MDkyfQ.V6y5mEdl9Dyz6SbQPO5HeZ6l4kuDYWtCpp9WiEQDE2U";
 let lista = [];
 let locais = [];
 
@@ -81,6 +82,7 @@ export const Dispositivos = () => {
         room,
       }),
     });
+    console.log('chamou')
     setIsOpen(false);
   };
 
@@ -91,7 +93,7 @@ export const Dispositivos = () => {
         <img src={modalInfo.photoUrl} alt="" />
         <form action="">
           <label htmlFor="local">local</label>
-          <select value={local} onChange={(e) => setLocal(e.target.value)}>
+          <select value={local} onBlur={(e) => setLocal(e.target.value)}>
             {locais.map((objeto) => (
               <Fragment key={objeto.description}>
                 <option value={objeto._id}>{objeto.description}</option>
@@ -137,7 +139,6 @@ export const Dispositivos = () => {
                         <h2 className="infoTitulo">{objeto.name}</h2>
                       </div>
                       <div className="info">
-                        {/* Aqui Mika */}
                         <button
                           onClick={(event) => {
                             HandleSelecionar(event, objeto);
