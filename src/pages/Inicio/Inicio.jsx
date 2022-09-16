@@ -3,26 +3,28 @@ import { CardStyled, WeatherStyled } from "./Inicio.styles";
 import Modal from "../../components/Modal/Modal";
 import ReactWeather, { useVisualCrossing } from "react-open-weather";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMzM4MDkyfQ.V6y5mEdl9Dyz6SbQPO5HeZ6l4kuDYWtCpp9WiEQDE2U";
-let lista = [];
+// let lista = [];
 
-lista = await fetch(
-  "https://connectlab.onrender.com/userDevices/user/631fd7c1ee4b688499a77759",
-  {
-    method: "get",
-    headers: new Headers({
-      Authorization: `Bearer ${token}`,
-    }),
-  },
-)
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    return data;
-  });
+function buscarDispositivos() {
+  return fetch(
+    "https://connectlab.onrender.com/userDevices/user/631fd7c1ee4b688499a77759",
+    {
+      method: "get",
+      headers: new Headers({
+        Authorization: `Bearer ${token}`,
+      }),
+    },
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data;
+    });
+}
 
 // export function handleUpdate() {
 //   lista =  fetch(
@@ -61,15 +63,23 @@ export const Inicio = () => {
     setFilter(filtro);
   }
 
-  // Open Weather
+  // VisualCrossing
 
   const { data, isLoading, errorMessage } = useVisualCrossing({
     key: "PK2ERHPTFRQ8CXFMX43AXMRT8",
     lat: "-23.627",
     lon: "-46.655",
     lang: "pt",
-    unit: "metric", // values are (metric,us,uk)
+    unit: "metric",
   });
+
+  const [lista, setLista] = useState([]);
+
+  useEffect(() => {
+    buscarDispositivos().then((dispositivos) => {
+      setLista(dispositivos);
+    });
+  }, []);
 
   return (
     <main>
