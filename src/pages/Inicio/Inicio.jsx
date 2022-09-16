@@ -1,6 +1,7 @@
 import { Card } from "../../components/Card/Card";
-import { CardStyled } from "./Inicio.styles";
+import { CardStyled, WeatherStyled } from "./Inicio.styles";
 import Modal from "../../components/Modal/Modal";
+import ReactWeather, { useVisualCrossing } from "react-open-weather";
 
 import { Fragment, useState } from "react";
 const token =
@@ -23,6 +24,24 @@ lista = await fetch(
     return data;
   });
 
+// export function handleUpdate() {
+//   lista =  fetch(
+//     "https://connectlab.onrender.com/userDevices/user/631fd7c1ee4b688499a77759",
+//     {
+//       method: "get",
+//       headers: new Headers({
+//         Authorization: `Bearer ${token}`,
+//       }),
+//     },
+//   )
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((data) => {
+//       return data;
+//     });
+// }
+
 export const Inicio = () => {
   // Abertura do modal
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +61,16 @@ export const Inicio = () => {
     setFilter(filtro);
   }
 
+  // Open Weather
+
+  const { data, isLoading, errorMessage } = useVisualCrossing({
+    key: "PK2ERHPTFRQ8CXFMX43AXMRT8",
+    lat: "-23.627",
+    lon: "-46.655",
+    lang: "pt",
+    unit: "metric", // values are (metric,us,uk)
+  });
+
   return (
     <main>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
@@ -58,7 +87,19 @@ export const Inicio = () => {
       <Card>
         <CardStyled>
           <div className="container">
-            <div className="Previsao">DATA HORA E PREVISÃO DO TEMPO</div>
+            <div className="Previsao">
+              <WeatherStyled>
+                <ReactWeather
+                  isLoading={isLoading}
+                  errorMessage={errorMessage}
+                  data={data}
+                  lang="pt"
+                  locationLabel="São Paulo"
+                  unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
+                  showForecast
+                />
+              </WeatherStyled>
+            </div>
             <div className="busca">
               <button
                 className="myButton"

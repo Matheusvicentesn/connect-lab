@@ -4,6 +4,7 @@ import { Fragment, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import { handleUpdate } from "../Inicio/Inicio";
 
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMzM4MDkyfQ.V6y5mEdl9Dyz6SbQPO5HeZ6l4kuDYWtCpp9WiEQDE2U";
@@ -82,7 +83,7 @@ export const Dispositivos = () => {
         room,
       }),
     });
-    console.log('chamou')
+    console.log("chamou");
     setIsOpen(false);
   };
 
@@ -107,6 +108,7 @@ export const Dispositivos = () => {
           onClick={() => {
             handleSalvar();
             notify();
+            // handleUpdate()
           }}
         >
           Salvar

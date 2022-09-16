@@ -11,7 +11,7 @@ export const CardStyled = styled.div`
   }
 
   .busca {
-    margin-top: 50px;
+    margin-top: 300px;
     text-align: center;
     margin-bottom: 50px;
   }
@@ -69,5 +69,10 @@ export const CardStyled = styled.div`
     margin: 4px 2px;
     cursor: pointer;
   }
+`;
 
+export const WeatherStyled = styled.div`
+  width: 100%;
+  height: 20px;
+  margin-bottom: 500px;
 `;
