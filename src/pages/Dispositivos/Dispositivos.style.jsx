@@ -53,7 +53,7 @@ export const CardStyled = styled.div`
     margin-top: 50px;
   }
   .btnCard {
-    border: solid 1px red;
+    /* border: solid 1px red; */
   }
   .cards {
     display: grid;

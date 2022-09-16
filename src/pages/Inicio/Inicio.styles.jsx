@@ -34,9 +34,8 @@ export const CardStyled = styled.div`
 
   .card {
     position: relative;
-    border: solid 1px red;
     display: inline-block;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin: 10px;
     grid-template-rows: max-content 50px 1fr;
     -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
