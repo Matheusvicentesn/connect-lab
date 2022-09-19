@@ -87,6 +87,8 @@ export const Dispositivos = () => {
     setIsOpen(false);
   };
 
+  
+
   return (
     <main>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
@@ -94,7 +96,8 @@ export const Dispositivos = () => {
         <img src={modalInfo.photoUrl} alt="" />
         <form action="">
           <label htmlFor="local">local</label>
-          <select value={local} onBlur={(e) => setLocal(e.target.value)}>
+          <select value={local} onChange={(e) => setLocal(e.target.value)}>
+            <option value=''>Selecione um local</option>
             {locais.map((objeto) => (
               <Fragment key={objeto.description}>
                 <option value={objeto._id}>{objeto.description}</option>
@@ -108,7 +111,6 @@ export const Dispositivos = () => {
           onClick={() => {
             handleSalvar();
             notify();
-            // handleUpdate()
           }}
         >
           Salvar
