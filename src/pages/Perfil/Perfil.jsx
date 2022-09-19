@@ -5,7 +5,7 @@ import { Context } from "../../context/autenticacao/app-context";
 import { useContext } from "react";
 
 let usuario = [];
-const token = userData.token
+const token = sessionStorage.getItem("usuario", "token");
 usuario = await fetch(
   "https://connectlab.onrender.com/users/631fd7c1ee4b688499a77759",
   {
