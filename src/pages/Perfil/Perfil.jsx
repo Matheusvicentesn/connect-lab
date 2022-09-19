@@ -5,8 +5,7 @@ import { Context } from "../../context/autenticacao/app-context";
 import { useContext } from "react";
 
 let usuario = [];
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMzM4MDkyfQ.V6y5mEdl9Dyz6SbQPO5HeZ6l4kuDYWtCpp9WiEQDE2U";
+const token = userData.token
 usuario = await fetch(
   "https://connectlab.onrender.com/users/631fd7c1ee4b688499a77759",
   {
@@ -25,7 +24,7 @@ usuario = await fetch(
 
 export const Perfil = () => {
   const { userData } = useContext(Context);
-  console.log(userData);
+  console.log(userData.token);
 
   return (
     <Card>

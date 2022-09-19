@@ -7,7 +7,7 @@ export const FormLogin = () => {
  
 
   const { auth, handleLogin } = useContext(Context);
-  console.log(auth);
+  console.log('Usuário logado ?',auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
