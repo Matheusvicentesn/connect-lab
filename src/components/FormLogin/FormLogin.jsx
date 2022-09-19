@@ -1,37 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FormStyled } from "./FormLogin.styles";
+import { Context } from "../../context/autenticacao/app-context";
 
 export const FormLogin = () => {
+ 
+
+  const { auth, handleLogin } = useContext(Context);
+  console.log(auth);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    fetch("https://connectlab.onrender.com/auth/login", {
-      method: "POST",
-
-      headers: new Headers({
-        "Content-Type": "application/json",
-      }),
-
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data.token);
-        if (data.error) {
-          alert("Erro senha ou email");
-        } else {
-          alert("Login efetuado e seu token é" + data.token);
-        }
-      });
-  };
 
   return (
     <>
@@ -56,7 +35,14 @@ export const FormLogin = () => {
             />
             <br />
             <br />
-            <button onClick={handleLogin}>Acessar</button>
+            <button
+              type="button"
+              onClick={(e) => {
+                handleLogin(e, email, password);
+              }}
+            >
+              Acessar
+            </button>
             <br />
             <br />
             <Link to={"/cadastro"}>

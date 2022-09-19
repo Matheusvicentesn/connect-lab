@@ -1,6 +1,8 @@
 import { Card } from "../../components/Card/Card";
 import { CardStyled } from "./Perfil.styles";
 import { Link } from "react-router-dom";
+import { Context } from "../../context/autenticacao/app-context";
+import { useContext } from "react";
 
 let usuario = [];
 const token =
@@ -22,6 +24,9 @@ usuario = await fetch(
   });
 
 export const Perfil = () => {
+  const { userData } = useContext(Context);
+  console.log(userData);
+
   return (
     <Card>
       <CardStyled>

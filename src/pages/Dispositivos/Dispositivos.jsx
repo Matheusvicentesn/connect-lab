@@ -87,7 +87,8 @@ export const Dispositivos = () => {
     setIsOpen(false);
   };
 
-  
+  const credenciais = sessionStorage.getItem("usuario");
+  console.log(credenciais);
 
   return (
     <main>
@@ -97,7 +98,7 @@ export const Dispositivos = () => {
         <form action="">
           <label htmlFor="local">local</label>
           <select value={local} onChange={(e) => setLocal(e.target.value)}>
-            <option value=''>Selecione um local</option>
+            <option value="">Selecione um local</option>
             {locais.map((objeto) => (
               <Fragment key={objeto.description}>
                 <option value={objeto._id}>{objeto.description}</option>
