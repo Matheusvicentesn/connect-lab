@@ -23,8 +23,8 @@ usuario = await fetch(
   });
 
 export const Perfil = () => {
-  const { userData } = useContext(Context);
-  console.log(userData.token);
+  const { auth } = useContext(Context);
+  console.log(auth);
 
   return (
     <Card>
