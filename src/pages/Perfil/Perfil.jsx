@@ -6,8 +6,8 @@ import { useContext, useState, useEffect } from "react";
 import Loading from "../../components/Loading/Loading";
 import { buscarPerfil } from "../../services/api";
 
-const token = JSON.parse(sessionStorage.getItem("usuario")).token;
-const user = JSON.parse(sessionStorage.getItem("usuario")).user?._id;
+const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
+const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
 
 export const Perfil = () => {
   const { auth } = useContext(Context);

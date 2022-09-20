@@ -5,8 +5,9 @@ import ReactWeather, { useVisualCrossing } from "react-open-weather";
 
 import { Fragment, useEffect, useState } from "react";
 import { buscarDispositivosUsuario } from "../../services/api";
-const token = JSON.parse(sessionStorage.getItem("usuario")).token;
-const user = JSON.parse(sessionStorage.getItem("usuario")).user?._id;
+import Loading from "../../components/Loading/Loading";
+const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
+const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
 
 export const Inicio = () => {
   // Abertura do modal
@@ -106,40 +107,44 @@ export const Inicio = () => {
                 Fábrica
               </button>
             </div>
-            <section className="cards">
-              {lista.map((objeto, id) => (
-                <Fragment key={id}>
-                  {(!filter || filter === objeto.local?.description) && (
-                    <article
-                      className="card"
-                      onClick={(event) => {
-                        HandleSelecionar(event, objeto);
-                        HandleModal();
-                      }}
-                    >
-                      <div className="info">
-                        <img
-                          className="img"
-                          alt="foto"
-                          src={objeto.device.photoUrl}
-                        />
-                      </div>
+            {!lista ? (
+              <Loading />
+            ) : (
+              <section className="cards">
+                {lista?.map((objeto, id) => (
+                  <Fragment key={id}>
+                    {(!filter || filter === objeto.local?.description) && (
+                      <article
+                        className="card"
+                        onClick={(event) => {
+                          HandleSelecionar(event, objeto);
+                          HandleModal();
+                        }}
+                      >
+                        <div className="info">
+                          <img
+                            className="img"
+                            alt="foto"
+                            src={objeto.device.photoUrl}
+                          />
+                        </div>
 
-                      <div className="infoText">
-                        <h2 className="infoTitulo">{objeto.device.name}</h2>
-                        <p>{objeto.local?.description}</p>
-                        <p>{objeto.room}</p>
-                      </div>
-                      <div className="btn">
-                        <button className="btnOn">
-                          <i className="fa-solid fa-power-off"></i>
-                        </button>
-                      </div>
-                    </article>
-                  )}
-                </Fragment>
-              ))}
-            </section>
+                        <div className="infoText">
+                          <h2 className="infoTitulo">{objeto.device.name}</h2>
+                          <p>{objeto.local?.description}</p>
+                          <p>{objeto.room}</p>
+                        </div>
+                        <div className="btn">
+                          <button className="btnOn">
+                            <i className="fa-solid fa-power-off"></i>
+                          </button>
+                        </div>
+                      </article>
+                    )}
+                  </Fragment>
+                ))}
+              </section>
+            )}
           </div>
         </CardStyled>
       </Card>

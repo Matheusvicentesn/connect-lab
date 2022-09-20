@@ -7,8 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { buscarDispositivos, buscarLocais, salvarDispositivos } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 
-const token = JSON.parse(sessionStorage.getItem("usuario")).token;
-const user = JSON.parse(sessionStorage.getItem("usuario")).user?._id;
+const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
+const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
 
 export const Dispositivos = () => {
   // Buscar dispositivos
