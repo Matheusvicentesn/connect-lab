@@ -1,16 +1,20 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormStyled } from "./FormLogin.styles";
 import { Context } from "../../context/autenticacao/app-context";
 
 export const FormLogin = () => {
- 
-
   const { auth, handleLogin } = useContext(Context);
-  console.log('Usuário logado ?',auth);
+  console.log("Usuário logado ?", auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  function handleRedirect() {
+    navigate("/")
+  }
 
   return (
     <>
@@ -39,6 +43,7 @@ export const FormLogin = () => {
               type="button"
               onClick={(e) => {
                 handleLogin(e, email, password);
+                handleRedirect();
               }}
             >
               Acessar
