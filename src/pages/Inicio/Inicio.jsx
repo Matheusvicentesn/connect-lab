@@ -4,7 +4,10 @@ import Modal from "../../components/Modal/Modal";
 import ReactWeather, { useVisualCrossing } from "react-open-weather";
 
 import { Fragment, useEffect, useState } from "react";
-import { buscarDispositivosUsuario } from "../../services/api";
+import {
+  atualizarDispositivoUsuario,
+  buscarDispositivosUsuario,
+} from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
 const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
@@ -38,11 +41,27 @@ export const Inicio = () => {
     unit: "metric",
   });
 
+  // Bussca dispositivos
   const [lista, setLista] = useState([]);
-
   useEffect(() => {
     buscarDispositivosUsuario(token, user, setLista);
   }, []);
+
+  // ajuda Thais
+  // capturar id do device
+  const [deviceId, setDeviceId] = useState();
+  function capturarDevice(event, param) {
+    setDeviceId(param._id);
+  }
+  console.log(deviceId);
+  // ajuda Thais
+  // toggle ligar/desligar
+  const [toggle, setToggle] = useState(false);
+  useEffect(() => {
+    atualizarDispositivoUsuario(token, deviceId, toggle);
+  }, []);
+
+  console.log(toggle);
 
   return (
     <main>
@@ -55,6 +74,7 @@ export const Inicio = () => {
         <p>{modalInfo.device?.info?.ip_address}</p>
         <p>{modalInfo.device?.info?.mac_address}</p>
         <p>{modalInfo.device?.info?.signal}</p>
+        {!modalInfo.is_on ? <p>Desligado</p> : <p>Ligado</p>}
         <img src={modalInfo.device?.photoUrl} alt=""></img>
       </Modal>
       <Card>
@@ -135,7 +155,14 @@ export const Inicio = () => {
                           <p>{objeto.room}</p>
                         </div>
                         <div className="btn">
-                          <button className="btnOn">
+                          <button
+                            className="btnOn"
+                            onClick={(event) => {
+                              capturarDevice(event, objeto);
+                              setToggle(!toggle);
+                              atualizarDispositivoUsuario();
+                            }}
+                          >
                             <i className="fa-solid fa-power-off"></i>
                           </button>
                         </div>
