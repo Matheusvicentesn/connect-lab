@@ -37,8 +37,14 @@ function AuthProvider({ children }) {
       });
   }
 
+  function handleLogout(e) {
+    e.preventDefault();
+    setAuth(false);
+    sessionStorage.clear();
+  }
+
   return (
-    <Context.Provider value={{ auth, handleLogin, userData }}>
+    <Context.Provider value={{ auth, handleLogin, userData, handleLogout }}>
       {children}
     </Context.Provider>
   );

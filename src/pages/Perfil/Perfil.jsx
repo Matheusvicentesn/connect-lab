@@ -1,6 +1,5 @@
 import { Card } from "../../components/Card/Card";
 import { CardStyled } from "./Perfil.styles";
-import { Link } from "react-router-dom";
 import { Context } from "../../context/autenticacao/app-context";
 import { useContext, useState, useEffect } from "react";
 import Loading from "../../components/Loading/Loading";
@@ -10,13 +9,13 @@ const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
 const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
 
 export const Perfil = () => {
-  const { auth } = useContext(Context);
+  const { auth, handleLogout } = useContext(Context);
   console.log(auth);
 
   // useEffect
   const [usuario, setUsuario] = useState();
   useEffect(() => {
-   buscarPerfil(token, user, setUsuario)
+    buscarPerfil(token, user, setUsuario);
   }, []);
 
   if (!usuario) return <Loading />;
@@ -45,10 +44,12 @@ export const Perfil = () => {
           <div className="footer">
             <button className="butao">Editar</button>
             <br></br>
-            <Link to={"/"}>
+            <button onClick={(e) => {
+              handleLogout(e)
+            }}>
               Sair &nbsp;
               <i className="fa-solid fa-arrow-up-right-from-square"></i>
-            </Link>
+            </button>
           </div>
         </div>
       </CardStyled>
