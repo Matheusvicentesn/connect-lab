@@ -1,7 +1,7 @@
 import { FormLogin } from "../../components/FormLogin/FormLogin"
 
 
-export const Home = () => {
+export const Login = () => {
   return (
     <FormLogin></FormLogin>
   )
