@@ -6,8 +6,9 @@ const Context = createContext();
 function AuthProvider({ children }) {
   const [auth, setAuth] = useState(false);
   const [userData, setuserData] = useState();
+  
 
-  async function handleLogin(e, email, password) {
+   function handleLogin(e, email, password) {
     e.preventDefault();
     fetch("https://connectlab.onrender.com/auth/login", {
       method: "POST",
@@ -33,6 +34,7 @@ function AuthProvider({ children }) {
           sessionStorage.setItem("usuario", JSON.stringify(data));
           setAuth(true);
           setuserData(data);
+          console.log('Autenticada')
         }
       });
   }

@@ -2,7 +2,8 @@ import { Card } from "../../components/Card/Card";
 import { CardStyled, WeatherStyled } from "./Inicio.styles";
 import Modal from "../../components/Modal/Modal";
 import ReactWeather, { useVisualCrossing } from "react-open-weather";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Fragment, useEffect, useState } from "react";
 import {
   atualizarDispositivoUsuario,
@@ -47,21 +48,8 @@ export const Inicio = () => {
     buscarDispositivosUsuario(token, user, setLista);
   }, []);
 
-  // ajuda Thais
-  // capturar id do device
-  const [deviceId, setDeviceId] = useState();
-  function capturarDevice(event, param) {
-    setDeviceId(param._id);
-  }
-  console.log(deviceId);
-  // ajuda Thais
-  // toggle ligar/desligar
-  const [toggle, setToggle] = useState(false);
-  useEffect(() => {
-    atualizarDispositivoUsuario(token, deviceId, toggle);
-  }, []);
-
-  console.log(toggle);
+  // Toast
+  const notify = (msg) => toast(`Dispositivo ${msg} com sucesso!`);
 
   return (
     <main>
@@ -158,9 +146,19 @@ export const Inicio = () => {
                           <button
                             className="btnOn"
                             onClick={(event) => {
-                              capturarDevice(event, objeto);
-                              setToggle(!toggle);
-                              atualizarDispositivoUsuario();
+                              atualizarDispositivoUsuario(
+                                token,
+                                objeto._id,
+                                !objeto.is_on,
+                              );
+                              buscarDispositivosUsuario(token, user, setLista);
+                              if (!objeto.is_on) {
+                                console.log("Ligado");
+                                notify('Ligado');
+                              } else {
+                                console.log("Desligado");
+                                notify("Desligado");
+                              }
                             }}
                           >
                             <i className="fa-solid fa-power-off"></i>
@@ -175,6 +173,17 @@ export const Inicio = () => {
           </div>
         </CardStyled>
       </Card>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </main>
   );
 };

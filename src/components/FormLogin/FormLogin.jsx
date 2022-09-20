@@ -13,7 +13,7 @@ export const FormLogin = () => {
   const navigate = useNavigate();
 
   function handleRedirect() {
-    navigate("/")
+    navigate("/");
   }
 
   return (
@@ -39,11 +39,14 @@ export const FormLogin = () => {
             />
             <br />
             <br />
+            
             <button
               type="button"
               onClick={(e) => {
                 handleLogin(e, email, password);
                 handleRedirect();
+                console.log("Redirect");
+                
               }}
             >
               Acessar
