@@ -1,51 +1,34 @@
 import { Card } from "../../components/Card/Card";
 import { CardStyled } from "./Dispositivos.style";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Modal from "../../components/Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { handleUpdate } from "../Inicio/Inicio";
+import { buscarDispositivos, buscarLocais, salvarDispositivos } from "../../services/api";
+import Loading from "../../components/Loading/Loading";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMzM4MDkyfQ.V6y5mEdl9Dyz6SbQPO5HeZ6l4kuDYWtCpp9WiEQDE2U";
-let lista = [];
-let locais = [];
-
-lista = await fetch("https://connectlab.onrender.com/devices", {
-  method: "get",
-  headers: new Headers({
-    Authorization: `Bearer ${token}`,
-  }),
-})
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    return data;
-  });
-
-console.log(lista);
-
-locais = await fetch("https://connectlab.onrender.com/locals", {
-  method: "get",
-  headers: new Headers({
-    Authorization: `Bearer ${token}`,
-  }),
-})
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    return data;
-  });
-console.log(locais);
+const token = JSON.parse(sessionStorage.getItem("usuario")).token;
+const user = JSON.parse(sessionStorage.getItem("usuario")).user?._id;
 
 export const Dispositivos = () => {
+  // Buscar dispositivos
+  const [lista, setLista] = useState();
+  useEffect(() => {
+    buscarDispositivos(token, setLista);
+  }, []);
+
+  // Buscar locais
+  const [locais, setLocais] = useState();
+  useEffect(() => {
+    buscarLocais(token, setLocais);
+    console.log(user)
+  }, []);
+
   // toast
   const notify = () => toast("Dispositivo adicionado com sucesso!");
   // Busca
   const [busca, setBusca] = useState("");
-  const listaFiltradas = lista.filter((item) => item.name.includes(busca));
+  const listaFiltradas = lista?.filter((item) => item.name.includes(busca));
 
   // Preenchimento do Modal
   const [modalInfo, setModalInfo] = useState({});
@@ -67,28 +50,11 @@ export const Dispositivos = () => {
   const [room, setRoom] = useState(""); // definir qual é o  comodo
 
   const handleSalvar = async () => {
-    await fetch("https://connectlab.onrender.com/userDevices", {
-      method: "POST",
-
-      headers: new Headers({
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      }),
-
-      body: JSON.stringify({
-        user: "631fd7c1ee4b688499a77759",
-        device: data._id,
-        is_on: true,
-        local,
-        room,
-      }),
-    });
-    console.log("chamou");
+    salvarDispositivos(token, user,data, local, room)
     setIsOpen(false);
   };
 
-  const credenciais = sessionStorage.getItem("usuario");
-  console.log(credenciais);
+  if (!lista) return <Loading />;
 
   return (
     <main>
@@ -99,7 +65,7 @@ export const Dispositivos = () => {
           <label htmlFor="local">local</label>
           <select value={local} onChange={(e) => setLocal(e.target.value)}>
             <option value="">Selecione um local</option>
-            {locais.map((objeto) => (
+            {locais?.map((objeto) => (
               <Fragment key={objeto.description}>
                 <option value={objeto._id}>{objeto.description}</option>
               </Fragment>

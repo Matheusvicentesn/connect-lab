@@ -7,6 +7,7 @@ import Loading from "../../components/Loading/Loading";
 import { buscarPerfil } from "../../services/api";
 
 const token = JSON.parse(sessionStorage.getItem("usuario")).token;
+const user = JSON.parse(sessionStorage.getItem("usuario")).user?._id;
 
 export const Perfil = () => {
   const { auth } = useContext(Context);
@@ -15,7 +16,7 @@ export const Perfil = () => {
   // useEffect
   const [usuario, setUsuario] = useState();
   useEffect(() => {
-   buscarPerfil(token, setUsuario)
+   buscarPerfil(token, user, setUsuario)
   }, []);
 
   if (!usuario) return <Loading />;

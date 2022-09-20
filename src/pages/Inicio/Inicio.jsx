@@ -4,45 +4,9 @@ import Modal from "../../components/Modal/Modal";
 import ReactWeather, { useVisualCrossing } from "react-open-weather";
 
 import { Fragment, useEffect, useState } from "react";
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inplcm9AdGVzdGUuY29tLmJyIiwiZnVsbE5hbWUiOiJ6ZXJvZXJvIiwiX2lkIjoiNjMxZmQ3YzFlZTRiNjg4NDk5YTc3NzU5IiwiaWF0IjoxNjYzMzM4MDkyfQ.V6y5mEdl9Dyz6SbQPO5HeZ6l4kuDYWtCpp9WiEQDE2U";
-// let lista = [];
-
-function buscarDispositivos() {
-  return fetch(
-    "https://connectlab.onrender.com/userDevices/user/631fd7c1ee4b688499a77759",
-    {
-      method: "get",
-      headers: new Headers({
-        Authorization: `Bearer ${token}`,
-      }),
-    },
-  )
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return data;
-    });
-}
-
-// export function handleUpdate() {
-//   lista =  fetch(
-//     "https://connectlab.onrender.com/userDevices/user/631fd7c1ee4b688499a77759",
-//     {
-//       method: "get",
-//       headers: new Headers({
-//         Authorization: `Bearer ${token}`,
-//       }),
-//     },
-//   )
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((data) => {
-//       return data;
-//     });
-// }
+import { buscarDispositivosUsuario } from "../../services/api";
+const token = JSON.parse(sessionStorage.getItem("usuario")).token;
+const user = JSON.parse(sessionStorage.getItem("usuario")).user?._id;
 
 export const Inicio = () => {
   // Abertura do modal
@@ -76,9 +40,7 @@ export const Inicio = () => {
   const [lista, setLista] = useState([]);
 
   useEffect(() => {
-    buscarDispositivos().then((dispositivos) => {
-      setLista(dispositivos);
-    });
+    buscarDispositivosUsuario(token, user, setLista);
   }, []);
 
   return (

@@ -32,9 +32,76 @@ export function cadastrarUsuario(e) {
     });
 }
 
-export function buscarPerfil(token, set) {
+export function buscarPerfil(token, user, set) {
+  return fetch(`https://connectlab.onrender.com/users/${user}`, {
+    method: "get",
+    headers: new Headers({
+      Authorization: `Bearer ${token}`,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      set(data);
+      return data;
+    });
+}
+
+export function buscarDispositivos(token, set) {
+  return fetch("https://connectlab.onrender.com/devices", {
+    method: "get",
+    headers: new Headers({
+      Authorization: `Bearer ${token}`,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      set(data);
+      return data;
+    });
+}
+
+export function buscarLocais(token, set) {
+  return fetch("https://connectlab.onrender.com/locals", {
+    method: "get",
+    headers: new Headers({
+      Authorization: `Bearer ${token}`,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      set(data);
+      return data;
+    });
+}
+
+export function salvarDispositivos(token, user, data, local, room) {
+  return fetch("https://connectlab.onrender.com/userDevices", {
+    method: "POST",
+
+    headers: new Headers({
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    }),
+
+    body: JSON.stringify({
+      user,
+      device: data,
+      is_on: true,
+      local,
+      room,
+    }),
+  });
+}
+
+export function buscarDispositivosUsuario(token, user, set) {
   return fetch(
-    "https://connectlab.onrender.com/users/631fd7c1ee4b688499a77759",
+    `https://connectlab.onrender.com/userDevices/user/${user}`,
     {
       method: "get",
       headers: new Headers({
@@ -48,13 +115,5 @@ export function buscarPerfil(token, set) {
     .then((data) => {
       set(data);
       return data;
-    })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return data;
     });
 }
-
-
