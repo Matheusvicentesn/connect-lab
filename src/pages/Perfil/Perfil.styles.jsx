@@ -15,7 +15,7 @@ export const CardStyled = styled.div`
     /* border: solid 1px red; */
   }
 
-  .footer{
+  .footer {
     text-align: center;
   }
 
@@ -61,4 +61,6 @@ export const CardStyled = styled.div`
     font-size: 20px;
     color: #f2f2f2;
   }
+
+
 `;

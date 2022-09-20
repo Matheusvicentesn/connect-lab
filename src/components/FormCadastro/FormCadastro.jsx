@@ -1,5 +1,6 @@
 import { FormStyled } from "./FormCadastro.styles";
 import { Link } from "react-router-dom";
+import { cadastrarUsuario } from "../../services/api";
 
 export const FormCadastro = () => {
   return (
@@ -57,7 +58,14 @@ export const FormCadastro = () => {
               <p>Bairro</p>
               <input type="text" />
             </li>
-            <button>Cadastrar</button>
+            <button
+              type="button"
+              onClick={(e) => {
+                cadastrarUsuario(e);
+              }}
+            >
+              Cadastrar
+            </button>
             <br />
             <br />
             <Link to={"/"}>

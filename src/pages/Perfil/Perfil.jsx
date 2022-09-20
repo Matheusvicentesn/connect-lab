@@ -2,29 +2,23 @@ import { Card } from "../../components/Card/Card";
 import { CardStyled } from "./Perfil.styles";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/autenticacao/app-context";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import Loading from "../../components/Loading/Loading";
+import { buscarPerfil } from "../../services/api";
 
-let usuario = [];
-const token = sessionStorage.getItem("usuario", "token");
-usuario = await fetch(
-  "https://connectlab.onrender.com/users/631fd7c1ee4b688499a77759",
-  {
-    method: "get",
-    headers: new Headers({
-      Authorization: `Bearer ${token}`,
-    }),
-  },
-)
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    return data;
-  });
+const token = JSON.parse(sessionStorage.getItem("usuario")).token;
 
 export const Perfil = () => {
   const { auth } = useContext(Context);
   console.log(auth);
+
+  // useEffect
+  const [usuario, setUsuario] = useState();
+  useEffect(() => {
+   buscarPerfil(token, setUsuario)
+  }, []);
+
+  if (!usuario) return <Loading />;
 
   return (
     <Card>
@@ -32,19 +26,19 @@ export const Perfil = () => {
         <div className="container">
           <h2>Perfil</h2>
           <article>
-            <img src={usuario.photoUrl} alt="" />
-            <p>{usuario.fullName}</p>
+            <img src={usuario?.photoUrl} alt="" />
+            <p>{usuario?.fullName}</p>
             <p>
-              {usuario.email} - {usuario.phone}
+              {usuario?.email} - {usuario?.phone}
             </p>
           </article>
           <h2>Endereço</h2>
           <hr />
           <p>
-            {usuario.userAddress?.street} {usuario.userAddress?.number}{" "}
-            {usuario.userAddress?.complement} -{" "}
-            {usuario.userAddress?.neighborhood} - {usuario.userAddress?.state} -{" "}
-            {usuario.userAddress?.city}{" "}
+            {usuario?.userAddress?.street} {usuario?.userAddress?.number}{" "}
+            {usuario?.userAddress?.complement} -{" "}
+            {usuario?.userAddress?.neighborhood} - {usuario?.userAddress?.state}{" "}
+            - {usuario?.userAddress?.city}{" "}
           </p>
           <br />
           <div className="footer">
