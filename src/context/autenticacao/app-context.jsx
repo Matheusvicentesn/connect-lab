@@ -1,14 +1,19 @@
 import { createContext, useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 const Context = createContext();
 
 function AuthProvider({ children }) {
   const [auth, setAuth] = useState(false);
   const [userData, setuserData] = useState();
-  
+  const navigate = useNavigate();
 
-   function handleLogin(e, email, password) {
+  function handleRedirect() {
+    navigate("/");
+  }
+
+  function handleLogin(e, email, password) {
     e.preventDefault();
     fetch("https://connectlab.onrender.com/auth/login", {
       method: "POST",
@@ -30,11 +35,11 @@ function AuthProvider({ children }) {
         if (data.error) {
           alert("Erro senha ou email");
         } else {
-          alert("Login efetuado e seu token é" + data.token);
           sessionStorage.setItem("usuario", JSON.stringify(data));
           setAuth(true);
           setuserData(data);
-          console.log('Autenticada')
+          console.log("Autenticada");
+          handleRedirect();
         }
       });
   }

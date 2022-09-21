@@ -13,6 +13,7 @@ export const FormLogin = () => {
   const navigate = useNavigate();
 
   function handleRedirect() {
+    
     navigate("/");
   }
 

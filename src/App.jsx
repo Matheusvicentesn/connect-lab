@@ -7,15 +7,15 @@ import { AuthProvider } from "./context/autenticacao/app-context";
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <div className="App">
           <Header />
           <Router />
           <GlobalStyle />
         </div>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
