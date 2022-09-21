@@ -115,8 +115,7 @@ export function buscarDispositivosUsuario(token, user, set) {
     });
 }
 
-// ajuda Thais
-export function atualizarDispositivoUsuario(token, device, toggle) {
+export function atualizarDispositivoUsuario(token, user, set, device, toggle) {
   return fetch(`https://connectlab.onrender.com/userDevices/${device}`, {
     method: "PUT",
     headers: new Headers({
@@ -132,5 +131,8 @@ export function atualizarDispositivoUsuario(token, device, toggle) {
     })
     .then((data) => {
       return data;
+    })
+    .then(() => {
+      buscarDispositivosUsuario(token,user,set);
     });
 }

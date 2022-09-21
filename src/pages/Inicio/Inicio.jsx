@@ -122,13 +122,7 @@ export const Inicio = () => {
                 {lista?.map((objeto, id) => (
                   <Fragment key={id}>
                     {(!filter || filter === objeto.local?.description) && (
-                      <article
-                        className="card"
-                        onClick={(event) => {
-                          HandleSelecionar(event, objeto);
-                          HandleModal();
-                        }}
-                      >
+                      <article className="card" onClick={(event) => {}}>
                         <div className="info">
                           <img
                             className="img"
@@ -148,13 +142,15 @@ export const Inicio = () => {
                             onClick={(event) => {
                               atualizarDispositivoUsuario(
                                 token,
+                                user,
+                                setLista,
                                 objeto._id,
                                 !objeto.is_on,
                               );
-                              buscarDispositivosUsuario(token, user, setLista);
+
                               if (!objeto.is_on) {
                                 console.log("Ligado");
-                                notify('Ligado');
+                                notify("Ligado");
                               } else {
                                 console.log("Desligado");
                                 notify("Desligado");
@@ -162,6 +158,15 @@ export const Inicio = () => {
                             }}
                           >
                             <i className="fa-solid fa-power-off"></i>
+                          </button>
+                          <button
+                            className="btnOn"
+                            onClick={(event) => {
+                              HandleSelecionar(event, objeto);
+                              HandleModal();
+                            }}
+                          >
+                            <i className="fa-solid fa-circle-info"></i>
                           </button>
                         </div>
                       </article>
