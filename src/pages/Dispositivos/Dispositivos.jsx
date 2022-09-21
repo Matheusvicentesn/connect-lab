@@ -4,7 +4,11 @@ import { Fragment, useState, useEffect } from "react";
 import Modal from "../../components/Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { buscarDispositivos, buscarLocais, salvarDispositivos } from "../../services/api";
+import {
+  buscarDispositivos,
+  buscarLocais,
+  salvarDispositivos,
+} from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 
 const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
@@ -21,11 +25,9 @@ export const Dispositivos = () => {
   const [locais, setLocais] = useState();
   useEffect(() => {
     buscarLocais(token, setLocais);
-    console.log(user)
+    console.log(user);
   }, []);
 
-  // toast
-  const notify = () => toast("Dispositivo adicionado com sucesso!");
   // Busca
   const [busca, setBusca] = useState("");
   const listaFiltradas = lista?.filter((item) => item.name.includes(busca));
@@ -45,16 +47,28 @@ export const Dispositivos = () => {
   }
 
   // Salvar Dispositivo na conta do usuário
+  const [timeOut, setTimeOut] = useState();
+  const [converter, setConverter] = useState();
+
   const [data, setData] = useState(""); // definir qual é o dispositivo
   const [local, setLocal] = useState(""); // definir qual é o local
   const [room, setRoom] = useState(""); // definir qual é o  comodo
-
   const handleSalvar = async () => {
-    salvarDispositivos(token, user,data, local, room)
+    const calculo = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+    setTimeOut(calculo);
+    const mile = timeOut * 1000;
+    setConverter(mile);
+    notify();
+    salvarDispositivos(token, user, data, local, room);
     setIsOpen(false);
   };
 
+  // Loading
   if (!lista) return <Loading />;
+
+  // toast
+  const notify = () =>
+    toast(`Dispositivo adicionado com sucesso! Aguarde alguns segundos`);
 
   return (
     <main>
@@ -77,7 +91,6 @@ export const Dispositivos = () => {
         <button
           onClick={() => {
             handleSalvar();
-            notify();
           }}
         >
           Salvar
@@ -128,8 +141,8 @@ export const Dispositivos = () => {
         </CardStyled>
       </Card>
       <ToastContainer
-        position="top-right"
-        autoClose={5000}
+        position="top-center"
+        autoClose={converter}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
