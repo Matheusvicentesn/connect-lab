@@ -47,7 +47,7 @@ export const Dispositivos = () => {
   }
 
   // Salvar Dispositivo na conta do usuário
-  const [timeOut, setTimeOut] = useState();
+  const [timeOut, setTimeOut] = useState(5);
   const [converter, setConverter] = useState();
 
   const [data, setData] = useState(""); // definir qual é o dispositivo

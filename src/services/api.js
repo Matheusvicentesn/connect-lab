@@ -99,8 +99,8 @@ export function salvarDispositivos(token, user, data, local, room) {
   });
 }
 
-export function buscarDispositivosUsuario(token, user, set) {
-  return fetch(`https://connectlab.onrender.com/userDevices/user/${user}`, {
+export function buscarDispositivosUsuario  (token, user, set) {
+  return  fetch(`https://connectlab.onrender.com/userDevices/user/${user}`, {
     method: "get",
     headers: new Headers({
       Authorization: `Bearer ${token}`,

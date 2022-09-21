@@ -10,8 +10,11 @@ import {
   buscarDispositivosUsuario,
 } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
+import { cordenadas } from "../../utils/localidade";
 const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
 const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
+const state = JSON.parse(sessionStorage.getItem("usuario"))?.user?.userAddress
+  ?.state;
 
 export const Inicio = () => {
   // Abertura do modal
@@ -33,19 +36,27 @@ export const Inicio = () => {
   }
 
   // VisualCrossing
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
+  useEffect(() => {
+    cordenadas(state, setLatitude, setLongitude);
+  }, []);
   const { data, isLoading, errorMessage } = useVisualCrossing({
     key: "PK2ERHPTFRQ8CXFMX43AXMRT8",
-    lat: "-23.627",
-    lon: "-46.655",
+    lat: latitude,
+    lon: longitude,
     lang: "pt",
     unit: "metric",
   });
+  console.log(latitude, longitude);
 
   // Bussca dispositivos
   const [lista, setLista] = useState([]);
   useEffect(() => {
-    buscarDispositivosUsuario(token, user, setLista);
+    if (user) {
+      buscarDispositivosUsuario(token, user, setLista);
+    }
   }, []);
 
   // Toast
@@ -68,19 +79,24 @@ export const Inicio = () => {
       <Card>
         <CardStyled>
           <div className="container">
-            <div className="Previsao">
-              <WeatherStyled>
-                <ReactWeather
-                  isLoading={isLoading}
-                  errorMessage={errorMessage}
-                  data={data}
-                  lang="pt"
-                  locationLabel="São Paulo"
-                  unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
-                  showForecast
-                />
-              </WeatherStyled>
-            </div>
+            {!latitude ? (
+              <p>Carregando tempo</p>
+            ) : (
+              <div className="Previsao">
+                <WeatherStyled>
+                  <ReactWeather
+                    isLoading={isLoading}
+                    errorMessage={errorMessage}
+                    data={data}
+                    lang="pt"
+                    locationLabel={state}
+                    unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
+                    showForecast
+                  />
+                </WeatherStyled>
+              </div>
+            )}
+
             <div className="busca">
               <button
                 className="myButton"
