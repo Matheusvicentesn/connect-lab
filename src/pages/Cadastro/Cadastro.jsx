@@ -26,6 +26,7 @@ export const Cadastro = () => {
     console.log("erros" + errors);
   }, [errors]);
 
+  // chamada API cadastrar usuario
   const post = (form) =>
     cadastrarUsuario(
       form?.email,

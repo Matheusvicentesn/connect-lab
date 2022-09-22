@@ -61,6 +61,19 @@ export const CardStyled = styled.div`
     font-size: 20px;
     color: #f2f2f2;
   }
+`;
 
-
+export const ModalPerfil = styled.div`
+  Modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ebeeee;
+    padding: 50px;
+    z-index: 1000;
+    height: 800px;
+    width: 900px;
+    border-radius: 10px;
+  }
 `;
