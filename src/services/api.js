@@ -1,24 +1,36 @@
-export function cadastrarUsuario(e) {
-  e.preventDefault();
+export function cadastrarUsuario(
+  email,
+  password,
+  name,
+  pic,
+  phone,
+  zipCode,
+  adress,
+  houseNumber,
+  district,
+  city,
+  state,
+  complement,
+) {
   return fetch("https://connectlab.onrender.com/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      email: "teste0000@teste.com.br",
-      password: "12345678",
-      fullName: "teste00000",
-      photoUrl: "",
-      phone: "(47) 99999-9999",
+      email,
+      password,
+      fullName: name,
+      photoUrl: pic,
+      phone,
       userAddress: {
-        zipCode: "85500-000",
-        street: "Rua teste",
-        number: "4",
-        neighborhood: "Bairro XYZ",
-        city: "Joinville",
-        state: "Santa Catarina",
-        complement: "Ap 204",
+        zipCode,
+        street: adress,
+        number: houseNumber,
+        neighborhood: district,
+        city,
+        state,
+        complement,
       },
     }),
   })

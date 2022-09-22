@@ -55,5 +55,5 @@ export const validacoes = {
   state: yup
     .string()
     .required("O Estado é obrigatório")
-    .max(2, "O Estado precisa ter menos de 2 caracteres"),
+    .max(19, "O Estado precisa ter menos de 2 caracteres"), // estado com maior nome no Brasil Rio Grande do Norte 19 caracteres
 };
