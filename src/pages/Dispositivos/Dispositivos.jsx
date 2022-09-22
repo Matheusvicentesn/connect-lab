@@ -15,11 +15,12 @@ const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
 const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
 
 export const Dispositivos = () => {
+  // ajuda Thais
   // Buscar dispositivos
   const [lista, setLista] = useState();
   useEffect(() => {
     buscarDispositivos(token, setLista);
-  }, []);
+  }, [user, token, buscarDispositivos]);
 
   // Buscar locais
   const [locais, setLocais] = useState();

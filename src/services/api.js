@@ -47,7 +47,7 @@ export function buscarPerfil(token, user, set) {
       return data;
     });
 }
-
+// ajuda Thais
 export function buscarDispositivos(token, set) {
   return fetch("https://connectlab.onrender.com/devices", {
     method: "get",
@@ -60,6 +60,7 @@ export function buscarDispositivos(token, set) {
     })
     .then((data) => {
       set(data);
+      console.log(token);
       return data;
     });
 }
@@ -99,8 +100,8 @@ export function salvarDispositivos(token, user, data, local, room) {
   });
 }
 
-export function buscarDispositivosUsuario  (token, user, set) {
-  return  fetch(`https://connectlab.onrender.com/userDevices/user/${user}`, {
+export function buscarDispositivosUsuario(token, user, set) {
+  return fetch(`https://connectlab.onrender.com/userDevices/user/${user}`, {
     method: "get",
     headers: new Headers({
       Authorization: `Bearer ${token}`,
@@ -133,6 +134,6 @@ export function atualizarDispositivoUsuario(token, user, set, device, toggle) {
       return data;
     })
     .then(() => {
-      buscarDispositivosUsuario(token,user,set);
+      buscarDispositivosUsuario(token, user, set);
     });
 }

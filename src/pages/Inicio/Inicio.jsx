@@ -41,7 +41,7 @@ export const Inicio = () => {
 
   useEffect(() => {
     cordenadas(state, setLatitude, setLongitude);
-  }, []);
+  }, [state]);
   const { data, isLoading, errorMessage } = useVisualCrossing({
     key: "PK2ERHPTFRQ8CXFMX43AXMRT8",
     lat: latitude,
@@ -54,10 +54,9 @@ export const Inicio = () => {
   // Bussca dispositivos
   const [lista, setLista] = useState([]);
   useEffect(() => {
-    if (user) {
-      buscarDispositivosUsuario(token, user, setLista);
-    }
-  }, []);
+    buscarDispositivosUsuario(token, user, setLista);
+  }, [user]);
+  console.log(lista);
 
   // Toast
   const notify = (msg) => toast(`Dispositivo ${msg} com sucesso!`);

@@ -16,7 +16,7 @@ export const Perfil = () => {
   const [usuario, setUsuario] = useState();
   useEffect(() => {
     buscarPerfil(token, user, setUsuario);
-  }, []);
+  }, [user]);
 
   if (!usuario) return <Loading />;
 
@@ -44,9 +44,11 @@ export const Perfil = () => {
           <div className="footer">
             <button className="butao">Editar</button>
             <br></br>
-            <button onClick={(e) => {
-              handleLogout(e)
-            }}>
+            <button
+              onClick={(e) => {
+                handleLogout(e);
+              }}
+            >
               Sair &nbsp;
               <i className="fa-solid fa-arrow-up-right-from-square"></i>
             </button>
