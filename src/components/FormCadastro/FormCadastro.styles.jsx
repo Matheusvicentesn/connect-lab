@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormStyled = styled.form`
+export const FormStyled = styled.div`
   div {
     background: #002630;
     max-width: 1200px;
@@ -20,6 +20,8 @@ export const FormStyled = styled.form`
   label {
     padding-bottom: 5px;
     color: #f2f2f2;
+    text-align: left;
+    float: left;
   }
 
   input {
@@ -65,7 +67,7 @@ export const FormStyled = styled.form`
   }
 
   p {
-    color: #f2f2f2;
+    color: #eb6a6a;
     text-align: left;
   }
 `;

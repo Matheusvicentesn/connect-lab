@@ -5,7 +5,7 @@ export function cadastrarUsuario(e) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
+    body: JSON.stringify({
       email: "teste0000@teste.com.br",
       password: "12345678",
       fullName: "teste00000",
@@ -20,7 +20,7 @@ export function cadastrarUsuario(e) {
         state: "Santa Catarina",
         complement: "Ap 204",
       },
-    },
+    }),
   })
     .then((response) => {
       console.log(response);
@@ -136,4 +136,9 @@ export function atualizarDispositivoUsuario(token, user, set, device, toggle) {
     .then(() => {
       buscarDispositivosUsuario(token, user, set);
     });
+}
+export function buscaCep(cep) {
+  return fetch(`https://viacep.com.br/ws/${cep}/json/`).then((response) => {
+    return response.json();
+  });
 }
