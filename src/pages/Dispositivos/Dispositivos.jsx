@@ -11,23 +11,37 @@ import {
 } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 
-const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
-const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
-
 export const Dispositivos = () => {
-  // ajuda Thais
+  // Recuperar dados sessionStorage (Token, user)
+  const [storageValues, setStorageValues] = useState();
+
+  useEffect(() => {
+    const session = sessionStorage.getItem("usuario");
+
+    if (session) {
+      const { token, user } = JSON.parse(sessionStorage.getItem("usuario"));
+      setStorageValues({
+        token,
+        user: user?._id,
+      });
+    }
+  }, []);
+
   // Buscar dispositivos
   const [lista, setLista] = useState();
   useEffect(() => {
-    buscarDispositivos(token, setLista);
-  }, [user, token, buscarDispositivos]);
+    if (storageValues?.token && storageValues?.user) {
+      buscarDispositivos(storageValues.token, storageValues.user, setLista);
+    }
+  }, [storageValues?.token, storageValues?.user, setLista]);
 
   // Buscar locais
   const [locais, setLocais] = useState();
   useEffect(() => {
-    buscarLocais(token, setLocais);
-    console.log(user);
-  }, []);
+    if (storageValues?.token && storageValues?.user) {
+      buscarLocais(storageValues.token, setLocais);
+    }
+  }, [storageValues?.token, storageValues?.user]);
 
   // Busca
   const [busca, setBusca] = useState("");
@@ -60,7 +74,13 @@ export const Dispositivos = () => {
     const mile = timeOut * 1000;
     setConverter(mile);
     notify();
-    salvarDispositivos(token, user, data, local, room);
+    salvarDispositivos(
+      storageValues.token,
+      storageValues?.user,
+      data,
+      local,
+      room,
+    );
     setIsOpen(false);
   };
 

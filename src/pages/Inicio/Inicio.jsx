@@ -11,12 +11,24 @@ import {
 } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 import { cordenadas } from "../../utils/localidade";
-const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
-const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
-const state = JSON.parse(sessionStorage.getItem("usuario"))?.user?.userAddress
-  ?.state;
 
 export const Inicio = () => {
+  // Recuperar dados sessionStorage (Token, user, state)
+  const [storageValues, setStorageValues] = useState();
+
+  useEffect(() => {
+    const session = sessionStorage.getItem("usuario");
+
+    if (session) {
+      const { token, user } = JSON.parse(sessionStorage.getItem("usuario"));
+      setStorageValues({
+        token,
+        user: user?._id,
+        state: user?.userAddress?.state,
+      });
+    }
+  }, []);
+
   // Abertura do modal
   const [isOpen, setIsOpen] = useState(false);
   function HandleModal() {
@@ -40,8 +52,10 @@ export const Inicio = () => {
   const [longitude, setLongitude] = useState("");
 
   useEffect(() => {
-    cordenadas(state, setLatitude, setLongitude);
-  }, [state]);
+    if (storageValues?.state) {
+      cordenadas(storageValues.state, setLatitude, setLongitude);
+    }
+  }, [storageValues?.state]);
   const { data, isLoading, errorMessage } = useVisualCrossing({
     key: "PK2ERHPTFRQ8CXFMX43AXMRT8",
     lat: latitude,
@@ -54,8 +68,14 @@ export const Inicio = () => {
   // Bussca dispositivos
   const [lista, setLista] = useState([]);
   useEffect(() => {
-    buscarDispositivosUsuario(token, user, setLista);
-  }, [user]);
+    if (storageValues?.token && storageValues?.user) {
+      buscarDispositivosUsuario(
+        storageValues.token,
+        storageValues.user,
+        setLista,
+      );
+    }
+  }, [storageValues?.token, storageValues?.user]);
   console.log(lista);
 
   // Toast
@@ -88,7 +108,7 @@ export const Inicio = () => {
                     errorMessage={errorMessage}
                     data={data}
                     lang="pt"
-                    locationLabel={state}
+                    locationLabel={storageValues?.state}
                     unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
                     showForecast
                   />
@@ -156,8 +176,8 @@ export const Inicio = () => {
                             className="btnOn"
                             onClick={(event) => {
                               atualizarDispositivoUsuario(
-                                token,
-                                user,
+                                storageValues?.token,
+                                storageValues?.user,
                                 setLista,
                                 objeto._id,
                                 !objeto.is_on,

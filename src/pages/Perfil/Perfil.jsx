@@ -5,18 +5,33 @@ import { useContext, useState, useEffect } from "react";
 import Loading from "../../components/Loading/Loading";
 import { buscarPerfil } from "../../services/api";
 
-const token = JSON.parse(sessionStorage.getItem("usuario"))?.token;
-const user = JSON.parse(sessionStorage.getItem("usuario"))?.user?._id;
 
 export const Perfil = () => {
+  // Recuperar dados sessionStorage (Token, user)
+  const [storageValues, setStorageValues] = useState();
+
+  useEffect(() => {
+    const session = sessionStorage.getItem("usuario");
+
+    if (session) {
+      const { token, user } = JSON.parse(sessionStorage.getItem("usuario"));
+      setStorageValues({
+        token,
+        user: user?._id,
+      });
+    }
+  }, []);
+
   const { auth, handleLogout } = useContext(Context);
   console.log(auth);
 
-  // useEffect
+  // Buscar Perfil
   const [usuario, setUsuario] = useState();
   useEffect(() => {
-    buscarPerfil(token, user, setUsuario);
-  }, [user]);
+    if (storageValues?.token && storageValues?.user) {
+      buscarPerfil(storageValues.token, storageValues.user, setUsuario);
+    }
+  }, [storageValues?.token, storageValues?.user, setUsuario]);
 
   if (!usuario) return <Loading />;
 
