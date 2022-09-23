@@ -8,6 +8,7 @@ import { buscaCep, cadastrarUsuario } from "../../services/api";
 import { validacoes } from "../../utils/validacoes";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FormStyledCadastro } from "./Cadastro.style";
 
 // Validação YUP
 const validationPost = yup.object().shape(validacoes);
@@ -105,8 +106,8 @@ export const Cadastro = () => {
         draggable
         pauseOnHover
       />
-      <Form>
-        <div>
+      <FormStyledCadastro>
+        <Form>
           <h2>Cadastro</h2>
           <br />
           <form onSubmit={handleSubmit(post)}>
@@ -208,6 +209,7 @@ export const Cadastro = () => {
                   {...register("houseNumber")}
                 />
               </li>
+              <br />
               <button type="submit">Cadastrar</button>
               <br />
               <br />
@@ -217,8 +219,8 @@ export const Cadastro = () => {
               </Link>
             </ul>
           </form>
-        </div>
-      </Form>
+        </Form>
+      </FormStyledCadastro>
     </>
   );
 };

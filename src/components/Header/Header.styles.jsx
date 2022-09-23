@@ -1,21 +1,18 @@
 import styled from "styled-components";
 
 export const HeaderStyled = styled.header`
-  header {
-    margin-bottom: 120px;
-  }
 
   #navbar {
     align-items: center;
-    background-color: #21495a;
+    background-color: #395b64;
     color: #21495a;
     overflow: hidden;
     padding: 18px 34px;
     transition: 0.4s;
-    position: fixed;
     width: 100%;
     top: 0;
     z-index: 99;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   }
 
   #navbar img {
@@ -25,7 +22,7 @@ export const HeaderStyled = styled.header`
 
   #navbar a {
     float: left;
-    color: black;
+    color: #a5c9ca;
     text-align: center;
     padding: 12px;
     text-decoration: none;
@@ -42,16 +39,6 @@ export const HeaderStyled = styled.header`
     font-size: 35px;
     font-weight: bold;
     transition: 0.4s;
-  }
-
-  #navbar a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  #navbar a.active {
-    background-color: dodgerblue;
-    color: white;
   }
 
   #navbar-right {
@@ -74,7 +61,7 @@ export const HeaderStyled = styled.header`
   }
   @media screen and (max-width: 900px) {
     header {
-      margin-bottom: 300px;
+      margin-bottom: 5px;
     }
   }
 `;

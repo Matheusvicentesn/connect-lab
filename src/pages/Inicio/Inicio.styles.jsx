@@ -10,7 +10,7 @@ export const CardStyled = styled.div`
   }
 
   .busca {
-    margin-top: 300px;
+    margin-top: 200px;
     text-align: center;
     margin-bottom: 50px;
   }
@@ -55,17 +55,16 @@ export const CardStyled = styled.div`
   }
 
   Button {
-    background-color: #d37b16;
-    border-radius: 18px;
-    border: none;
-    color: white;
-    padding: 10px 32px;
+    background-color: #2c3333;
+    color: #a5c9ca;
+    padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 5px;
   }
 `;
 

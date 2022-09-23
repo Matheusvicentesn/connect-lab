@@ -11,7 +11,6 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 #root{     
-    height: 100vh;
     width: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -21,7 +20,9 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
-    background-color: #EBEEEE;
+    background-color: #E7F6F2;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 main {
@@ -30,13 +31,14 @@ main {
   padding: 40px;
   flex: 1;
   gap: 40px;
+  
 }
 
 `;
 
 export const Light = {
   colors: {
-    prieira: "#00A335",
+    primeira: "#00A335",
     segunda: "#50788A",
     terceira: "#50788A",
     quarta: "#BBCAD2",
