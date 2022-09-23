@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { validacoes } from "../../utils/validacoes";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Validação YUP
 const validationPost = yup.object().shape(validacoes);
@@ -117,12 +119,27 @@ export const Perfil = () => {
       form?.complement,
       storageValues.token,
       storageValues.user,
-    );
+    )
+      .then(notify())
+      .then(setIsOpen(false));
 
   if (!usuario) return <Loading />;
 
+  const notify = () => toast("Usuário Atualizado");
+
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <>
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
           <div>
