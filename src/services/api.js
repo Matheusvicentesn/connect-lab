@@ -1,49 +1,3 @@
-export function cadastrarUsuario(
-  email,
-  password,
-  name,
-  pic,
-  phone,
-  zipCode,
-  adress,
-  houseNumber,
-  district,
-  city,
-  state,
-  complement,
-) {
-  return fetch("https://connectlab.onrender.com/auth/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-      fullName: name,
-      photoUrl: pic,
-      phone,
-      userAddress: {
-        zipCode,
-        street: adress,
-        number: houseNumber,
-        neighborhood: district,
-        city,
-        state,
-        complement,
-      },
-    }),
-  })
-    .then((response) => {
-      console.log(response);
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      return data;
-    });
-}
-
 export function buscarPerfil(token, user, set) {
   return fetch(`https://connectlab.onrender.com/users/${user}`, {
     method: "get",
@@ -153,4 +107,99 @@ export function buscaCep(cep) {
   return fetch(`https://viacep.com.br/ws/${cep}/json/`).then((response) => {
     return response.json();
   });
+}
+
+export function cadastrarUsuario(
+  email,
+  password,
+  name,
+  pic,
+  phone,
+  zipCode,
+  adress,
+  houseNumber,
+  district,
+  city,
+  state,
+  complement,
+) {
+  return fetch("https://connectlab.onrender.com/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      fullName: name,
+      photoUrl: pic,
+      phone,
+      userAddress: {
+        zipCode,
+        street: adress,
+        number: houseNumber,
+        neighborhood: district,
+        city,
+        state,
+        complement,
+      },
+    }),
+  })
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
+}
+
+export function atualizarUsuario(
+  email,
+  password,
+  name,
+  pic,
+  phone,
+  zipCode,
+  adress,
+  houseNumber,
+  district,
+  city,
+  state,
+  complement,
+  token,
+  id,
+) {
+  return fetch(`https://connectlab.onrender.com/users/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      fullName: name,
+      photoUrl: pic,
+      phone,
+      userAddress: {
+        zipCode,
+        street: adress,
+        number: houseNumber,
+        neighborhood: district,
+        city,
+        state,
+        complement,
+      },
+    }),
+  })
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
 }
