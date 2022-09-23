@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ModalStyled } from "../../components/Modal/Modal.styled";
 
 export const CardStyled = styled.div`
   .Previsao {
@@ -25,7 +26,7 @@ export const CardStyled = styled.div`
     display: grid;
     grid-template-columns: repeat(
       auto-fill,
-      minmax(600px, 1fr)
+      minmax(400px, 1fr)
     ); /* see notes below */
     grid-auto-rows: minmax(100px, auto);
     grid-gap: 1rem;
@@ -72,4 +73,62 @@ export const WeatherStyled = styled.div`
   width: 100%;
   height: 20px;
   margin-bottom: 500px;
+`;
+
+export const ModalStyledInicio = styled(ModalStyled)`
+  img {
+    width: 300;
+  }
+`;
+
+export const ComponenteTeste = styled.div`
+  h2 {
+    text-align: center;
+    color: #395b64;
+    padding-bottom: 5px;
+  }
+
+  h3 {
+    text-align: center;
+    color: grey;
+  }
+
+  .device {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+
+    img {
+      height: 110px;
+      border-radius: 15px;
+      padding-bottom: 8px;
+    }
+
+    h2 {
+      color: black;
+    }
+  }
+
+  .deviceInfo {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: justify;
+
+    h2 {
+      font-size: 16px;
+      font-weight: 40px;
+    }
+
+    hr {
+      border-bottom: 1px solid;
+    }
+  }
+  .centerBtn {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+  }
 `;

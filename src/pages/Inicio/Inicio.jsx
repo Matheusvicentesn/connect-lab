@@ -1,5 +1,10 @@
 import { Card } from "../../components/Card/Card";
-import { CardStyled, WeatherStyled } from "./Inicio.styles";
+import {
+  CardStyled,
+  ComponenteTeste,
+  ModalStyledInicio,
+  WeatherStyled,
+} from "./Inicio.styles";
 import Modal from "../../components/Modal/Modal";
 import ReactWeather, { useVisualCrossing } from "react-open-weather";
 import { ToastContainer, toast } from "react-toastify";
@@ -103,18 +108,40 @@ export const Inicio = () => {
 
   return (
     <main>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <p>teste</p>
-        <p>{modalInfo.device?.name}</p>
-        <p>{modalInfo.device?.type}</p>
-        <p>{modalInfo.device?.madeBy}</p>
-        <p>{modalInfo.device?.info?.virtual_id}</p>
-        <p>{modalInfo.device?.info?.ip_address}</p>
-        <p>{modalInfo.device?.info?.mac_address}</p>
-        <p>{modalInfo.device?.info?.signal}</p>
-        {!modalInfo.is_on ? <p>Desligado</p> : <p>Ligado</p>}
-        <img src={modalInfo.device?.photoUrl} alt=""></img>
-      </Modal>
+      <ModalStyledInicio>
+        <Modal open={isOpen} onClose={() => setIsOpen(false)} esconder={"none"}>
+          <ComponenteTeste>
+            <h2>{modalInfo.device?.name}</h2>
+            <h3>{modalInfo.device?.madeBy}</h3>
+            <div className="device">
+              <img src={modalInfo.device?.photoUrl} alt=""></img>
+              <h2>Dispositivo: {!modalInfo.is_on ? "Desligado" : "Ligado"}</h2>
+            </div>
+            <div className="deviceInfo">
+              <h2>Informações do dispositivo</h2>
+              <hr />
+              <p> ID virtual: {modalInfo.device?.info?.virtual_id}</p>
+              <p>
+                Endereço IP:
+                {modalInfo.device?.info?.ip_address}
+              </p>
+              <p>Endereço MAC: {modalInfo.device?.info?.mac_address}</p>
+              <p>Força do sinal: {modalInfo.device?.info?.signal}</p>
+            </div>
+            <div className="centerBtn">
+              {" "}
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+              >
+                {" "}
+                Fechar
+              </button>
+            </div>
+          </ComponenteTeste>
+        </Modal>
+      </ModalStyledInicio>
       <Card>
         <CardStyled>
           <div className="container">
@@ -123,7 +150,8 @@ export const Inicio = () => {
             ) : (
               <div className="Previsao">
                 <WeatherStyled>
-                  <ReactWeather theme={customStyles}
+                  <ReactWeather
+                    theme={customStyles}
                     isLoading={isLoading}
                     errorMessage={errorMessage}
                     data={data}
