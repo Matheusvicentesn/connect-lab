@@ -1,16 +1,31 @@
 import { ModalStyled, Overlay } from "./Modal.styled";
 import PropTypes from "prop-types";
 import ReactDom from "react-dom";
-const Modal = ({ open, children, onClose, customWidth, customHeight }) => {
+const Modal = ({
+  open,
+  children,
+  onClose,
+  customWidth,
+  customHeight,
+  color,
+  esconder
+}) => {
   if (!open) return null;
   return ReactDom.createPortal(
     <>
       <Overlay>
         <div>
-          <ModalStyled customWidth={customWidth} customHeight={customHeight}>
+          <ModalStyled
+            customWidth={customWidth}
+            customHeight={customHeight}
+            color={color}
+            esconder={esconder}
+          >
             <div className="container">
               {children}
-              <button onClick={onClose}> Fechar</button>
+              <div className="btnClose">
+                <button onClick={onClose}> Fechar</button>
+              </div>
             </div>
           </ModalStyled>
         </div>
@@ -28,4 +43,6 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   customWidth: PropTypes,
   customHeight: PropTypes,
+  color: PropTypes,
+  esconder: PropTypes,
 };

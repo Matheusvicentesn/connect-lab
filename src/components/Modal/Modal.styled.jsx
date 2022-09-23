@@ -6,11 +6,11 @@ export const ModalStyled = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ebeeee;
+    background-color: ${({ customWidth }) => customWidth || "#ebeeee"};
     padding: 50px;
     z-index: 1000;
     width: ${({ customWidth }) => customWidth || "400"}px;
-    height: ${({ customHeight }) => (customHeight ||  "400")}px;
+    height: ${({ customHeight }) => customHeight || "400"}px;
     border-radius: 10px;
   }
 
@@ -39,6 +39,11 @@ export const ModalStyled = styled.div`
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+  }
+
+  .btnClose {
+    text-align: ${({ esconder }) => esconder || ""};
+    display: ${({ esconder }) => esconder || ""};
   }
 `;
 

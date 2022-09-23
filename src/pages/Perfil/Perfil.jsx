@@ -1,5 +1,5 @@
 import { Card } from "../../components/Card/Card";
-import { CardStyled, ModalStyledPerfil } from "./Perfil.styles";
+import { CardStyled, FormPerfil } from "./Perfil.styles";
 import { Context } from "../../context/autenticacao/app-context";
 import { useContext, useState, useEffect } from "react";
 import Loading from "../../components/Loading/Loading";
@@ -141,13 +141,15 @@ export const Perfil = () => {
         pauseOnHover
       />
       <>
-        <ModalStyledPerfil>
-          <Modal
-            open={isOpen}
-            onClose={() => setIsOpen(false)}
-            customWidth={'1000'}
-            customHeight={'800'}
-          >
+        <Modal
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          customWidth={700}
+          customHeight={800}
+          color={true}
+          esconder={"none"}
+        >
+          <FormPerfil>
             <div>
               <h2>Cadastro</h2>
               <br />
@@ -259,14 +261,23 @@ export const Perfil = () => {
                       {...register("houseNumber")}
                     />
                   </li>
+                  <br></br>
                   <button type="submit">Atualizar</button>
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    {" "}
+                    Fechar
+                  </button>
                   <br />
                   <br />
                 </ul>
               </form>
             </div>
-          </Modal>
-        </ModalStyledPerfil>
+          </FormPerfil>
+        </Modal>
       </>
 
       <Card>
@@ -301,6 +312,7 @@ export const Perfil = () => {
               </button>
               <br></br>
               <button
+                className="butao"
                 onClick={(e) => {
                   handleLogout(e);
                 }}

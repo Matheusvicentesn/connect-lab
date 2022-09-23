@@ -7,7 +7,7 @@ export const Header = () => {
     <>
       <HeaderStyled>
         <header>
-          <img src={logo} alt="" />
+          {/* <img src={logo} alt="" />
           <nav>
             <ul>
               <li>
@@ -18,7 +18,31 @@ export const Header = () => {
                 <Link to={"/perfil"}>Perfil</Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
+          {/* <div className="navbar">
+            <img src={logo} alt="" />
+            <div className="navbar-right">
+              <ul>
+                <li>
+                  <Link to={"/"}>Inicio</Link>
+                </li>
+                <li>
+                  <Link to={"/dispositivos"}>Dispositivos</Link>
+                </li>
+                <li>
+                  <Link to={"/perfil"}>Perfil</Link>
+                </li>
+              </ul>
+            </div>
+          </div> */}
+          <div id="navbar">
+            <img src={logo} alt="" />
+            <div id="navbar-right">
+              <Link to={"/"}>Inicio</Link>
+              <Link to={"/dispositivos"}>Dispositivos</Link>
+              <Link to={"/perfil"}>Perfil</Link>
+            </div>
+          </div>
         </header>
       </HeaderStyled>
     </>
