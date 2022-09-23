@@ -3,9 +3,8 @@ import styled from "styled-components";
 export const CardStyled = styled.div`
   .Previsao {
     /* border: solid 1px red; */
-    height: 150px;
+    height: 250px;
     margin-bottom: 5px;
-    background-color: #323232;
     color: white;
     text-align: center;
   }

@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
 export const ModalStyled = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ebeeee;
-  padding: 50px;
-  z-index: 1000;
-  height: 400px;
-  width: 400px;
-  border-radius: 10px;
+  .container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ebeeee;
+    padding: 50px;
+    z-index: 1000;
+    width: ${({ customWidth }) => customWidth || "400"}px;
+    height: ${({ customHeight }) => (customHeight ||  "400")}px;
+    border-radius: 10px;
+  }
 
   input {
     display: block;

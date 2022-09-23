@@ -10,16 +10,18 @@ export const GlobalStyle = createGlobalStyle`
 
 }
 
-
 #root{     
     height: 100vh;
     width: 100%;
- 
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+
 }
 
 body{
     background-color: #EBEEEE;
-    
 }
 
 main {
@@ -31,3 +33,21 @@ main {
 }
 
 `;
+
+export const Light = {
+  colors: {
+    prieira: "#00A335",
+    segunda: "#50788A",
+    terceira: "#50788A",
+    quarta: "#BBCAD2",
+  },
+};
+
+export const Dark = {
+  colors: {
+    prieira: "#00A335",
+    segunda: "#50788A",
+    terceira: "#50788A",
+    quarta: "#BBCAD2",
+  },
+};

@@ -63,7 +63,25 @@ export const Inicio = () => {
     lang: "pt",
     unit: "metric",
   });
-  console.log(latitude, longitude);
+  const customStyles = {
+    fontFamily: "Helvetica, sans-serif",
+    gradientStart: "#fbfeff",
+    gradientMid: "#04A7F9",
+    gradientEnd: "#4BC4F7",
+    locationFontColor: "#FFF",
+    todayTempFontColor: "#FFF",
+    todayDateFontColor: "#B5DEF4",
+    todayRangeFontColor: "#B5DEF4",
+    todayDescFontColor: "#B5DEF4",
+    todayInfoFontColor: "#B5DEF4",
+    todayIconColor: "#FFF",
+    forecastBackgroundColor: "#FFF",
+    forecastSeparatorColor: "#DDD",
+    forecastDateColor: "#777",
+    forecastDescColor: "#777",
+    forecastRangeColor: "#777",
+    forecastIconColor: "#4BC4F7",
+  };
 
   // Bussca dispositivos
   const [lista, setLista] = useState([]);
@@ -80,6 +98,8 @@ export const Inicio = () => {
 
   // Toast
   const notify = (msg) => toast(`Dispositivo ${msg} com sucesso!`);
+
+  // custom
 
   return (
     <main>
@@ -103,7 +123,7 @@ export const Inicio = () => {
             ) : (
               <div className="Previsao">
                 <WeatherStyled>
-                  <ReactWeather
+                  <ReactWeather theme={customStyles}
                     isLoading={isLoading}
                     errorMessage={errorMessage}
                     data={data}
