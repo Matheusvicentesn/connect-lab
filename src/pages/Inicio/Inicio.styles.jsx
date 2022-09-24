@@ -27,7 +27,7 @@ export const CardStyled = styled.div`
     grid-template-columns: repeat(
       auto-fill,
       minmax(400px, 1fr)
-    ); /* see notes below */
+    ); 
     grid-auto-rows: minmax(100px, auto);
     grid-gap: 1rem;
   }
@@ -35,7 +35,6 @@ export const CardStyled = styled.div`
   .card {
     position: relative;
     display: inline-block;
-    /* border: 1px solid red; */
     margin: 10px;
     grid-template-rows: max-content 50px 1fr;
     -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
@@ -43,9 +42,8 @@ export const CardStyled = styled.div`
     padding: 16px;
     background-color: #fff;
     border-radius: 10px;
-    /* border: 1px solid red; */
     transition: all 0.2s;
-  } /* li item */
+  } 
   .card:hover {
     transform: scale(1.04);
   }

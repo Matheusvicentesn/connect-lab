@@ -105,6 +105,7 @@ export const Inicio = () => {
   const notify = (msg) => toast(`Dispositivo ${msg} com sucesso!`);
 
   // custom
+    // const [stateDevice, setStateDevice] = useState();
 
   return (
     <main>
@@ -135,7 +136,6 @@ export const Inicio = () => {
                   setIsOpen(false);
                 }}
               >
-                {" "}
                 Fechar
               </button>
             </div>
@@ -233,11 +233,16 @@ export const Inicio = () => {
 
                               if (!objeto.is_on) {
                                 console.log("Ligado");
+                                // setStateDevice(true);
                                 notify("Ligado");
                               } else {
                                 console.log("Desligado");
+                                // setStateDevice(false);
                                 notify("Desligado");
                               }
+                            }}
+                            style={{
+                              backgroundColor: objeto.is_on ? "green" : "grey",
                             }}
                           >
                             <i className="fa-solid fa-power-off"></i>
