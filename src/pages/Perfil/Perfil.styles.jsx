@@ -1,18 +1,16 @@
 import styled from "styled-components";
 export const CardStyled = styled.div`
-  margin-top: 300px;
   h2 {
     margin-bottom: 15px;
     color: white;
     text-align: center;
   }
   .container {
-    background: #002630;
+    background: #395b64;
     max-width: 500px;
-    margin: 18vh auto;
+    margin: 10vh auto;
     padding: 40px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    /* border: solid 1px red; */
   }
 
   .footer {
@@ -21,20 +19,20 @@ export const CardStyled = styled.div`
 
   article {
     width: 100%;
-    /* border: solid 1px red; */
     margin-bottom: 50px;
   }
 
   img {
-    height: 50px;
+    height: 90px;
     float: left;
     border-radius: 5px;
     margin-right: 50px;
   }
 
   p {
-    color: #92c1d4;
+    color: #a5c9ca;
     font-size: 20px;
+    padding: 5px;
   }
 
   hr {
@@ -42,10 +40,9 @@ export const CardStyled = styled.div`
     margin-bottom: 5px;
   }
 
-  .butao {
-    background-color: #d37b16;
-    border: none;
-    color: white;
+  Button {
+    background-color: #2c3333;
+    color: #a5c9ca;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -53,70 +50,28 @@ export const CardStyled = styled.div`
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    margin-bottom: 14px;
+    border-radius: 15px;
   }
 
   @media only screen and (max-width: 600px) {
-    h2 {
-      margin-bottom: 15px;
-      color: white;
-      text-align: center;
-    }
     .container {
-      background: #002630;
       max-width: 300px;
-      margin: 18vh auto;
-      padding: 40px;
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-      /* border: solid 1px red; */
-    }
-
-    .footer {
-      text-align: center;
-    }
-
-    article {
-      width: 100%;
-      /* border: solid 1px red; */
-      margin-bottom: 50px;
     }
 
     img {
-      height: 50px;
-      float: left;
-      border-radius: 5px;
-      margin-right: 50px;
+      float: none;
+      margin-left: 50px;
     }
 
-    p {
-      color: #92c1d4;
-      font-size: 20px;
-    }
-
-    hr {
-      border-top: 1px solid #92c1d4;
-      margin-bottom: 5px;
-    }
-
-    .butao {
-      background-color: #d37b16;
-      border: none;
-      color: white;
-      padding: 15px 32px;
+    article {
       text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      margin-bottom: 14px;
     }
   }
 `;
 
 export const FormPerfil = styled.div`
   div {
-    background: #002630;
+    background: #395b64;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     width: 700px;
     height: 800px;
@@ -149,9 +104,8 @@ export const FormPerfil = styled.div`
   }
 
   Button {
-    background-color: #d37b16;
-    border: none;
-    color: white;
+    background-color: #2c3333;
+    color: #a5c9ca;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -159,6 +113,7 @@ export const FormPerfil = styled.div`
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 15px;
   }
 
   a {
@@ -187,8 +142,6 @@ export const FormPerfil = styled.div`
 
   @media only screen and (max-width: 600px) {
     div {
-      background: #002630;
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
       width: 600px;
       height: 800px;
     }

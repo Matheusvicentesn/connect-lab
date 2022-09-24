@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import { ModalStyled } from "../../components/Modal/Modal.styled";
 
 export const CardStyled = styled.div`
   .Previsao {
-    /* border: solid 1px red; */
     height: 250px;
     margin-bottom: 5px;
     color: white;
@@ -22,12 +20,13 @@ export const CardStyled = styled.div`
     float: left;
   }
 
+  h2 {
+    color: #395b64;
+  }
+
   .cards {
     display: grid;
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(400px, 1fr)
-    ); 
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-auto-rows: minmax(100px, auto);
     grid-gap: 1rem;
   }
@@ -43,7 +42,7 @@ export const CardStyled = styled.div`
     background-color: #fff;
     border-radius: 10px;
     transition: all 0.2s;
-  } 
+  }
   .card:hover {
     transform: scale(1.04);
   }
@@ -63,7 +62,28 @@ export const CardStyled = styled.div`
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 15px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .busca {
+      margin-top: 200px;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    .busca {
+      margin-top: 250px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .busca {
+      margin-top: 350px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .busca {
+      margin-top: 350px;
+    }
   }
 `;
 
@@ -73,13 +93,9 @@ export const WeatherStyled = styled.div`
   margin-bottom: 500px;
 `;
 
-export const ModalStyledInicio = styled(ModalStyled)`
-  img {
-    width: 300;
-  }
-`;
 
-export const ComponenteTeste = styled.div`
+
+export const ModalContentInicio = styled.div`
   h2 {
     text-align: center;
     color: #395b64;
@@ -128,5 +144,18 @@ export const ComponenteTeste = styled.div`
     width: 50%;
     padding: 10px;
     text-align: center;
+
+    Button {
+      background-color: #2c3333;
+      color: #a5c9ca;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 15px;
+    }
   }
 `;

@@ -87,6 +87,7 @@ export const Perfil = () => {
     setValue("state", storageValues.state);
     setValue("complement", storageValues.complement);
     setValue("houseNumber", storageValues.number);
+    setValue("city", storageValues.city);
   }
 
   // auto fill input with zipcode
@@ -287,9 +288,8 @@ export const Perfil = () => {
             <article>
               <img src={usuario?.photoUrl} alt="" />
               <p>{usuario?.fullName}</p>
-              <p>
-                {usuario?.email} - {usuario?.phone}
-              </p>
+              <p>{usuario?.email}</p>
+              <p>{usuario?.phone}</p>
             </article>
             <h2>Endereço</h2>
             <hr />

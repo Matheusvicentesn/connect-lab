@@ -1,5 +1,5 @@
 import { Card } from "../../components/Card/Card";
-import { CardStyled } from "./Dispositivos.style";
+import { CardStyled, ModalContentDispositivo } from "./Dispositivos.style";
 import { Fragment, useState, useEffect } from "react";
 import Modal from "../../components/Modal/Modal";
 import { ToastContainer, toast } from "react-toastify";
@@ -93,34 +93,47 @@ export const Dispositivos = () => {
 
   return (
     <main>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <h2>{modalInfo.name}</h2>
-        <img src={modalInfo.photoUrl} alt="" />
-        <form action="">
-          <label htmlFor="local">local</label>
-          <select value={local} onChange={(e) => setLocal(e.target.value)}>
-            <option value="">Selecione um local</option>
-            {locais?.map((objeto) => (
-              <Fragment key={objeto.description}>
-                <option value={objeto._id}>{objeto.description}</option>
-              </Fragment>
-            ))}
-          </select>
-          <label htmlFor="comodo">Cômodo</label>
-          <input type="text" onChange={(e) => setRoom(e.target.value)} />
-        </form>
-        <button
-          onClick={() => {
-            handleSalvar();
-          }}
-        >
-          Salvar
-        </button>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} esconder={"none"}>
+        <ModalContentDispositivo>
+          <h2>{modalInfo.name}</h2>
+          <div className="device">
+            <img src={modalInfo.photoUrl} alt="" />
+          </div>
+          <form action="">
+            <label htmlFor="local">Local:</label>
+            <select value={local} onChange={(e) => setLocal(e.target.value)}>
+              <option value="">Selecione um local</option>
+              {locais?.map((objeto) => (
+                <Fragment key={objeto.description}>
+                  <option value={objeto._id}>{objeto.description}</option>
+                </Fragment>
+              ))}
+            </select>
+            <label htmlFor="comodo">Cômodo: </label>
+            <input type="text" onChange={(e) => setRoom(e.target.value)} />
+          </form>
+          <div className="centerBtn">
+            <button
+              onClick={() => {
+                handleSalvar();
+              }}
+            >
+              Salvar
+            </button>
+            <button
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              Fechar
+            </button>
+          </div>
+        </ModalContentDispositivo>
       </Modal>
       <Card>
         <CardStyled>
           <div className="container">
-            <div className="Previsao">
+            <div className="Title">
               <h1>Dispositivos</h1>
             </div>
             <hr />
@@ -130,7 +143,7 @@ export const Dispositivos = () => {
                 value={busca}
                 onChange={(e) => setBusca(e.target.value)}
               />{" "}
-              <button>Pesquisar</button>
+              <button className="btnPesquisa">Pesquisar</button>
             </div>
             <div className="displaycards">
               <section className="cards">

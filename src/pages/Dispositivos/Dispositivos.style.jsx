@@ -1,23 +1,25 @@
 import styled from "styled-components";
 
 export const CardStyled = styled.div`
-  .Previsao {
+  .Title {
     color: white;
     text-align: center;
     margin-bottom: 4px;
   }
 
   h1 {
-    color: #eb741f;
+    color: #395b64;
     text-transform: uppercase;
   }
 
   h2 {
     text-align: center;
+    color: #395b64;
   }
 
   hr {
     border-bottom: #283966 1px solid;
+    padding-top: 10px;
   }
 
   .busca {
@@ -29,14 +31,14 @@ export const CardStyled = styled.div`
     width: 80%;
     padding: 8px;
     border-radius: 10px;
+    -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
   }
 
   .infoTitulo {
     display: flex;
     align-items: center;
-
     text-align: center;
-    content: "";
     display: block;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -45,22 +47,14 @@ export const CardStyled = styled.div`
   img {
     width: 70px;
     height: auto;
-    /* float: left; */
   }
 
   .displaycards {
-    /* border: solid 1px red; */
     margin-top: 50px;
-  }
-  .btnCard {
-    /* border: solid 1px red; */
   }
   .cards {
     display: grid;
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(400px, 1fr)
-    ); /* see notes below */
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-auto-rows: minmax(100px, auto);
     grid-gap: 1rem;
   }
@@ -76,15 +70,13 @@ export const CardStyled = styled.div`
     padding: 16px;
     background-color: #fff;
     border-radius: 10px;
-    /* border: 1px solid red; */
     transition: all 0.2s;
-  } /* li item */
-  .card:hover {
+  }
+  / .card:hover {
     transform: scale(1.04);
   }
 
   .card h1 {
-    /* text-align: center; */
     float: right;
   }
 
@@ -94,29 +86,99 @@ export const CardStyled = styled.div`
   }
 
   Button {
-    background-color: #d37b16;
-    border-radius: 18px;
-    border: none;
-    color: white;
-    padding: 10px 32px;
+    background-color: #2c3333;
+    color: #a5c9ca;
+    padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 15px;
+  }
+
+  @media screen and (max-width: 850px) {
+    .btnPesquisa {
+      margin-top: 30px;
+    }
   }
 `;
 
-export const ModalTest = styled.div`
-  .buttonWrapperStyles {
-    position: relative;
-    z-index: 1;
+export const ModalContentDispositivo = styled.div`
+  h2 {
+    text-align: center;
+    color: #395b64;
+    padding-bottom: 5px;
   }
-  .otherContentStyles {
-    position: relative;
-    z-index: 2;
-    background-color: red;
-    padding: 10;
+
+  h3 {
+    text-align: center;
+    color: grey;
+  }
+
+  input {
+    padding: 5px;
+    margin-top: 10px;
+  }
+
+  select {
+    padding: 5px;
+    margin-top: 10px;
+  }
+
+  label {
+    color: #395b64;
+    font-size: 20px;
+    font-weight: 900;
+    padding-bottom: 10px;
+  }
+
+  .device {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+
+    img {
+      height: 110px;
+      border-radius: 15px;
+      padding-bottom: 8px;
+    }
+  }
+
+  .deviceInfo {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: justify;
+
+    h2 {
+      font-size: 16px;
+      font-weight: 40px;
+    }
+
+    hr {
+      border-bottom: 1px solid;
+    }
+  }
+  .centerBtn {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    Button {
+      background-color: #2c3333;
+      color: #a5c9ca;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 15px;
+    }
   }
 `;

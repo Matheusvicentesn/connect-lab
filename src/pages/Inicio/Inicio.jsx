@@ -1,10 +1,5 @@
 import { Card } from "../../components/Card/Card";
-import {
-  CardStyled,
-  ComponenteTeste,
-  ModalStyledInicio,
-  WeatherStyled,
-} from "./Inicio.styles";
+import { CardStyled, ModalContentInicio, WeatherStyled } from "./Inicio.styles";
 import Modal from "../../components/Modal/Modal";
 import ReactWeather, { useVisualCrossing } from "react-open-weather";
 import { ToastContainer, toast } from "react-toastify";
@@ -73,7 +68,7 @@ export const Inicio = () => {
     gradientStart: "#2c3333",
     gradientMid: "#2c3333",
     gradientEnd: "#2c3333",
-    locationFontColor: "#a5c9ca",
+    locationFontColor: "#fff",
     todayTempFontColor: "#2c3333",
     todayDateFontColor: "#a5c9ca",
     todayRangeFontColor: "#a5c9ca",
@@ -104,44 +99,40 @@ export const Inicio = () => {
   // Toast
   const notify = (msg) => toast(`Dispositivo ${msg} com sucesso!`);
 
-  // custom
-    // const [stateDevice, setStateDevice] = useState();
-
   return (
     <main>
-      <ModalStyledInicio>
-        <Modal open={isOpen} onClose={() => setIsOpen(false)} esconder={"none"}>
-          <ComponenteTeste>
-            <h2>{modalInfo.device?.name}</h2>
-            <h3>{modalInfo.device?.madeBy}</h3>
-            <div className="device">
-              <img src={modalInfo.device?.photoUrl} alt=""></img>
-              <h2>Dispositivo: {!modalInfo.is_on ? "Desligado" : "Ligado"}</h2>
-            </div>
-            <div className="deviceInfo">
-              <h2>Informações do dispositivo</h2>
-              <hr />
-              <p> ID virtual: {modalInfo.device?.info?.virtual_id}</p>
-              <p>
-                Endereço IP:
-                {modalInfo.device?.info?.ip_address}
-              </p>
-              <p>Endereço MAC: {modalInfo.device?.info?.mac_address}</p>
-              <p>Força do sinal: {modalInfo.device?.info?.signal}</p>
-            </div>
-            <div className="centerBtn">
-              {" "}
-              <button
-                onClick={() => {
-                  setIsOpen(false);
-                }}
-              >
-                Fechar
-              </button>
-            </div>
-          </ComponenteTeste>
-        </Modal>
-      </ModalStyledInicio>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} esconder={"none"}>
+        <ModalContentInicio>
+          <h2>{modalInfo.device?.name}</h2>
+          <h3>{modalInfo.device?.madeBy}</h3>
+          <div className="device">
+            <img src={modalInfo.device?.photoUrl} alt=""></img>
+            <h2>Dispositivo: {!modalInfo.is_on ? "Desligado" : "Ligado"}</h2>
+          </div>
+          <div className="deviceInfo">
+            <h2>Informações do dispositivo</h2>
+            <hr />
+            <p> ID virtual: {modalInfo.device?.info?.virtual_id}</p>
+            <p>
+              Endereço IP:
+              {modalInfo.device?.info?.ip_address}
+            </p>
+            <p>Endereço MAC: {modalInfo.device?.info?.mac_address}</p>
+            <p>Força do sinal: {modalInfo.device?.info?.signal}</p>
+          </div>
+          <div className="centerBtn">
+            {" "}
+            <button
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              Fechar
+            </button>
+          </div>
+        </ModalContentInicio>
+      </Modal>
+
       <Card>
         <CardStyled>
           <div className="container">
@@ -232,12 +223,8 @@ export const Inicio = () => {
                               );
 
                               if (!objeto.is_on) {
-                                console.log("Ligado");
-                                // setStateDevice(true);
                                 notify("Ligado");
                               } else {
-                                console.log("Desligado");
-                                // setStateDevice(false);
                                 notify("Desligado");
                               }
                             }}
