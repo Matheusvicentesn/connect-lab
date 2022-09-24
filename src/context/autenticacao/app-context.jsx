@@ -31,14 +31,12 @@ function AuthProvider({ children }) {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         if (data.error) {
           alert("Erro senha ou email");
         } else {
           sessionStorage.setItem("usuario", JSON.stringify(data));
           setAuth(true);
           setuserData(data);
-          console.log("Autenticada");
           handleRedirect();
         }
       });

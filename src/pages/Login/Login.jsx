@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../context/autenticacao/app-context";
 import { FormStyledLogin } from "./Login.styled";
 export const Login = () => {
-  const { auth, handleLogin } = useContext(Context);
-  console.log("Usuário logado ?", auth);
+  const { handleLogin } = useContext(Context);
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,7 +44,6 @@ export const Login = () => {
               onClick={(e) => {
                 handleLogin(e, email, password);
                 handleRedirect();
-                console.log("Redirect");
               }}
             >
               Acessar

@@ -24,7 +24,6 @@ export const Cadastro = () => {
   } = useForm({ resolver: yupResolver(validationPost) });
 
   useEffect(() => {
-    console.log("erros" + errors);
   }, [errors]);
 
   // chamada API cadastrar usuario
@@ -51,27 +50,10 @@ export const Cadastro = () => {
         return () => clearTimeout(timer);
       });
 
-  // console.log(
-  // form?.email,
-  // form?.password,
-  // form?.name,
-  // form?.pic,
-  // form?.phone,
-  // form?.zipCode,
-  // form?.adress,
-  // form?.houseNumber,
-  // form?.district,
-  // form?.city,
-  // form?.state,
-  // form?.complement
-  // );
-
-  // cadastrarUsuario(form.email)
 
   // auto fill input with zipcode
   const fillInfo = (e) => {
     const cep = e.target.value.replace(/\D/g, "");
-    console.log("cep" + cep);
     if (cep) {
       buscaCep(cep).then((data) => {
         setValue("adress", data.logradouro);

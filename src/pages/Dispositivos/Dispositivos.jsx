@@ -50,7 +50,6 @@ export const Dispositivos = () => {
   // Preenchimento do Modal
   const [modalInfo, setModalInfo] = useState({});
   function HandleSelecionar(event, param) {
-    console.log(param);
     setModalInfo(param);
     setData(param);
   }

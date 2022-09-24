@@ -31,7 +31,6 @@ export const Perfil = () => {
   } = useForm({ resolver: yupResolver(validationPost) });
 
   useEffect(() => {
-    console.log("erros" + errors);
   }, [errors]);
 
   // Recuperar dados sessionStorage (Token, user)
@@ -61,10 +60,8 @@ export const Perfil = () => {
     }
   }, []);
 
-  console.log(storageValues);
 
-  const { auth, handleLogout } = useContext(Context);
-  console.log(storageValues, auth);
+  const { handleLogout } = useContext(Context);
 
   // Buscar Perfil
   const [usuario, setUsuario] = useState();
@@ -93,7 +90,6 @@ export const Perfil = () => {
   // auto fill input with zipcode
   const fillInfo = (e) => {
     const cep = e.target.value.replace(/\D/g, "");
-    console.log("cep" + cep);
     if (cep) {
       buscaCep(cep).then((data) => {
         setValue("adress", data.logradouro);

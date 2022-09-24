@@ -93,7 +93,6 @@ export const Inicio = () => {
       );
     }
   }, [storageValues?.token, storageValues?.user]);
-  console.log(lista);
 
   // Toast
   const notify = (msg) => toast(`Dispositivo ${msg} com sucesso!`);
