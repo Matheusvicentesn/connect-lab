@@ -7,7 +7,6 @@ export const GlobalStyle = createGlobalStyle`
         vertical-align:baseline;
         list-style:none;
         border:0;
-
 }
 
 #root{     
@@ -16,7 +15,6 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 14px;
     line-height: 20px;
     font-weight: 500;
-
 }
 
 body{
@@ -35,21 +33,3 @@ main {
 }
 
 `;
-
-export const Light = {
-  colors: {
-    primeira: "#00A335",
-    segunda: "#50788A",
-    terceira: "#50788A",
-    quarta: "#BBCAD2",
-  },
-};
-
-export const Dark = {
-  colors: {
-    prieira: "#00A335",
-    segunda: "#50788A",
-    terceira: "#50788A",
-    quarta: "#BBCAD2",
-  },
-};

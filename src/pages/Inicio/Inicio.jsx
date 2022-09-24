@@ -9,7 +9,6 @@ import {
   atualizarDispositivoUsuario,
   buscarDispositivosUsuario,
 } from "../../services/api";
-import Loading from "../../components/Loading/Loading";
 import { cordenadas } from "../../utils/localidade";
 
 export const Inicio = () => {
@@ -137,7 +136,7 @@ export const Inicio = () => {
         <CardStyled>
           <div className="container">
             {!latitude ? (
-              <p>Carregando tempo</p>
+              <h2>Tempo sendo carregado</h2>
             ) : (
               <div className="Previsao">
                 <WeatherStyled>
@@ -189,8 +188,10 @@ export const Inicio = () => {
                 Fábrica
               </button>
             </div>
-            {!lista ? (
-              <Loading />
+            {lista.length < 1 ? (
+              <div className="DeviceSpace">
+                <h2>Nenhum dispositivo adicionado</h2>
+              </div>
             ) : (
               <section className="cards">
                 {lista?.map((objeto, id) => (

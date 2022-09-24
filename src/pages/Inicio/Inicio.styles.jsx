@@ -65,6 +65,11 @@ export const CardStyled = styled.div`
     border-radius: 15px;
   }
 
+  .DeviceSpace {
+    text-align: center;
+    font-size: large;
+    padding-top: 150px;
+  }
   @media screen and (max-width: 1200px) {
     .busca {
       margin-top: 200px;
@@ -92,8 +97,6 @@ export const WeatherStyled = styled.div`
   height: 20px;
   margin-bottom: 500px;
 `;
-
-
 
 export const ModalContentInicio = styled.div`
   h2 {
