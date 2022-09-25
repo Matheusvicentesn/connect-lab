@@ -4,7 +4,7 @@
 
 <p align="center">
  <h2 align="center">Connect Lab - Dashboard para gerenciar dispositivos IOT</h2>
- <p>Projeto feito para conclusão de módulo front-end do curso DEVinHouse (Turma Intelbras) </p>
+ Projeto feito para conclusão de módulo front-end do curso DEVinHouse (Turma Intelbras)
 </p>
   <p align="center">
     <a href="">
