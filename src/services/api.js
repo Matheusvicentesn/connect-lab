@@ -13,7 +13,7 @@ export function buscarPerfil(token, user, set) {
       return data;
     });
 }
-// ajuda Thais
+
 export function buscarDispositivos(token, user, set) {
   return fetch("https://connectlab.onrender.com/devices", {
     method: "get",

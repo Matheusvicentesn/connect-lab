@@ -16,7 +16,7 @@ import {
   deletarDispositivo,
 } from "../../services/api";
 import { cordenadas } from "../../utils/localidade";
-import { confirmAlert } from "react-confirm-alert"; // Import
+import { confirmAlert } from "react-confirm-alert"; 
 
 export const Inicio = () => {
   // Recuperar dados sessionStorage (Token, user, state)
@@ -130,28 +130,6 @@ export const Inicio = () => {
       ],
     });
   };
-  // const options = (objeto) => ({
-  //   title: "Title",
-  //   message: "Message",
-  //   buttons: [
-  //     {
-  //       label: "Yes",
-  //     },
-  //     {
-  //       label: "No",
-  //       onClick: () => alert("Click No"),
-  //     },
-  //   ],
-  //   closeOnEscape: true,
-  //   closeOnClickOutside: true,
-  //   keyCodeForClose: [8, 32],
-  //   willUnmount: () => {},
-  //   afterClose: () => {},
-  //   onClickOutside: () => {},
-  //   onKeypress: () => {},
-  //   onKeypressEscape: () => {},
-  //   overlayClassName: "overlay-custom-class-name",
-  // });
 
   return (
     <main>

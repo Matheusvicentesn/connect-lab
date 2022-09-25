@@ -31,7 +31,6 @@ export const NavBarStyled = styled.header`
     border-radius: 4px;
     margin-right: 50px;
     margin-top: 8px;
-    /* padding-left: 30px; */
     font-size: 24px;
   }
 

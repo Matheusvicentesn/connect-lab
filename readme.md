@@ -5,6 +5,7 @@
 <p align="center">
  <h2 align="center">Connect Lab - Dashboard para gerenciar dispositivos IOT</h2>
  <p align="center">Projeto feito para conclusão de módulo front-end do curso DEVinHouse (Turma Intelbras)</p>
+ <p align="center">hospedado em: <a href="https://connect-lab-mvsn.netlify.app/">Netlify</a> </p>
 </p>
   <p align="center">
     <a href="">

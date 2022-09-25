@@ -98,7 +98,6 @@ export const FormPerfil = styled.div`
     width: 100%;
     border: 0;
     margin: 14px 0 15px;
-    /* padding: 15px; */
     box-sizing: border-box;
     font-size: 14px;
   }
