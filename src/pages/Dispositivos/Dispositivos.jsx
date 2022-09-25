@@ -88,7 +88,9 @@ export const Dispositivos = () => {
 
   // toast
   const notify = () =>
-    toast(`Dispositivo adicionado com sucesso! Aguarde alguns segundos`);
+    toast.success(
+      `Dispositivo adicionado com sucesso! Aguarde alguns segundos`,
+    );
 
   return (
     <main>

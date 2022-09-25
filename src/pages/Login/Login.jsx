@@ -1,53 +1,74 @@
 import { Form } from "../../components/Form/Form";
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../../context/autenticacao/app-context";
 import { FormStyledLogin } from "./Login.styled";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const validationPost = yup.object().shape({
+  email: yup
+    .string()
+    .email("Formato de e-mail inválido")
+    .required("Campo obrigatório"),
+  password: yup
+    .string()
+    .required("A senha é obrigatória")
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
+      "Senha deve conter ao menos um dos seguintes elementos letra maiscula minuscula numeral e caractere especial",
+    ),
+});
+
 export const Login = () => {
   const { handleLogin } = useContext(Context);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(validationPost) });
 
+  const onSubmit = (form) => {
+    handleLogin(form.email, form.password);
+  };
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  useEffect(() => {}, [errors]);
 
-  const navigate = useNavigate();
-
-  function handleRedirect() {
-    navigate("/");
-  }
   return (
-    <FormStyledLogin>
-      <Form>
-
+    <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <FormStyledLogin>
+        <Form>
           <h2>Acessar</h2>
           <br />
-          <form action="">
-            <label htmlFor="email">E-mail</label>
-            <input
-              type="text"
-              name="user"
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="email">
+              E-mail* <p>{errors?.email?.message}</p>
+            </label>
+            <input type="text" name="email" {...register("email")} />
             <br />
             <br />
-            <label htmlFor="senha">Senha:</label>
-            <input
-              type="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <label htmlFor="password">
+              Senha* <p>{errors?.password?.message}</p>
+            </label>
+            <input type="password" name="password" {...register("password")} />
             <br />
             <br />
 
-            <button
-              type="button"
-              onClick={(e) => {
-                handleLogin(e, email, password);
-                handleRedirect();
-              }}
-            >
-              Acessar
-            </button>
+            <button type="submit">Acessar</button>
             <br />
             <br />
             <Link to={"/cadastro"}>
@@ -55,7 +76,8 @@ export const Login = () => {
               <i className="fa-solid fa-arrow-up-right-from-square"></i>
             </Link>
           </form>
-      </Form>
-    </FormStyledLogin>
+        </Form>
+      </FormStyledLogin>
+    </>
   );
 };

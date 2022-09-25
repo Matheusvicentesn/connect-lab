@@ -71,7 +71,7 @@ export const Cadastro = () => {
   }
 
   // toast
-  const notify = () => toast("Usuário cadastrato com sucesso!");
+  const notify = () => toast.success("Usuário cadastrato com sucesso!");
 
   return (
     <>

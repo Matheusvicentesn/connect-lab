@@ -8,7 +8,7 @@ const Modal = ({
   customWidth,
   customHeight,
   color,
-  esconder
+  esconder,
 }) => {
   if (!open) return null;
   return ReactDom.createPortal(
@@ -41,8 +41,8 @@ Modal.propTypes = {
   children: PropTypes.node.isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  customWidth: PropTypes,
-  customHeight: PropTypes,
-  color: PropTypes,
-  esconder: PropTypes,
+  customWidth: PropTypes.number,
+  customHeight: PropTypes.number,
+  color: PropTypes.bool,
+  esconder: PropTypes.string,
 };

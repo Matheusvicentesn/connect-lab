@@ -95,7 +95,7 @@ export const Inicio = () => {
   }, [storageValues?.token, storageValues?.user]);
 
   // Toast
-  const notify = (msg) => toast(`Dispositivo ${msg} com sucesso!`);
+  const notify = (msg) => toast.success(`Dispositivo ${msg} com sucesso!`);
 
   return (
     <main>
@@ -242,6 +242,18 @@ export const Inicio = () => {
                             }}
                           >
                             <i className="fa-solid fa-circle-info"></i>
+                          </button>
+                          <button
+                            className="btnDelete"
+                            style={{
+                              backgroundColor: "#e46150",
+                            }}
+                            onClick={(event) => {
+                              HandleSelecionar(event, objeto);
+                              HandleModal();
+                            }}
+                          >
+                            <i className="fa-solid fa-trash"></i>
                           </button>
                         </div>
                       </article>
