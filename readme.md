@@ -59,6 +59,41 @@ Melhorias que poderão ser feitas no projeto posteriormente.
 <img src="src/assets/img/readme/imagem2.png" alt="" style="vertical-align:middle;max-height:50%;">
 </div>
 
+<p align="center">
+ <h2 align="center">Página de adição de dispositivos</h2>
+ <p>Página responsável por vincular um dispositivo a conta de um usuário</p>
+</p>
+
+<div id="container" style="height:100px;line-height:100px;">
+<img src="src/assets/img/readme/imagem3.png" alt="" style="vertical-align:middle;max-height:50%;">
+</div>
+
+## Rodando projeto localmente
+
+Clonar repositório / entrar na pasta do projeto / Instalar as dependencias do projeto
+
+```
+https://github.com/Matheusvicentesn/connect-lab
+```
+
+```
+cd connect-lab
+
+```
+
+```
+npm install
+```
+
+Executa o aplicativo no modo de desenvolvedor
+
+```
+npm run dev
+```
+
+Em seguida já é possível acessar a página localmente através do endereço que vai ser gerado no terminal
+<img src="src/assets/img/readme/imagem4.png" alt="" style="vertical-align:middle;max-height:50%;">
+
 ### Contato
 
 Projeto desenvolvido com base na atividade do curso DEVinHouse
