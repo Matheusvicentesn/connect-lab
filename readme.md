@@ -4,6 +4,7 @@
 
 <p align="center">
  <h2 align="center">Connect Lab - Dashboard para gerenciar dispositivos IOT</h2>
+ <p>Projeto feito para conclusão de módulo front-end do curso DEVinHouse (Turma Intelbras) </p>
 </p>
   <p align="center">
     <a href="">
@@ -28,9 +29,9 @@
 - Cadastro/Login ( Com validações )
 - Adição/Remoção de Dispositivos a conta
 - Gerenciar Estado dos dispositivos
+- Sistema de notificações via Toast
 - Previsão do tempo baseado no local do usuário
 - Todas as comunicações/ações feitas em comunicação via API
-
 
 ### A ser desenvolvido
 
@@ -38,6 +39,17 @@ Melhorias que poderão ser feitas no projeto posteriormente.
 
 - [ ] Dark/Light Mode
 - [ ] Cadastro de novos dispositivos
+
+### Imagens do projeto
+
+<p align="center">
+ <h2 align="center">Página de inicio da aplicação</h2>
+ <p>Página responsável por visão geral dos dispositivos adicionados a conta e gerenciamento dos mesmos, podendo ser possível desliga-los/liga-los ver detalhes dos mesmos e também fazer a exclusão do dispositivo vinculado a conta  </p>
+</p>
+
+<div id="container" style="height:100px;line-height:100px;">
+<img src="src/assets/img/readme/imagem1.png" alt="" style="vertical-align:middle;max-height:50%;">
+</div>
 
 ### Contato
 
