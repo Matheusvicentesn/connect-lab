@@ -30,8 +30,7 @@ export const Perfil = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(validationPost) });
 
-  useEffect(() => {
-  }, [errors]);
+  useEffect(() => {}, [errors]);
 
   // Recuperar dados sessionStorage (Token, user)
   const [storageValues, setStorageValues] = useState();
@@ -59,7 +58,6 @@ export const Perfil = () => {
       });
     }
   }, []);
-
 
   const { handleLogout } = useContext(Context);
 
@@ -181,7 +179,7 @@ export const Perfil = () => {
                       Senha* <p>{errors.password?.message}</p>
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       name="password"
                       {...register("password")}
                     />
@@ -192,7 +190,7 @@ export const Perfil = () => {
                       <p>{errors.confirmPassowrd?.message}</p>
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       name="confirmPassowrd"
                       {...register("confirmPassowrd")}
                     />

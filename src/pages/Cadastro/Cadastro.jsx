@@ -23,8 +23,7 @@ export const Cadastro = () => {
     setFocus,
   } = useForm({ resolver: yupResolver(validationPost) });
 
-  useEffect(() => {
-  }, [errors]);
+  useEffect(() => {}, [errors]);
 
   // chamada API cadastrar usuario
   const post = (form) =>
@@ -49,7 +48,6 @@ export const Cadastro = () => {
         }, 5000);
         return () => clearTimeout(timer);
       });
-
 
   // auto fill input with zipcode
   const fillInfo = (e) => {
@@ -122,14 +120,18 @@ export const Cadastro = () => {
                 <label htmlFor="password">
                   Senha* <p>{errors.password?.message}</p>
                 </label>
-                <input type="text" name="password" {...register("password")} />
+                <input
+                  type="password"
+                  name="password"
+                  {...register("password")}
+                />
               </li>
               <li>
                 <label htmlFor="confirmPassowrd">
                   Confirmação da senha* <p>{errors.confirmPassowrd?.message}</p>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   name="confirmPassowrd"
                   {...register("confirmPassowrd")}
                 />
