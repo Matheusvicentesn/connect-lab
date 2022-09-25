@@ -71,11 +71,6 @@ export const CardStyled = styled.div`
     padding-top: 150px;
   }
 
-  .btnDelete {
-    Button {
-      background-color: red;
-    }
-  }
   @media screen and (max-width: 1200px) {
     .busca {
       margin-top: 200px;

@@ -8,6 +8,7 @@ import { Fragment, useEffect, useState } from "react";
 import {
   atualizarDispositivoUsuario,
   buscarDispositivosUsuario,
+  deletarDispositivo,
 } from "../../services/api";
 import { cordenadas } from "../../utils/localidade";
 
@@ -248,9 +249,13 @@ export const Inicio = () => {
                             style={{
                               backgroundColor: "#e46150",
                             }}
-                            onClick={(event) => {
-                              HandleSelecionar(event, objeto);
-                              HandleModal();
+                            onClick={() => {
+                              deletarDispositivo(
+                                storageValues?.token,
+                                storageValues?.user,
+                                objeto._id,
+                                setLista,
+                              );
                             }}
                           >
                             <i className="fa-solid fa-trash"></i>

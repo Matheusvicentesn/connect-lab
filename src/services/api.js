@@ -198,3 +198,22 @@ export function atualizarUsuario(
       return data;
     });
 }
+
+export function deletarDispositivo(token,user, device, set, ) {
+  return fetch(`https://connectlab.onrender.com/userDevices/${device}`, {
+    method: "DELETE",
+    headers: new Headers({
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data;
+    })
+    .then(() => {
+      buscarDispositivosUsuario(token, user, set);
+    });
+}
