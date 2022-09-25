@@ -120,7 +120,7 @@ export const Perfil = () => {
 
   if (!usuario) return <Loading />;
 
-  const notify = () => toast("Usuário Atualizado");
+  const notify = () => toast.success("Usuário Atualizado");
 
   return (
     <>

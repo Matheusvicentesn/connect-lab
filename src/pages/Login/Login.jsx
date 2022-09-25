@@ -14,13 +14,7 @@ const validationPost = yup.object().shape({
     .string()
     .email("Formato de e-mail inválido")
     .required("Campo obrigatório"),
-  password: yup
-    .string()
-    .required("A senha é obrigatória")
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
-      "Senha deve conter ao menos um dos seguintes elementos letra maiscula minuscula numeral e caractere especial",
-    ),
+  password: yup.string().required("A senha é obrigatória"),
 });
 
 export const Login = () => {
