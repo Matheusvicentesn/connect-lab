@@ -4,7 +4,7 @@
 
 <p align="center">
  <h2 align="center">Connect Lab - Dashboard para gerenciar dispositivos IOT</h2>
- Projeto feito para conclusão de módulo front-end do curso DEVinHouse (Turma Intelbras)
+ <p align="center">Projeto feito para conclusão de módulo front-end do curso DEVinHouse (Turma Intelbras)</p>
 </p>
   <p align="center">
     <a href="">
@@ -44,11 +44,19 @@ Melhorias que poderão ser feitas no projeto posteriormente.
 
 <p align="center">
  <h2 align="center">Página de inicio da aplicação</h2>
- <p>Página responsável por visão geral dos dispositivos adicionados a conta e gerenciamento dos mesmos, podendo ser possível desliga-los/liga-los ver detalhes dos mesmos e também fazer a exclusão do dispositivo vinculado a conta  </p>
+ <p>Página responsável por visão geral dos dispositivos adicionados a conta e gerenciamento dos mesmos, podendo ser possível desliga-los/liga-los ver detalhes dos mesmos e também fazer a exclusão do dispositivo vinculado a conta. </p>
 </p>
 
 <div id="container" style="height:100px;line-height:100px;">
 <img src="src/assets/img/readme/imagem1.png" alt="" style="vertical-align:middle;max-height:50%;">
+</div>
+
+<p align="center">
+ <h2 align="center">Modal com detalhes de cada dispositivo</h2>
+</p>
+
+<div id="container" style="height:100px;line-height:100px;">
+<img src="src/assets/img/readme/imagem2.png" alt="" style="vertical-align:middle;max-height:50%;">
 </div>
 
 ### Contato
