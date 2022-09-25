@@ -19,12 +19,9 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const recuperarUsuario = sessionStorage.getItem("usuario");
-    console.log(recuperarUsuario);
-
     if (recuperarUsuario) {
       setAuth(true);
     }
-
     setLoading(false);
   }, [auth]);
 
