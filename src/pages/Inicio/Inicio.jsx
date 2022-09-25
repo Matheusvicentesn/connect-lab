@@ -1,5 +1,10 @@
 import { Card } from "../../components/Card/Card";
-import { CardStyled, ModalContentInicio, WeatherStyled } from "./Inicio.styles";
+import {
+  CardStyled,
+  ConfirmStyle,
+  ModalContentInicio,
+  WeatherStyled,
+} from "./Inicio.styles";
 import Modal from "../../components/Modal/Modal";
 import ReactWeather, { useVisualCrossing } from "react-open-weather";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +16,7 @@ import {
   deletarDispositivo,
 } from "../../services/api";
 import { cordenadas } from "../../utils/localidade";
+import { confirmAlert } from "react-confirm-alert"; // Import
 
 export const Inicio = () => {
   // Recuperar dados sessionStorage (Token, user, state)
@@ -97,9 +103,59 @@ export const Inicio = () => {
 
   // Toast
   const notify = (msg) => toast.success(`Dispositivo ${msg} com sucesso!`);
+  const deleteDevice = (msg) =>
+    toast.success(`Dispositivo ${msg} apagado com sucesso!`);
+
+  // Custom Alert
+  const submit = (objeto) => {
+    confirmAlert({
+      title: "",
+      message: "Você deseja apagar o dispositivo ?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            deletarDispositivo(
+              storageValues?.token,
+              storageValues?.user,
+              objeto._id,
+              setLista,
+            );
+            deleteDevice(objeto?.device?.name);
+          },
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  };
+  // const options = (objeto) => ({
+  //   title: "Title",
+  //   message: "Message",
+  //   buttons: [
+  //     {
+  //       label: "Yes",
+  //     },
+  //     {
+  //       label: "No",
+  //       onClick: () => alert("Click No"),
+  //     },
+  //   ],
+  //   closeOnEscape: true,
+  //   closeOnClickOutside: true,
+  //   keyCodeForClose: [8, 32],
+  //   willUnmount: () => {},
+  //   afterClose: () => {},
+  //   onClickOutside: () => {},
+  //   onKeypress: () => {},
+  //   onKeypressEscape: () => {},
+  //   overlayClassName: "overlay-custom-class-name",
+  // });
 
   return (
     <main>
+      <ConfirmStyle />
       <Modal open={isOpen} onClose={() => setIsOpen(false)} esconder={"none"}>
         <ModalContentInicio>
           <h2>{modalInfo.device?.name}</h2>
@@ -250,12 +306,7 @@ export const Inicio = () => {
                               backgroundColor: "#e46150",
                             }}
                             onClick={() => {
-                              deletarDispositivo(
-                                storageValues?.token,
-                                storageValues?.user,
-                                objeto._id,
-                                setLista,
-                              );
+                              submit(objeto);
                             }}
                           >
                             <i className="fa-solid fa-trash"></i>
