@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,12 +9,24 @@ const Context = createContext();
 function AuthProvider({ children }) {
   const [auth, setAuth] = useState(false);
   const [userData, setuserData] = useState();
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const notify = () => toast.error("Combinação de e-mail e senha incorretos!");
 
   function handleRedirect() {
     navigate("/");
   }
+
+  useEffect(() => {
+    const recuperarUsuario = sessionStorage.getItem("usuario");
+    console.log(recuperarUsuario);
+
+    if (recuperarUsuario) {
+      setAuth(true);
+    }
+
+    setLoading(false);
+  }, [auth]);
 
   function handleLogin(email, password) {
     fetch("https://connectlab.onrender.com/auth/login", {
@@ -44,19 +56,6 @@ function AuthProvider({ children }) {
       });
   }
 
-  // <ToastContainer
-  //   position="top-center"
-  //   autoClose={5000}
-  //   hideProgressBar={false}
-  //   newestOnTop={false}
-  //   closeOnClick
-  //   rtl={false}
-  //   pauseOnFocusLoss
-  //   draggable
-  //   pauseOnHover
-  // />;
-  // <ToastContainer />;
-
   function handleLogout(e) {
     e.preventDefault();
     setAuth(false);
@@ -64,7 +63,9 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <Context.Provider value={{ auth, handleLogin, userData, handleLogout }}>
+    <Context.Provider
+      value={{ auth, loading, handleLogin, userData, handleLogout }}
+    >
       {children}
     </Context.Provider>
   );
