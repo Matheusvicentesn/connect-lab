@@ -26,4 +26,11 @@ export const FormStyledLogin = styled(FormStyled)`
     box-sizing: border-box;
     font-size: 14px;
   }
+
+  @media screen and (max-width: 375px) {
+    div {
+      margin-top: 30px;
+      margin-left: 18px;
+    }
+  }
 `;

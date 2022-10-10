@@ -102,6 +102,17 @@ export const CardStyled = styled.div`
     .btnPesquisa {
       margin-top: 30px;
     }
+    .cards {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      margin-left: 5px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .cards {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      margin-left: 5px;
+    }
   }
 `;
 
@@ -179,6 +190,13 @@ export const ModalContentDispositivo = styled.div`
       margin: 4px 2px;
       cursor: pointer;
       border-radius: 15px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .cards {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      margin-left: 5px;
     }
   }
 `;

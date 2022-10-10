@@ -16,7 +16,7 @@ import {
   deletarDispositivo,
 } from "../../services/api";
 import { cordenadas } from "../../utils/localidade";
-import { confirmAlert } from "react-confirm-alert"; 
+import { confirmAlert } from "react-confirm-alert";
 
 export const Inicio = () => {
   // Recuperar dados sessionStorage (Token, user, state)
@@ -236,12 +236,12 @@ export const Inicio = () => {
                           <img
                             className="img"
                             alt="foto"
-                            src={objeto.device.photoUrl}
+                            src={objeto?.device?.photoUrl}
                           />
                         </div>
 
                         <div className="infoText">
-                          <h2 className="infoTitulo">{objeto.device.name}</h2>
+                          <h2 className="infoTitulo">{objeto?.device?.name}</h2>
                           <p>{objeto.local?.description}</p>
                           <p>{objeto.room}</p>
                         </div>

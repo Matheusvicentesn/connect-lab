@@ -26,7 +26,7 @@ function AuthProvider({ children }) {
   }, [auth]);
 
   function handleLogin(email, password) {
-    fetch("https://connectlab.onrender.com/auth/login", {
+    fetch("https://connectlabapi.onrender.com/auth/login", {
       method: "POST",
 
       headers: new Headers({

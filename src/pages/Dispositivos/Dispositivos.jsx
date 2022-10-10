@@ -80,6 +80,7 @@ export const Dispositivos = () => {
       local,
       room,
     );
+    console.log(storageValues.token, storageValues?.user, data, local, room);
     setIsOpen(false);
   };
 

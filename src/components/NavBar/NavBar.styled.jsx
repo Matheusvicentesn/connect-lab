@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const NavBarStyled = styled.header`
-
   #navbar {
     align-items: center;
     background-color: #395b64;
@@ -61,6 +60,12 @@ export const NavBarStyled = styled.header`
   @media screen and (max-width: 900px) {
     header {
       margin-bottom: 5px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    #navbar a {
+      margin-left: 60px;
     }
   }
 `;

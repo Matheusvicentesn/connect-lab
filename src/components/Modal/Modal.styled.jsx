@@ -45,6 +45,18 @@ export const ModalStyled = styled.div`
     text-align: ${({ esconder }) => esconder || ""};
     display: ${({ esconder }) => esconder || ""};
   }
+
+  @media screen and (max-width: 520px) {
+    .container {
+      width: ${({ customWidth }) => customWidth || "300"}px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .container {
+      width: ${({ customWidth }) => customWidth || "200"}px;
+    }
+  }
 `;
 
 export const Overlay = styled.div`

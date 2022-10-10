@@ -2,16 +2,19 @@ import styled from "styled-components";
 
 export const FormStyled = styled.div`
   div {
+    max-width: auto;
+    height: auto;
     background: #002630;
-    max-width: 1200px;
     margin: 4vh auto;
     padding: 46px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 15px;
+    border: 1px solid red;
   }
 
   form {
     text-align: center;
+    border: 1px solid red;
   }
   h2 {
     color: #a5c9ca;
@@ -71,6 +74,6 @@ export const FormStyled = styled.div`
     text-align: left;
   }
   label {
-    color: #A5C9CA;
+    color: #a5c9ca;
   }
 `;
