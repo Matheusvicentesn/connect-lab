@@ -81,14 +81,89 @@ export const CardStyled = styled.div`
       margin-top: 250px;
     }
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 633px) {
     .busca {
-      margin-top: 350px;
+      margin-top: 280px;
     }
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 587px) {
     .busca {
-      margin-top: 350px;
+      margin-top: 300px;
+    }
+  }
+
+  @media screen and (max-width: 523px) {
+    .busca {
+      margin-top: 320px;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .busca {
+      margin-top: 340px;
+    }
+  }
+
+  @media screen and (max-width: 437px) {
+    .busca {
+      margin-top: 380px;
+    }
+  }
+
+  @media screen and (max-width: 434px) {
+    .busca {
+      margin-top: 400px;
+    }
+  }
+  @media screen and (max-width: 428px) {
+    .busca {
+      margin-top: 420px;
+    }
+  }
+  @media screen and (max-width: 426px) {
+    .busca {
+      margin-top: 440px;
+    }
+  }
+
+  @media screen and (max-width: 406px) {
+    .busca {
+      margin-top: 460px;
+    }
+  }
+
+  @media screen and (max-width: 378px) {
+    .busca {
+      margin-top: 480px;
+    }
+  }
+
+  @media screen and (max-width: 376px) {
+    .busca {
+      margin-top: 500px;
+    }
+  }
+
+  @media screen and (max-width: 845px) {
+    .cards {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      margin-left: 5px;
+    }
+    Button {
+      padding: 10px 16px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .cards {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      margin-left: 5px;
+    }
+
+    Button {
+      padding: 10px 16px;
+    }
+    .busca {
+      margin-top: 500px;
     }
   }
 `;
@@ -161,6 +236,40 @@ export const ModalContentInicio = styled.div`
       cursor: pointer;
       border-radius: 15px;
     }
+  }
+
+  @media screen and (max-width: 520px) {
+    h2 {
+      padding-bottom: 0px;
+    }
+
+    .device {
+      width: 100%;
+      padding: 0px;
+
+      img {
+        height: 100px;
+        padding-bottom: 0px;
+      }
+    }
+
+    .deviceInfo {
+      margin: auto;
+      width: 50%;
+      padding: 6px;
+      text-align: left;
+
+      p {
+        font-size: 14px;
+      }
+
+      h2 {
+        font-size: 16px;
+        font-weight: 40px;
+      }
+
+    }
+
   }
 `;
 

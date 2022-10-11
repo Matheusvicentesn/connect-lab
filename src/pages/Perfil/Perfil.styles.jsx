@@ -67,6 +67,32 @@ export const CardStyled = styled.div`
       text-align: center;
     }
   }
+  @media only screen and (max-width: 450px) {
+    .container {
+      max-width: 300px;
+      margin-right: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 430px) {
+    .container {
+      max-width: 280px;
+      margin-right: 34px;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    .container {
+      margin-right: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    .container {
+      max-width: 260px;
+      margin-right: 15px;
+    }
+  }
 `;
 
 export const FormPerfil = styled.div`
@@ -74,7 +100,7 @@ export const FormPerfil = styled.div`
     background: #395b64;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     width: 700px;
-    height: 800px;
+    height: auto;
   }
 
   form {
@@ -142,11 +168,33 @@ export const FormPerfil = styled.div`
   @media only screen and (max-width: 600px) {
     div {
       width: 600px;
-      height: 800px;
+      height: auto;
+      overflow-y: scroll;
     }
 
     ul {
       width: 100%;
+    }
+    ul li {
+      width: 60%;
+    }
+
+    ul li > * {
+      width: 50%;
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    div {
+      width: 600px;
+      height: auto;
+      margin-left: 70px;
+      padding-bottom: 50px;
+      overflow-y: scroll;
+    }
+
+    ul {
+      width: 90%;
     }
     ul li {
       width: 60%;
