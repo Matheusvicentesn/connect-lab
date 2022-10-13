@@ -242,8 +242,8 @@ export const Inicio = () => {
 
                         <div className="infoText">
                           <h2 className="infoTitulo">{objeto?.device?.name}</h2>
-                          <p>{objeto.local?.description}</p>
-                          <p>{objeto.room}</p>
+                          <p>Local: {objeto.local?.description}</p>
+                          <p>Cômodo: {objeto.room}</p>
                         </div>
                         <div className="btn">
                           <button
@@ -264,7 +264,7 @@ export const Inicio = () => {
                               }
                             }}
                             style={{
-                              backgroundColor: objeto.is_on ? "green" : "grey",
+                              backgroundColor: objeto.is_on ? "#27bdbe" : "gray",
                             }}
                           >
                             <i className="fa-solid fa-power-off"></i>

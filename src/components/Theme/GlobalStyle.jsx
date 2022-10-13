@@ -17,11 +17,16 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 500;
 }
 
-body{
-    background-color: #E7F6F2;
+
+
+body {
+    background: ${({ theme }) => theme.body};
+    font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif;
+    transition: all 0.50s linear;
     max-width: 100%;
     overflow-x: hidden;
-}
+    color:  ${({ theme }) => theme.text};
+  }
 
 main {
   display: flex;

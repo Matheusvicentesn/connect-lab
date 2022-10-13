@@ -4,7 +4,6 @@ import { FormStyled } from "../../components/Form/Form.styled";
 
 export const FormStyledLogin = styled(FormStyled)`
   div {
-    background: #395b64;
     max-width: 400px;
     margin-top: 150px;
     padding: 45px;

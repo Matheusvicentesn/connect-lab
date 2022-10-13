@@ -186,8 +186,9 @@ export const FormPerfil = styled.div`
 
   @media only screen and (max-width: 375px) {
     div {
+      padding-top: 30px;
       width: 600px;
-      height: auto;
+      height: 600px;
       margin-left: 70px;
       padding-bottom: 50px;
       overflow-y: scroll;
@@ -201,7 +202,7 @@ export const FormPerfil = styled.div`
     }
 
     ul li > * {
-      width: 50%;
+      width: 90%;
     }
   }
 `;

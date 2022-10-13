@@ -21,7 +21,7 @@ export const CardStyled = styled.div`
   }
 
   h2 {
-    color: #395b64;
+    color: ${({ theme }) => theme.colors.secondary};
   }
 
   .cards {
@@ -39,7 +39,7 @@ export const CardStyled = styled.div`
     -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
     padding: 16px;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.primary};
     border-radius: 10px;
     transition: all 0.2s;
   }
@@ -51,10 +51,15 @@ export const CardStyled = styled.div`
     margin-top: 0px;
     font-size: 18px;
   }
+  .busca button {
+    background-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.secondary};
+  }
 
   Button {
-    background-color: #2c3333;
-    color: #a5c9ca;
+    background-color: ${({ theme }) => theme.colors.color08};
+    border: none;
+    color: ${({ theme }) => theme.colors.secondary};
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -71,6 +76,9 @@ export const CardStyled = styled.div`
     padding-top: 150px;
   }
 
+  .infoText p {
+    color: ${({ theme }) => theme.colors.secondary};
+  }
   @media screen and (max-width: 1200px) {
     .busca {
       margin-top: 200px;
@@ -177,7 +185,7 @@ export const WeatherStyled = styled.div`
 export const ModalContentInicio = styled.div`
   h2 {
     text-align: center;
-    color: #395b64;
+    color: ${({ theme }) => theme.colors.color10};
     padding-bottom: 5px;
   }
 
@@ -199,7 +207,7 @@ export const ModalContentInicio = styled.div`
     }
 
     h2 {
-      color: black;
+      color: ${({ theme }) => theme.colors.color10};
     }
   }
 
@@ -267,9 +275,7 @@ export const ModalContentInicio = styled.div`
         font-size: 16px;
         font-weight: 40px;
       }
-
     }
-
   }
 `;
 

@@ -3,7 +3,6 @@ import { FormStyled } from "../../components/Form/Form.styled";
 
 export const FormStyledCadastro = styled(FormStyled)`
   div {
-    background: #395b64;
     max-width: auto;
     height: auto;
     padding: 30px;
@@ -11,26 +10,19 @@ export const FormStyledCadastro = styled(FormStyled)`
     border-radius: 15px;
   }
 
-  @media screen and (max-width: 500px) {
-    div {
-      height: auto;
-      margin-left: 18px;
-    }
-
-    form {
-      width: 100%;
-    }
-
-    ul li {
-      width: 80%;
-      display: inline-block;
-      margin-left: 20px;
-    }
+  form {
+    width: 100%;
   }
+
+  ul li {
+    width: 40%;
+    display: inline-block;
+    margin-left: 20px;
+  }
+
   @media screen and (max-width: 375px) {
     div {
       height: auto;
-      margin-left: 18px;
     }
 
     form {
