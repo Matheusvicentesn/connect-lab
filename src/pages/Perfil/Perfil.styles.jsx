@@ -6,7 +6,7 @@ export const CardStyled = styled.div`
     text-align: center;
   }
   .container {
-    background: #395b64;
+    background: ${({ theme }) => theme.colors.primary};
     max-width: 500px;
     margin: 10vh auto;
     padding: 40px;
@@ -30,19 +30,18 @@ export const CardStyled = styled.div`
   }
 
   p {
-    color: #a5c9ca;
     font-size: 20px;
     padding: 5px;
   }
 
   hr {
-    border-top: 1px solid #92c1d4;
+    border-bottom: ${({ theme }) => theme.colors.color12} 1px solid;
     margin-bottom: 5px;
   }
 
   Button {
-    background-color: #2c3333;
-    color: #a5c9ca;
+    background-color: ${({ theme }) => theme.colors.color12};
+    color: ${({ theme }) => theme.colors.color13};
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -97,10 +96,16 @@ export const CardStyled = styled.div`
 
 export const FormPerfil = styled.div`
   div {
-    background: #395b64;
+    background: ${({ theme }) => theme.colors.primary};
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     width: 700px;
     height: auto;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
   }
 
   form {
@@ -167,8 +172,11 @@ export const FormPerfil = styled.div`
 
   @media only screen and (max-width: 600px) {
     div {
-      width: 600px;
-      height: auto;
+      top: 70%;
+      left: 40%;
+      margin-right: -50%;
+      width: 400px;
+      height: 600px;
       overflow-y: scroll;
     }
 
@@ -187,11 +195,12 @@ export const FormPerfil = styled.div`
   @media only screen and (max-width: 375px) {
     div {
       padding-top: 30px;
-      width: 600px;
+      width: 400px;
       height: 600px;
       margin-left: 70px;
       padding-bottom: 50px;
       overflow-y: scroll;
+      left: 0%;
     }
 
     ul {

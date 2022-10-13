@@ -8,17 +8,17 @@ export const CardStyled = styled.div`
   }
 
   h1 {
-    color: #395b64;
+    color: ${({ theme }) => theme.colors.color12};
     text-transform: uppercase;
   }
 
   h2 {
     text-align: center;
-    color: #395b64;
+    color: ${({ theme }) => theme.colors.color12};
   }
 
   hr {
-    border-bottom: #283966 1px solid;
+    border-bottom: ${({ theme }) => theme.colors.color12} 1px solid;
     padding-top: 10px;
   }
 
@@ -31,8 +31,8 @@ export const CardStyled = styled.div`
     width: 80%;
     padding: 8px;
     border-radius: 10px;
-    -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
-    box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 0px 16px -3px rgba(0, 0, 0, 0.78);
+    box-shadow: 0px 0px 16px -3px rgba(0, 0, 0, 0.78);
   }
 
   .infoTitulo {
@@ -68,7 +68,7 @@ export const CardStyled = styled.div`
     -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
     padding: 16px;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.color13};
     border-radius: 10px;
     transition: all 0.2s;
   }
@@ -86,8 +86,9 @@ export const CardStyled = styled.div`
   }
 
   Button {
-    background-color: #2c3333;
-    color: #a5c9ca;
+    background-color: ${({ theme }) => theme.colors.color14};
+    border: none;
+    color: ${({ theme }) => theme.colors.secondary};
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -119,18 +120,17 @@ export const CardStyled = styled.div`
 export const ModalContentDispositivo = styled.div`
   h2 {
     text-align: center;
-    color: #395b64;
+    color: ${({ theme }) => theme.colors.color10};
     padding-bottom: 5px;
-  }
-
-  h3 {
-    text-align: center;
-    color: grey;
   }
 
   input {
     padding: 5px;
     margin-top: 10px;
+    width: 98%;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -3px rgba(0, 0, 0, 0.78);
+    box-shadow: 0px 0px 16px -3px rgba(0, 0, 0, 0.78);
   }
 
   select {
@@ -139,7 +139,7 @@ export const ModalContentDispositivo = styled.div`
   }
 
   label {
-    color: #395b64;
+    color: ${({ theme }) => theme.colors.color10};
     font-size: 20px;
     font-weight: 900;
     padding-bottom: 10px;
@@ -180,8 +180,8 @@ export const ModalContentDispositivo = styled.div`
     align-items: center;
 
     Button {
-      background-color: #2c3333;
-      color: #a5c9ca;
+      background-color: ${({ theme }) => theme.colors.color14};
+      color: ${({ theme }) => theme.colors.secondary};
       padding: 15px 32px;
       text-align: center;
       text-decoration: none;

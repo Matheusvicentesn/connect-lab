@@ -9,9 +9,15 @@ import { useState } from "react";
 
 function App() {
   const [theme, setTheme] = useState("light");
+  const [icon, setIcon] = useState("fa-solid fa-moon");
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
+    icon === "fa-solid fa-sun"
+      ? setIcon("fa-solid fa-moon")
+      : setIcon("fa-solid fa-sun");
   };
+
+
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyle />
@@ -19,7 +25,9 @@ function App() {
         <AuthProvider>
           <div className="App">
             <NavBar />
-            <button onClick={themeToggler}>Switch Theme</button>
+            <button className="changeTheme" onClick={themeToggler}>
+              <i className={icon}></i>
+            </button>
             <Router />
           </div>
         </AuthProvider>

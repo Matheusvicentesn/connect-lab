@@ -139,8 +139,8 @@ export const Perfil = () => {
         <Modal
           open={isOpen}
           onClose={() => setIsOpen(false)}
-          customWidth={700}
-          customHeight={800}
+          customWidth={1}
+          customHeight={1}
           color={true}
           esconder={"none"}
         >

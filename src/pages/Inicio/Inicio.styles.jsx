@@ -20,9 +20,6 @@ export const CardStyled = styled.div`
     float: left;
   }
 
-  h2 {
-    color: ${({ theme }) => theme.colors.secondary};
-  }
 
   .cards {
     display: grid;
@@ -39,7 +36,7 @@ export const CardStyled = styled.div`
     -webkit-box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
     box-shadow: 11px 11px 15px 5px rgba(0, 0, 0, 0.2);
     padding: 16px;
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.color13};
     border-radius: 10px;
     transition: all 0.2s;
   }
@@ -76,9 +73,6 @@ export const CardStyled = styled.div`
     padding-top: 150px;
   }
 
-  .infoText p {
-    color: ${({ theme }) => theme.colors.secondary};
-  }
   @media screen and (max-width: 1200px) {
     .busca {
       margin-top: 200px;
@@ -233,8 +227,8 @@ export const ModalContentInicio = styled.div`
     text-align: center;
 
     Button {
-      background-color: #2c3333;
-      color: #a5c9ca;
+      background-color: ${({ theme }) => theme.colors.color10};
+      color: ${({ theme }) => theme.colors.color11};
       padding: 15px 32px;
       text-align: center;
       text-decoration: none;

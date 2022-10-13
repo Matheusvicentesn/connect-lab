@@ -18,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 
-
 body {
     background: ${({ theme }) => theme.body};
     font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif;
@@ -35,6 +34,16 @@ main {
   flex: 1;
   gap: 40px;
   
+}
+
+.changeTheme{
+  background-color: transparent;
+  color: ${({ theme }) => theme.colors.color15};
+  border-radius: 5px;
+  float: right;
+  padding: 15px;
+  margin: 5px 5px 0px 0px;
+  font-size: 30px
 }
 
 `;

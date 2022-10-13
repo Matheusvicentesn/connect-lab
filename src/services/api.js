@@ -217,5 +217,3 @@ export function deletarDispositivo(token, user, device, set) {
       buscarDispositivosUsuario(token, user, set);
     });
 }
-
-// test

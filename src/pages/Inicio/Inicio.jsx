@@ -35,6 +35,7 @@ export const Inicio = () => {
     }
   }, []);
 
+
   // Abertura do modal
   const [isOpen, setIsOpen] = useState(false);
   function HandleModal() {
@@ -264,7 +265,7 @@ export const Inicio = () => {
                               }
                             }}
                             style={{
-                              backgroundColor: objeto.is_on ? "#27bdbe" : "gray",
+                              backgroundColor: objeto.is_on ? "green" : "gray",
                             }}
                           >
                             <i className="fa-solid fa-power-off"></i>

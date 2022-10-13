@@ -6,11 +6,11 @@ export const ModalStyled = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: ${({ theme }) => theme.body};
+    background-color: ${({ color, theme }) => color || theme.body};
     padding: 50px;
     z-index: 1000;
     width: ${({ customWidth }) => customWidth || "400"}px;
-    height: ${({ customHeight }) => customHeight || "auto"};    
+    height: ${({ customHeight }) => customHeight || "auto"};
     border-radius: 10px;
   }
 

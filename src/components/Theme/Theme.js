@@ -14,8 +14,11 @@ export const lightTheme = {
     color08: "#EAB42A",
     color09: "#27bdbe",
     color10: "#000000",
-    color11: "#a1a09a",
-    color12: "#ededec",
+    color11: "#fff",
+    color12: "#000",
+    color13: "#fff",
+    color14: "#00A335",
+    color15: "#322F3D",
   },
 };
 export const darkTheme = {
@@ -34,7 +37,10 @@ export const darkTheme = {
     color08: "#51504b",
     color09: "#717069",
     color10: "#f0edee",
-    color11: "#a1a09a",
-    color12: "#ededec",
+    color11: "#000",
+    color12: "#fff",
+    color13: "#363062",
+    color14: "#232320",
+    color15: "yellow",
   },
 };
