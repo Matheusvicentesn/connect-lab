@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { AddressEntity } from './address.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -25,4 +32,8 @@ export class UserEntity {
 
   @Column({ length: 50, nullable: false })
   phone: string;
+
+  @JoinColumn()
+  @OneToOne(() => AddressEntity, (address) => address.user, { cascade: true })
+  address: AddressEntity;
 }
