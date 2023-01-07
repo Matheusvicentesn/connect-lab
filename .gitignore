@@ -3,8 +3,7 @@
 /node_modules
 
 
-#Database
-/docker/database/dbdata
+/docker/database
 
 # Logs
 logs
