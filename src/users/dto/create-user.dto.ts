@@ -4,7 +4,10 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
+import { AddressDTO } from './address-dto';
+import { Type } from 'class-transformer';
 
 export class CreateUserDto {
   @IsString()
@@ -30,4 +33,8 @@ export class CreateUserDto {
   @MaxLength(50)
   @IsOptional()
   readonly phone: string;
+
+  @ValidateNested()
+  @Type(() => AddressDTO)
+  address: AddressDTO;
 }
