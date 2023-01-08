@@ -5,6 +5,8 @@
 
 /docker/database
 
+.env
+
 # Logs
 logs
 *.log
