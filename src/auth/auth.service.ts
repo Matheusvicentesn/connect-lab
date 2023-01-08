@@ -23,8 +23,11 @@ export class AuthService {
 
   async createUser(userBody: CreateUserDto): Promise<UserEntity> {
     return new Promise(async (resolve) => {
-      const { email, name, password, phone, address } = userBody;
+      const { email, name, password, phone, address, profile_pic } = userBody;
       const user = this.userRepository.create();
+      user.profile_pic = profile_pic
+        ? profile_pic
+        : 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg'; // TODO: arrumar posteriormente com valor default na entidade
       user.email = email;
       user.phone = phone;
       user.name = name;

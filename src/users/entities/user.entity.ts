@@ -15,6 +15,11 @@ export class UserEntity {
   @Column({ length: 50, nullable: false })
   name: string;
 
+  @Column({
+    nullable: true,
+  })
+  profile_pic: string;
+
   @Column({ length: 50, unique: true })
   email: string;
 
@@ -30,7 +35,7 @@ export class UserEntity {
   @Column({ type: 'varchar', length: 64 })
   recoverToken: string;
 
-  @Column({ length: 50, nullable: false })
+  @Column({ length: 50, nullable: true })
   phone: string;
 
   @JoinColumn()

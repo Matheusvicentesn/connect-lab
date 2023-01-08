@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsOptional,
   IsString,
+  IsUrl,
   Matches,
   MaxLength,
   MinLength,
@@ -16,6 +17,11 @@ export class CreateUserDto {
   @MinLength(3)
   @MaxLength(50)
   readonly name: string;
+
+  @IsUrl()
+  @IsString()
+  @IsOptional()
+  readonly profile_pic: string;
 
   @IsEmail(undefined)
   readonly email: string;
