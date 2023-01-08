@@ -2,6 +2,7 @@ import {
   IsEmail,
   IsOptional,
   IsString,
+  Matches,
   MaxLength,
   MinLength,
   ValidateNested,
@@ -15,22 +16,22 @@ export class CreateUserDto {
   @MaxLength(50)
   readonly name: string;
 
-  @IsEmail(undefined, { message: 'O e-mail informado não é válido' })
+  @IsEmail(undefined)
   readonly email: string;
 
   @IsString()
-  @MinLength(6)
-  @MaxLength(20)
+  @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, {
+    message:
+      'Password must contain at least 8 characters, containing 1 uppercase letter. 1 lowercase letter, 1 number, and 1 special character / example: @Example123',
+  })
   readonly password: string;
 
   @IsString()
-  @MinLength(6)
-  @MaxLength(20)
   readonly confirm_password: string;
 
   @IsString()
-  @MinLength(3)
-  @MaxLength(50)
+  @MinLength(8)
+  @MaxLength(30)
   @IsOptional()
   readonly phone: string;
 
