@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
+import { CredentialsDTO } from 'src/auth/dto/credentials.dto';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './entities/user.entity';
@@ -14,6 +15,10 @@ export class UsersService {
 
   async findAll() {
     return await this.userRepository.find({ relations: { address: true } });
+  }
+
+  async signIn(credentials: CredentialsDTO) {
+    return await this.authService.signIn(credentials);
   }
 
   async signUp(user: CreateUserDto) {

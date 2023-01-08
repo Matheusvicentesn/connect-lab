@@ -42,7 +42,6 @@ export class AuthService {
         email: email,
       },
     });
-    console.log(user + '2');
 
     if (user && (await user.checkPassword(password))) {
       return user;
