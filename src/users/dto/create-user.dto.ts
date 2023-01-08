@@ -28,7 +28,7 @@ export class CreateUserDto {
   readonly password: string;
 
   @IsString()
-  @Match('password')
+  @Match('password', { message: 'passwords do not match' })
   readonly confirm_password: string;
 
   @IsString()

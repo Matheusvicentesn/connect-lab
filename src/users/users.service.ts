@@ -17,6 +17,10 @@ export class UsersService {
   }
 
   async signUp(user: CreateUserDto) {
-    this.authService.signUp(user);
+    try {
+      return await this.authService.signUp(user);
+    } catch (error) {
+      ('erro doido ');
+    }
   }
 }
