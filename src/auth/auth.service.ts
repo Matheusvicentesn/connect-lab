@@ -1,19 +1,55 @@
 import {
   Inject,
   Injectable,
+  UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UserEntity } from 'src/users/entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
+import { CredentialsDTO } from './dto/credentials.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject('USER_REPOSITORY')
     private userRepository: Repository<UserEntity>,
+    private jwtService: JwtService,
   ) {}
+  async signIn(credentials: CredentialsDTO) {
+    const user = await this.checkCredentials(credentials);
+    console.log(user);
+    if (user === null) {
+      throw new UnauthorizedException('invalid login data');
+    }
+
+    const jwtPayload = {
+      id: user.id,
+      name: user.name,
+      pic: user.profile_pic,
+      email: user.email,
+    };
+    const token = await this.jwtService.sign(jwtPayload);
+    return { token };
+  }
+
+  async checkCredentials(credentials: CredentialsDTO) {
+    const { email, password } = credentials;
+    const user = await this.userRepository.findOne({
+      where: {
+        email: email,
+      },
+    });
+    console.log(user + '2');
+
+    if (user && (await user.checkPassword(password))) {
+      return user;
+    }
+    return null;
+  }
+
   async signUp(user: CreateUserDto): Promise<UserEntity> {
     if (user.password != user.confirm_password) {
       throw new UnprocessableEntityException('passwords do not match');

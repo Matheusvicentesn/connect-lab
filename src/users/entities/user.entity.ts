@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AddressEntity } from './address.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -41,4 +42,9 @@ export class UserEntity {
   @JoinColumn()
   @OneToOne(() => AddressEntity, (address) => address.user, { cascade: true })
   address: AddressEntity;
+
+  async checkPassword(password: string): Promise<boolean> {
+    const hash = await bcrypt.hash(password, this.salt);
+    return hash === this.password;
+  }
 }
