@@ -1,4 +1,8 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UserEntity } from 'src/users/entities/user.entity';
 import * as bcrypt from 'bcrypt';
@@ -10,6 +14,13 @@ export class AuthService {
     @Inject('USER_REPOSITORY')
     private userRepository: Repository<UserEntity>,
   ) {}
+  async signUp(user: CreateUserDto): Promise<UserEntity> {
+    if (user.password != user.confirm_password) {
+      throw new UnprocessableEntityException('passwords do not match');
+    }
+    return await this.createUser(user);
+  }
+
   async createUser(userBody: CreateUserDto): Promise<UserEntity> {
     return new Promise(async (resolve) => {
       const { email, name, password, phone, address } = userBody;
