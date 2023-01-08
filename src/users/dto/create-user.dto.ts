@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 import { AddressDTO } from './address-dto';
 import { Type } from 'class-transformer';
+import { Match } from 'src/core/constraints/match.decorator';
 
 export class CreateUserDto {
   @IsString()
@@ -27,6 +28,7 @@ export class CreateUserDto {
   readonly password: string;
 
   @IsString()
+  @Match('password')
   readonly confirm_password: string;
 
   @IsString()
