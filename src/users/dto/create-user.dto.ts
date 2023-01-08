@@ -36,5 +36,5 @@ export class CreateUserDto {
 
   @ValidateNested()
   @Type(() => AddressDTO)
-  address: AddressDTO;
+  address: any; // TODO: arrumar posteriormente tipagem
 }
