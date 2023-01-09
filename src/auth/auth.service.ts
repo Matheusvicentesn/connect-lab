@@ -10,6 +10,7 @@ import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { CredentialsDTO } from './dto/credentials.dto';
 import { JwtService } from '@nestjs/jwt';
+import { updatePasswordDTO } from './dto/update-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +19,26 @@ export class AuthService {
     private userRepository: Repository<UserEntity>,
     private jwtService: JwtService,
   ) {}
+  async updatePassword(updatePasswordDTO: updatePasswordDTO, payload) {
+    const user: UserEntity = await this.userRepository.findOne({
+      where: { id: payload.id },
+    });
+
+    if (user.email != updatePasswordDTO.email) {
+      return 'Email inválido';
+    }
+    if (await user.checkPassword(updatePasswordDTO.password)) {
+      return 'Senha incorreta';
+    }
+    const updateuser = this.userRepository.create(user);
+    updateuser.password = await this.hashPassword(
+      updatePasswordDTO.password,
+      user.salt,
+    );
+    const userSaved = await this.userRepository.save(updateuser);
+    return userSaved;
+  }
+
   async signIn(credentials: CredentialsDTO) {
     const user = await this.checkCredentials(credentials);
     console.log(user);
