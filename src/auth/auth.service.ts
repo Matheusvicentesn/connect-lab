@@ -24,19 +24,35 @@ export class AuthService {
       where: { id: payload.id },
     });
 
+    // TODO: IMPLEMENTAÇÃO FALHA VERIFICAR POSTERIORMENTE
+    const credentials: CredentialsDTO = await {
+      email: updatePasswordDTO.email,
+      password: updatePasswordDTO.password,
+    };
+
+    const checkUser = await this.checkCredentials(credentials);
+
+    if (checkUser === null) {
+      throw new UnauthorizedException('invalid log2in data');
+    }
+
     if (user.email != updatePasswordDTO.email) {
       return 'Email inválido';
     }
-    if (await user.checkPassword(updatePasswordDTO.password)) {
+    const checkpass = await user.checkPassword(updatePasswordDTO.password);
+    if (!checkpass) {
       return 'Senha incorreta';
     }
-    const updateuser = this.userRepository.create(user);
-    updateuser.password = await this.hashPassword(
-      updatePasswordDTO.password,
+    user.salt = await bcrypt.genSalt(12);
+    user.password = await this.hashPassword(
+      updatePasswordDTO.new_password,
       user.salt,
     );
-    const userSaved = await this.userRepository.save(updateuser);
-    return userSaved;
+    const userUpdate = this.userRepository.create(user);
+    const saveUserUpdate = await this.userRepository.save(userUpdate);
+    delete saveUserUpdate.password;
+    delete saveUserUpdate.salt;
+    return saveUserUpdate;
   }
 
   async signIn(credentials: CredentialsDTO) {
