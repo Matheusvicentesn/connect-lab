@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { DeviceEntity } from './device.entity';
 
 @Entity({ name: 'info' })
 export class InfoEntity {
@@ -16,4 +17,7 @@ export class InfoEntity {
 
   @Column()
   signal: string;
+
+  @OneToOne(() => DeviceEntity, (device) => device.info)
+  device: DeviceEntity;
 }
