@@ -1,7 +1,9 @@
+import { UsersDeviceEntity } from 'src/users/entities/users_device.entity';
 import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -27,4 +29,7 @@ export class DeviceEntity {
   @JoinColumn()
   @OneToOne(() => InfoEntity, (info) => info.device, { cascade: true })
   info: InfoEntity;
+
+  @OneToMany(() => UsersDeviceEntity, (devices) => devices.device, {})
+  users_devices: UsersDeviceEntity;
 }
