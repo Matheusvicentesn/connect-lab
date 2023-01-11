@@ -50,6 +50,13 @@ export class UserEntity {
   })
   devices: UsersDeviceEntity[];
 
+  addDevices(device: UsersDeviceEntity) {
+    if (this.devices == null) {
+      this.devices = new Array<UsersDeviceEntity>();
+    }
+    this.devices.push(device);
+  }
+
   async checkPassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
     return hash === this.password;
