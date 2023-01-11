@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { DataSource } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
+import { SeederOptions } from 'typeorm-extension';
 require('dotenv-flow').config();
 
-export const AppDataSource = new DataSource({
+const options: DataSourceOptions & SeederOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT) || 5432,
@@ -19,5 +20,10 @@ export const AppDataSource = new DataSource({
   ],
   synchronize: false,
   migrationsRun: false,
-  migrationsTableName: 'history',
-});
+  // migrationsTableName: 'teste',
+
+  seeds: ['src/core/database/seeds/**/*{.ts,.js}'],
+  factories: ['src/database/factories/**/*{.ts,.js}'],
+};
+
+export const AppDataSource = new DataSource(options);
