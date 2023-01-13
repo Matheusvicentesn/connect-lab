@@ -35,6 +35,7 @@ export class UsersService {
     const filterDevices = local
       ? filterLocal.map((device) => {
           const devices = {
+            id: device.id,
             name: device.device.name,
             type: device.device.type,
             madeBy: device.device.madeBy,
@@ -46,6 +47,7 @@ export class UsersService {
         })
       : userDevices.map((device) => {
           const devices = {
+            id: device.id,
             name: device.device.name,
             type: device.device.type,
             madeBy: device.device.madeBy,
