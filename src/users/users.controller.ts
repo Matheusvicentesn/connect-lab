@@ -2,13 +2,14 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
   Put,
+  Query,
   Request,
   UseGuards,
 } from '@nestjs/common';
 import { CredentialsDTO } from 'src/auth/dto/credentials.dto';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { updatePasswordDTO } from 'src/auth/dto/update-password.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -48,5 +49,10 @@ export class UsersController {
       createDevice,
       request.user,
     );
+  }
+  @UseGuards(JwtAuthGuard)
+  @Get('searchdevice')
+  async searchdevice(@Request() request, @Query('local') query) {
+    return await this.usersService.findUserDevice(request.user, query);
   }
 }

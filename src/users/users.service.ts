@@ -20,6 +20,45 @@ export class UsersService {
     private authService: AuthService,
   ) {}
 
+  // TODO: Fazer filter local via typeorm
+  async findUserDevice(payload, local: string) {
+    const user = await this.userRepository.findOne({
+      where: [{ id: payload.id }],
+      relations: {
+        devices: {
+          device: { info: true },
+        },
+      },
+    });
+    const userDevices = user.devices;
+    const filterLocal = userDevices.filter((filter) => filter.local === local);
+    const filterDevices = local
+      ? filterLocal.map((device) => {
+          const devices = {
+            name: device.device.name,
+            type: device.device.type,
+            madeBy: device.device.madeBy,
+            isOn: device.is_on,
+            info: device.device.info,
+          };
+          delete devices.info.id;
+          return devices;
+        })
+      : userDevices.map((device) => {
+          const devices = {
+            name: device.device.name,
+            type: device.device.type,
+            madeBy: device.device.madeBy,
+            isOn: device.is_on,
+            info: device.device.info,
+          };
+          delete devices.info.id;
+          return devices;
+        });
+
+    return filterDevices;
+  }
+
   createDeviceForUser(createDevice, request): Promise<any> {
     return new Promise(async (resolve) => {
       const user: UserEntity = await this.userRepository.findOne({
