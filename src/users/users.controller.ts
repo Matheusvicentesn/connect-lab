@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Put,
   Query,
@@ -51,8 +52,14 @@ export class UsersController {
     );
   }
   @UseGuards(JwtAuthGuard)
-  @Get('searchdevice')
-  async searchdevice(@Request() request, @Query('local') query) {
-    return await this.usersService.findUserDevice(request.user, query);
+  @Get('searchdevices')
+  async searchDevices(@Request() request, @Query('local') query) {
+    return await this.usersService.findUserDevices(request.user, query);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('searchdevice/:id')
+  async searchDevice(@Request() request, @Param('id') id) {
+    return await this.usersService.findUserDevice(request.user, +id);
   }
 }

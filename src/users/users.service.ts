@@ -20,8 +20,26 @@ export class UsersService {
     private authService: AuthService,
   ) {}
 
+  async findUserDevice(payload, id) {
+    const userDevice = await this.user_device_repository.findOne({
+      where: [{ id: id, user: payload.id }],
+      relations: {
+        device: {
+          info: true,
+        },
+      },
+    });
+    return {
+      name: userDevice.device.name,
+      type: userDevice.device.type,
+      madeBy: userDevice.device.madeBy,
+      isOn: userDevice.is_on,
+      info: userDevice.device.info,
+    };
+  }
+
   // TODO: Fazer filter local via typeorm
-  async findUserDevice(payload, local: string) {
+  async findUserDevices(payload, local: string) {
     const user = await this.userRepository.findOne({
       where: [{ id: payload.id }],
       relations: {
