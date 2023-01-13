@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Put,
   Request,
@@ -38,5 +39,14 @@ export class UsersController {
     @Request() request,
   ) {
     return this.usersService.updatePassword(updatePasswordDTO, request.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('linkdevice/:id')
+  async createDeviceForUser(@Body() createDevice, @Request() request) {
+    return await this.usersService.createDeviceForUser(
+      createDevice,
+      request.user,
+    );
   }
 }

@@ -22,7 +22,6 @@ export class UsersService {
 
   createDeviceForUser(createDevice, request): Promise<any> {
     return new Promise(async (resolve) => {
-      console.log(request);
       const user: UserEntity = await this.userRepository.findOne({
         where: { id: request.id },
         relations: {
