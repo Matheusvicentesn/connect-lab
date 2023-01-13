@@ -20,6 +20,30 @@ export class UsersService {
     private authService: AuthService,
   ) {}
 
+  async findUser(payload) {
+    const user: UserEntity = await this.userRepository.findOne({
+      where: { id: payload.id },
+      relations: { address: true },
+    });
+    delete user.address.id;
+    if (user.phone === null) {
+      return {
+        pic: user.profile_pic,
+        name: user.name,
+        email: user.email,
+        address: user.address,
+      };
+    } else {
+      return {
+        pic: user.profile_pic,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        address: user.address,
+      };
+    }
+  }
+
   async findUserDevice(payload, id) {
     const userDevice = await this.user_device_repository.findOne({
       where: [{ id: id, user: payload.id }],
@@ -79,10 +103,10 @@ export class UsersService {
     return filterDevices;
   }
 
-  createDeviceForUser(createDevice, request): Promise<any> {
+  createDeviceForUser(createDevice, payload): Promise<any> {
     return new Promise(async (resolve) => {
       const user: UserEntity = await this.userRepository.findOne({
-        where: { id: request.id },
+        where: { id: payload.id },
         relations: {
           devices: true,
         },

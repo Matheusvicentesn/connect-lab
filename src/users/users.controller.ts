@@ -62,4 +62,10 @@ export class UsersController {
   async searchDevice(@Request() request, @Param('id') id) {
     return await this.usersService.findUserDevice(request.user, +id);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('userinfo')
+  async userInfo(@Request() payload) {
+    return await this.usersService.findUser(payload);
+  }
 }
