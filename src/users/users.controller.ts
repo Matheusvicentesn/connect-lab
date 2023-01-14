@@ -65,10 +65,10 @@ export class UsersController {
   @Put('/updatepassword')
   async updatePassword(
     @Body() updatePasswordDTO: updatePasswordDTO,
-    @Request() request,
+    @Request() payload,
   ) {
     try {
-      await this.authService.updatePassword(updatePasswordDTO, request.user);
+      await this.authService.updatePassword(updatePasswordDTO, payload.user);
       return {
         message: 'updated password',
       };
@@ -84,10 +84,10 @@ export class UsersController {
   @Post('/linkdevice')
   async createDeviceForUser(
     @Body() createDevice: CreateUsersDeviceDto,
-    @Request() request,
+    @Request() payload,
   ) {
     try {
-      await this.usersService.createDeviceForUser(createDevice, request.user);
+      await this.usersService.createDeviceForUser(createDevice, payload.user);
       return {
         message: 'successfully linked device',
       };
@@ -97,18 +97,23 @@ export class UsersController {
   }
   @UseGuards(JwtAuthGuard)
   @Get('searchdevices')
-  async searchDevices(@Request() request, @Query('local') query: string) {
+  async searchDevices(@Request() payload, @Query('local') query: string) {
     try {
-      return await this.usersService.findUserDevices(request.user, query);
+      return await this.usersService.findUserDevices(payload.user, query);
     } catch (error) {
       throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
     }
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('searchdevice/:id')
-  async searchDevice(@Request() request, @Param('id') id) {
-    return await this.usersService.findUserDevice(request.user, +id);
+  @Get('userDeviceInfo/:id')
+  async userDeviceInfo(@Request() payload, @Param('id') id: string) {
+    try {
+      return await this.usersService.userDeviceInfo(payload.user, +id);
+    } catch (error) {
+      console.log(error);
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @UseGuards(JwtAuthGuard)

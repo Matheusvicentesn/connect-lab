@@ -43,22 +43,31 @@ export class UsersService {
     }
   }
 
-  async findUserDevice(payload, id) {
-    const userDevice = await this.user_device_repository.findOne({
-      where: [{ id: id, user: payload.id }],
-      relations: {
-        device: {
-          info: true,
-        },
-      },
+  async userDeviceInfo(payload: payloadDTO, id: number) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const userDevice = await this.user_device_repository.findOne({
+          where: [{ id: id, user: { id: payload.id } }],
+          relations: {
+            device: {
+              info: true,
+            },
+          },
+        });
+        if (userDevice === null) {
+          reject('not found device');
+        }
+        resolve({
+          name: userDevice.device.name,
+          type: userDevice.device.type,
+          madeBy: userDevice.device.madeBy,
+          isOn: userDevice.is_on,
+          info: userDevice.device.info,
+        });
+      } catch (error) {
+        reject(error);
+      }
     });
-    return {
-      name: userDevice.device.name,
-      type: userDevice.device.type,
-      madeBy: userDevice.device.madeBy,
-      isOn: userDevice.is_on,
-      info: userDevice.device.info,
-    };
   }
 
   async findUserDevices(payload: payloadDTO, local: string) {
