@@ -9,8 +9,10 @@ import {
   Put,
   Query,
   Request,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
+import { AuthService } from 'src/auth/auth.service';
 import { CredentialsDTO } from 'src/auth/dto/credentials.dto';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { updatePasswordDTO } from 'src/auth/dto/update-password.dto';
@@ -20,21 +22,31 @@ import { UsersService } from './users.service';
 
 @Controller('auth')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private authService: AuthService,
+  ) {}
 
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
   @Post('/signin')
-  singIn(@Body() credentials: CredentialsDTO) {
-    return this.usersService.signIn(credentials);
+  async singIn(@Body() credentials: CredentialsDTO) {
+    try {
+      return await this.authService.signIn(credentials);
+    } catch (error) {
+      if ((error = 'data invalid')) {
+        throw new UnauthorizedException('invalid login data');
+      }
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Post('/signup')
   async signUp(@Body() createUserDto: CreateUserDto) {
     try {
-      await this.usersService.signUp(createUserDto);
+      await this.authService.signUp(createUserDto);
       return {
         message: 'user created successfully',
       };

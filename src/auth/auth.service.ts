@@ -51,20 +51,25 @@ export class AuthService {
   }
 
   async signIn(credentials: CredentialsDTO) {
-    const user = await this.checkCredentials(credentials);
-    console.log(user);
-    if (user === null) {
-      throw new UnauthorizedException('invalid login data');
-    }
+    return new Promise(async (resolve, reject) => {
+      try {
+        const user = await this.checkCredentials(credentials);
+        if (user === null) {
+          reject('data invalid');
+        }
 
-    const jwtPayload = {
-      id: user.id,
-      name: user.name,
-      pic: user.profile_pic,
-      email: user.email,
-    };
-    const token = await this.jwtService.sign(jwtPayload);
-    return { token };
+        const jwtPayload = {
+          id: user.id,
+          name: user.name,
+          pic: user.profile_pic,
+          email: user.email,
+        };
+        const token = this.jwtService.sign(jwtPayload);
+        resolve({ token });
+      } catch (error) {
+        error;
+      }
+    });
   }
 
   async checkCredentials(credentials: CredentialsDTO) {

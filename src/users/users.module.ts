@@ -5,7 +5,7 @@ import { databaseProviders } from 'src/core/database/database.provider';
 import { userProviders } from './users.provider';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from 'src/auth/dto/jwt.strategy';
+import { JwtStrategy } from 'src/auth/jwt.strategy';
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv-flow').config();

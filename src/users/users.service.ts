@@ -1,10 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
-import { CredentialsDTO } from 'src/auth/dto/credentials.dto';
 import { updatePasswordDTO } from 'src/auth/dto/update-password.dto';
 import { DeviceEntity } from 'src/devices/entities/device.entity';
 import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { UsersDeviceEntity } from './entities/users_device.entity';
 
@@ -136,20 +134,5 @@ export class UsersService {
 
   async findAll() {
     return await this.userRepository.find({ relations: { address: true } });
-  }
-
-  async signIn(credentials: CredentialsDTO) {
-    return await this.authService.signIn(credentials);
-  }
-
-  async signUp(user: CreateUserDto): Promise<UserEntity> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const singUpuser = await this.authService.signUp(user);
-        resolve(singUpuser);
-      } catch (error) {
-        reject(error);
-      }
-    });
   }
 }
