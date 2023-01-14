@@ -3,6 +3,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { payloadDTO } from 'src/auth/dto/payload.dto';
 import { DeviceEntity } from 'src/devices/entities/device.entity';
 import { Repository } from 'typeorm';
+import { CreateUsersDeviceDto } from './dto/create-users_device.dto';
 import { UserEntity } from './entities/user.entity';
 import { UsersDeviceEntity } from './entities/users_device.entity';
 
@@ -98,30 +99,37 @@ export class UsersService {
     });
   }
 
-  createDeviceForUser(createDevice, payload): Promise<any> {
-    return new Promise(async (resolve) => {
-      const user: UserEntity = await this.userRepository.findOne({
-        where: { id: payload.id },
-        relations: {
-          devices: true,
-        },
-      });
+  async createDeviceForUser(
+    createDevice: CreateUsersDeviceDto,
+    payload: payloadDTO,
+  ) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const user: UserEntity = await this.userRepository.findOne({
+          where: { id: payload.id },
+          relations: {
+            devices: true,
+          },
+        });
 
-      const dispositivo: DeviceEntity = await this.deviceRepository.findOne({
-        where: { id: createDevice.device_id },
-      });
+        const devices: DeviceEntity = await this.deviceRepository.findOne({
+          where: { id: createDevice.device_id },
+        });
 
-      let devices = this.user_device_repository.create();
+        let newDevice = this.user_device_repository.create();
 
-      devices = { ...createDevice, ...devices };
+        newDevice = { ...createDevice, ...newDevice };
 
-      devices.device = dispositivo;
+        newDevice.device = devices;
 
-      user.addDevices(devices);
+        user.addDevices(newDevice);
 
-      this.userRepository.save(user);
+        this.userRepository.save(user);
 
-      resolve(devices);
+        resolve(newDevice);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 

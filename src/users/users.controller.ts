@@ -18,6 +18,7 @@ import { CredentialsDTO } from 'src/auth/dto/credentials.dto';
 import { updatePasswordDTO } from 'src/auth/dto/update-password.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUsersDeviceDto } from './dto/create-users_device.dto';
 import { UsersService } from './users.service';
 
 @Controller('auth')
@@ -80,12 +81,19 @@ export class UsersController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('linkdevice/:id')
-  async createDeviceForUser(@Body() createDevice, @Request() request) {
-    return await this.usersService.createDeviceForUser(
-      createDevice,
-      request.user,
-    );
+  @Post('/linkdevice')
+  async createDeviceForUser(
+    @Body() createDevice: CreateUsersDeviceDto,
+    @Request() request,
+  ) {
+    try {
+      await this.usersService.createDeviceForUser(createDevice, request.user);
+      return {
+        message: 'successfully linked device',
+      };
+    } catch (error) {
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
   }
   @UseGuards(JwtAuthGuard)
   @Get('searchdevices')
