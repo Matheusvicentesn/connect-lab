@@ -142,11 +142,14 @@ export class UsersService {
     return await this.authService.signIn(credentials);
   }
 
-  async signUp(user: CreateUserDto) {
-    try {
-      return await this.authService.signUp(user);
-    } catch (error) {
-      ('erro doido ');
-    }
+  async signUp(user: CreateUserDto): Promise<UserEntity> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const singUpuser = await this.authService.signUp(user);
+        resolve(singUpuser);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 }

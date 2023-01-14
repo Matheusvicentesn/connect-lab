@@ -1,9 +1,4 @@
-import {
-  Inject,
-  Injectable,
-  UnauthorizedException,
-  UnprocessableEntityException,
-} from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UserEntity } from 'src/users/entities/user.entity';
 import * as bcrypt from 'bcrypt';
@@ -87,31 +82,40 @@ export class AuthService {
   }
 
   async signUp(user: CreateUserDto): Promise<UserEntity> {
-    if (user.password != user.confirm_password) {
-      throw new UnprocessableEntityException('passwords do not match');
-    }
-    return await this.createUser(user);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const userReturn = await this.createUser(user);
+        resolve(userReturn);
+      } catch (error) {
+        console.log(error);
+        reject(error);
+      }
+    });
   }
 
   async createUser(userBody: CreateUserDto): Promise<UserEntity> {
-    return new Promise(async (resolve) => {
-      const { email, name, password, phone, address, profile_pic } = userBody;
-      const user = this.userRepository.create();
-      user.profile_pic = profile_pic
-        ? profile_pic
-        : 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg'; // TODO: arrumar posteriormente com valor default na entidade
-      user.email = email;
-      user.phone = phone;
-      user.name = name;
-      user.address = address; // TODO: arrumar posteriormente tipagem
-      user.salt = await bcrypt.genSalt(12);
-      user.confirmationToken = '';
-      user.recoverToken = '';
-      user.password = await this.hashPassword(password, user.salt);
-      const userCreated = await this.userRepository.save(user);
-      delete userCreated.password;
-      delete user.salt;
-      resolve(user);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { email, name, password, phone, address, profile_pic } = userBody;
+        const user = this.userRepository.create();
+        user.profile_pic = profile_pic
+          ? profile_pic
+          : 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg'; // TODO: arrumar posteriormente com valor default na entidade
+        user.email = email;
+        user.phone = phone;
+        user.name = name;
+        user.address = address; // TODO: arrumar posteriormente tipagem
+        user.salt = await bcrypt.genSalt(12);
+        user.confirmationToken = '';
+        user.recoverToken = '';
+        user.password = await this.hashPassword(password, user.salt);
+        const userCreated = await this.userRepository.save(user);
+        delete userCreated.password;
+        delete user.salt;
+        resolve(user);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
   private async hashPassword(password: string, salt: string): Promise<string> {

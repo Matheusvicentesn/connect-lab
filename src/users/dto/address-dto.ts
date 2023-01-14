@@ -7,7 +7,7 @@ export class AddressDTO {
 
   @IsString()
   @IsNotEmpty()
-  public_place: string;
+  street: string;
 
   @IsString()
   @IsNotEmpty()

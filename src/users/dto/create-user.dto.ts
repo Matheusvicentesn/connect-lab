@@ -23,7 +23,7 @@ export class CreateUserDto {
   @IsOptional()
   readonly profile_pic: string;
 
-  @IsEmail(undefined)
+  @IsEmail()
   readonly email: string;
 
   @IsString()

@@ -10,7 +10,7 @@ export class AddressEntity {
   zip_code: string;
 
   @Column({ length: 50, nullable: false })
-  public_place: string;
+  street: string;
 
   @Column({ length: 50, nullable: false })
   number: string;

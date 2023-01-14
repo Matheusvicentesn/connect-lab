@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -30,8 +32,20 @@ export class UsersController {
   }
 
   @Post('/signup')
-  signUp(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.signUp(createUserDto);
+  async signUp(@Body() createUserDto: CreateUserDto) {
+    try {
+      await this.usersService.signUp(createUserDto);
+      return {
+        message: 'user created successfully',
+      };
+    } catch (error) {
+      if (error.code == 23505)
+        throw new HttpException(
+          { reason: 'email already exists in the database' },
+          HttpStatus.CONFLICT,
+        );
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @UseGuards(JwtAuthGuard)
