@@ -89,8 +89,12 @@ export class UsersController {
   }
   @UseGuards(JwtAuthGuard)
   @Get('searchdevices')
-  async searchDevices(@Request() request, @Query('local') query) {
-    return await this.usersService.findUserDevices(request.user, query);
+  async searchDevices(@Request() request, @Query('local') query: string) {
+    try {
+      return await this.usersService.findUserDevices(request.user, query);
+    } catch (error) {
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @UseGuards(JwtAuthGuard)

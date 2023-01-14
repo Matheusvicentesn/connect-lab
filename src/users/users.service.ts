@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
+import { payloadDTO } from 'src/auth/dto/payload.dto';
 import { DeviceEntity } from 'src/devices/entities/device.entity';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
@@ -59,34 +60,27 @@ export class UsersService {
     };
   }
 
-  // TODO: Fazer filter local via typeorm
-  async findUserDevices(payload, local: string) {
-    const user = await this.userRepository.findOne({
-      where: [{ id: payload.id }],
-      relations: {
-        devices: {
-          device: { info: true },
-        },
-      },
-    });
-    const userDevices = user.devices;
-    const filterLocal = userDevices.filter((filter) => filter.local === local);
-    const filterDevices = local
-      ? filterLocal.map((device) => {
+  async findUserDevices(payload: payloadDTO, local: string) {
+    return new Promise(async (resolve) => {
+      try {
+        const user: UserEntity = await this.userRepository.findOne({
+          where: { id: payload.id },
+          relations: {
+            devices: true,
+          },
+        });
+
+        const userDevice = await this.user_device_repository.find({
+          where: [{ local: local, user: { id: user.id } }],
+          relations: {
+            device: {
+              info: true,
+            },
+          },
+        });
+        const formatResponse = userDevice.map((device) => {
           const devices = {
-            id: device.id,
-            name: device.device.name,
-            type: device.device.type,
-            madeBy: device.device.madeBy,
-            isOn: device.is_on,
-            info: device.device.info,
-          };
-          delete devices.info.id;
-          return devices;
-        })
-      : userDevices.map((device) => {
-          const devices = {
-            id: device.id,
+            id: device.device.id,
             name: device.device.name,
             type: device.device.type,
             madeBy: device.device.madeBy,
@@ -97,7 +91,11 @@ export class UsersService {
           return devices;
         });
 
-    return filterDevices;
+        resolve(formatResponse);
+      } catch (error) {
+        error;
+      }
+    });
   }
 
   createDeviceForUser(createDevice, payload): Promise<any> {
