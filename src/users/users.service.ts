@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AuthService } from 'src/auth/auth.service';
 import { payloadDTO } from 'src/auth/dto/payload.dto';
 import { DeviceEntity } from 'src/devices/entities/device.entity';
 import { Repository } from 'typeorm';
@@ -16,31 +15,36 @@ export class UsersService {
     private deviceRepository: Repository<DeviceEntity>,
     @Inject('USER_DEVICES_REPOSITORY')
     private user_device_repository: Repository<UsersDeviceEntity>,
-    private authService: AuthService,
   ) {}
 
-  async findUser(payload) {
-    const user: UserEntity = await this.userRepository.findOne({
-      where: { id: payload.id },
-      relations: { address: true },
+  async findUser(payload: payloadDTO) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const user: UserEntity = await this.userRepository.findOne({
+          where: { id: payload.id },
+          relations: { address: true },
+        });
+        delete user.address.id;
+        if (user.phone === null) {
+          resolve({
+            pic: user.profile_pic,
+            name: user.name,
+            email: user.email,
+            address: user.address,
+          });
+        } else {
+          resolve({
+            pic: user.profile_pic,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            address: user.address,
+          });
+        }
+      } catch (error) {
+        reject(error);
+      }
     });
-    delete user.address.id;
-    if (user.phone === null) {
-      return {
-        pic: user.profile_pic,
-        name: user.name,
-        email: user.email,
-        address: user.address,
-      };
-    } else {
-      return {
-        pic: user.profile_pic,
-        name: user.name,
-        email: user.email,
-        phone: user.phone,
-        address: user.address,
-      };
-    }
   }
 
   async userDeviceInfo(payload: payloadDTO, id: number) {
