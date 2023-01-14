@@ -119,6 +119,11 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get('userinfo')
   async userInfo(@Request() payload) {
-    return await this.usersService.findUser(payload);
+    try {
+      return await this.usersService.findUser(payload);
+    } catch (error) {
+      console.log(error);
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
   }
 }
