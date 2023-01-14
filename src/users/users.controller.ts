@@ -62,11 +62,21 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Put('/updatepassword')
-  updatePassword(
+  async updatePassword(
     @Body() updatePasswordDTO: updatePasswordDTO,
     @Request() request,
   ) {
-    return this.usersService.updatePassword(updatePasswordDTO, request.user);
+    try {
+      await this.authService.updatePassword(updatePasswordDTO, request.user);
+      return {
+        message: 'updated password',
+      };
+    } catch (error) {
+      if ((error = 'data invalid')) {
+        throw new UnauthorizedException('email or password invalid');
+      }
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @UseGuards(JwtAuthGuard)

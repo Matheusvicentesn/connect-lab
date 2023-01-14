@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
-import { updatePasswordDTO } from 'src/auth/dto/update-password.dto';
 import { DeviceEntity } from 'src/devices/entities/device.entity';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
@@ -126,10 +125,6 @@ export class UsersService {
 
       resolve(devices);
     });
-  }
-
-  async updatePassword(updatePasswordDTO: updatePasswordDTO, payload) {
-    return await this.authService.updatePassword(updatePasswordDTO, payload);
   }
 
   async findAll() {
