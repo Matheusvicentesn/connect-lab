@@ -6,8 +6,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { UserEntity } from 'src/users/entities/user.entity';
-import { DeviceEntity } from 'src/devices/entities/device.entity';
+import { UserEntity } from '../entities/user.entity';
+import { DeviceEntity } from '../../devices/entities/device.entity';
 
 @Entity({ name: 'users_devices' })
 export class UsersDeviceEntity {

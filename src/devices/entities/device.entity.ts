@@ -1,4 +1,4 @@
-import { UsersDeviceEntity } from 'src/users/entities/users_device.entity';
+import { UsersDeviceEntity } from '../../users/entities/users_device.entity';
 import {
   Column,
   Entity,
