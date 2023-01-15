@@ -72,7 +72,7 @@ export class AuthService {
           email: user.email,
         };
         const token = this.jwtService.sign(jwtPayload);
-        resolve({ token });
+        resolve({ token, user });
       } catch (error) {
         error;
       }
@@ -84,6 +84,9 @@ export class AuthService {
     const user = await this.userRepository.findOne({
       where: {
         email: email,
+      },
+      relations: {
+        address: true,
       },
     });
 
