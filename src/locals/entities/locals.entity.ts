@@ -1,9 +1,9 @@
 import { UsersDeviceEntity } from '../../users/entities/users_device.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 export enum description {
-  casa = 'casa',
-  Escritório = 'escritório',
-  Fábrica = 'fábrica',
+  casa = 'Casa',
+  Escritório = 'Escritório',
+  Fábrica = 'Fábrica',
 }
 
 @Entity({ name: 'locals' })
