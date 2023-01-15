@@ -4,5 +4,7 @@ RUN apk add --no-cache bash
 
 USER node
 
+RUN npm install -g @nestjs/cli && npm link webpack
+
 WORKDIR /home/node/app
 
