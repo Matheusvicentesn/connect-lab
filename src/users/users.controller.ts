@@ -97,7 +97,7 @@ export class UsersController {
   }
   @UseGuards(JwtAuthGuard)
   @Get('searchdevices')
-  async searchDevices(@Request() payload, @Query('local') query: string) {
+  async searchDevices(@Request() payload, @Query('local') query) {
     try {
       return await this.usersService.findUserDevices(payload.user, query);
     } catch (error) {

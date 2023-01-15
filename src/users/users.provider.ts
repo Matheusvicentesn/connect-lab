@@ -1,7 +1,7 @@
 import { DeviceEntity } from 'src/devices/entities/device.entity';
+import { localsEntity } from 'src/locals/entities/locals.entity';
 
 import { DataSource } from 'typeorm';
-import { AddressEntity } from './entities/address.entity';
 import { UserEntity } from './entities/user.entity';
 import { UsersDeviceEntity } from './entities/users_device.entity';
 
@@ -22,6 +22,12 @@ export const userProviders = [
     provide: 'USER_DEVICES_REPOSITORY',
     useFactory: (dataSource: DataSource) =>
       dataSource.getRepository(UsersDeviceEntity),
+    inject: ['DATA_SOURCE'],
+  },
+  {
+    provide: 'LOCALS_REPOSITORY',
+    useFactory: (dataSource: DataSource) =>
+      dataSource.getRepository(localsEntity),
     inject: ['DATA_SOURCE'],
   },
 ];

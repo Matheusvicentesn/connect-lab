@@ -1,8 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { payloadDTO } from 'src/auth/dto/payload.dto';
 import { DeviceEntity } from 'src/devices/entities/device.entity';
+import { localsEntity } from 'src/locals/entities/locals.entity';
 import { Repository } from 'typeorm';
-import { CreateUsersDeviceDto } from './dto/create-users_device.dto';
+import {
+  CreateUsersDeviceDto,
+  description,
+} from './dto/create-users_device.dto';
 import { UserEntity } from './entities/user.entity';
 import { UsersDeviceEntity } from './entities/users_device.entity';
 
@@ -15,6 +19,8 @@ export class UsersService {
     private deviceRepository: Repository<DeviceEntity>,
     @Inject('USER_DEVICES_REPOSITORY')
     private user_device_repository: Repository<UsersDeviceEntity>,
+    @Inject('LOCALS_REPOSITORY')
+    private localsRepository: Repository<localsEntity>,
   ) {}
 
   async findUser(payload: payloadDTO) {
@@ -74,7 +80,7 @@ export class UsersService {
     });
   }
 
-  async findUserDevices(payload: payloadDTO, local: string) {
+  async findUserDevices(payload: payloadDTO, local: description) {
     return new Promise(async (resolve) => {
       try {
         const user: UserEntity = await this.userRepository.findOne({
@@ -85,7 +91,7 @@ export class UsersService {
         });
 
         const userDevice = await this.user_device_repository.find({
-          where: [{ local: local, user: { id: user.id } }],
+          where: [{ local: { description: local }, user: { id: user.id } }],
           relations: {
             device: {
               info: true,
@@ -124,16 +130,23 @@ export class UsersService {
             devices: true,
           },
         });
+        const stringLocal = createDevice.local.toLowerCase();
 
         const devices: DeviceEntity = await this.deviceRepository.findOne({
           where: { id: createDevice.device_id },
+        });
+
+        const locals: localsEntity = await this.localsRepository.findOne({
+          where: { description: stringLocal },
         });
 
         let newDevice = this.user_device_repository.create();
 
         newDevice = { ...createDevice, ...newDevice };
 
+        console.log(locals);
         newDevice.device = devices;
+        newDevice.local = locals;
 
         user.addDevices(newDevice);
 
