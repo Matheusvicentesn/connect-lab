@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -14,8 +16,8 @@ import {
 } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { CredentialsDTO } from 'src/auth/dto/credentials.dto';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { updatePasswordDTO } from 'src/auth/dto/update-password.dto';
+import { updateUserDTO } from 'src/auth/dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUsersDeviceDto } from './dto/create-users_device.dto';
@@ -120,10 +122,53 @@ export class UsersController {
   @Get('userinfo')
   async userInfo(@Request() payload) {
     try {
-      return await this.usersService.findUser(payload);
+      return await this.usersService.findUser(payload.user);
     } catch (error) {
       console.log(error);
       throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('switchdevice/:id')
+  async updateUserState(@Request() payload, @Param('id') id: string) {
+    try {
+      return await this.usersService.updateUserState(payload.user, +id);
+    } catch (error) {
+      console.log(error);
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('/updateUser')
+  async updateUser(@Body() updateUserDTO: updateUserDTO, @Request() payload) {
+    try {
+      await this.authService.updateUser(updateUserDTO, payload.user);
+      return {
+        message: 'user Updated',
+      };
+    } catch (error) {
+      if (error == 'data invalid') {
+        throw new UnauthorizedException('email or password 2invalid');
+      }
+      throw new HttpException({ reason: error }, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('deleteuserdevice/:id')
+  async deleteUserDevice(@Param('id') id: string, @Request() payload) {
+    try {
+      await this.usersService.deleteUserDevice(+id, payload.user);
+      return {
+        message: 'device deleted',
+      };
+    } catch (error) {
+      throw new HttpException(
+        { reason: 'This device is not yours or not exists' },
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 }

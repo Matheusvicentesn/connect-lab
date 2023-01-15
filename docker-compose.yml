@@ -7,7 +7,20 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - .:/home/node/app 
+      - .:/home/node/app
+    depends_on:
+      - db
+    networks:
+      - postgres
+
+  react:
+    build: ./docker/react
+    entrypoint: ./docker/react.sh
+    container_name: react
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./connect-lab:/home/node/app
     depends_on:
       - db
     networks:

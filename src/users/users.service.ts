@@ -23,6 +23,66 @@ export class UsersService {
     private localsRepository: Repository<localsEntity>,
   ) {}
 
+  async deleteUserDevice(id: number, payload: payloadDTO) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const userDevice = await this.user_device_repository.findOne({
+          where: [{ id: id, user: { id: payload.id } }],
+          relations: {
+            device: {
+              info: true,
+            },
+            user: true,
+          },
+        });
+        if (userDevice.user.id !== payload.id) {
+          reject(userDevice);
+        }
+        const device = await this.user_device_repository.delete({
+          id: id,
+          user: { id: payload.id },
+        });
+        console.log(device);
+
+        resolve(device);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  async updateUserState(payload: payloadDTO, id: number) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const userDevice = await this.user_device_repository.findOne({
+          where: [{ id: id, user: { id: payload.id } }],
+          relations: {
+            device: {
+              info: true,
+            },
+            local: true,
+          },
+        });
+        if (userDevice === null) {
+          reject('not found device');
+        }
+        const deviceState = this.user_device_repository.create(userDevice);
+        deviceState.is_on = !deviceState.is_on ? true : false;
+        this.user_device_repository.save(deviceState);
+        resolve({
+          id: deviceState.id,
+          user: payload.id,
+          device: deviceState.device.id,
+          local: deviceState.local.id,
+          isOn: deviceState.is_on,
+          room: deviceState.room,
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
   async findUser(payload: payloadDTO) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -62,6 +122,7 @@ export class UsersService {
             device: {
               info: true,
             },
+            user: true,
           },
         });
         if (userDevice === null) {
@@ -96,18 +157,23 @@ export class UsersService {
             device: {
               info: true,
             },
+            local: true,
           },
         });
         const formatResponse = userDevice.map((device) => {
           const devices = {
-            id: device.device.id,
+            id: device.id,
             name: device.device.name,
             type: device.device.type,
+            photoUrl: device.device.photoUrl,
+            local: device.local,
+            room: device.room,
             madeBy: device.device.madeBy,
             isOn: device.is_on,
             info: device.device.info,
           };
           delete devices.info.id;
+          delete devices.local.id;
           return devices;
         });
 
