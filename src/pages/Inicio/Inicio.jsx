@@ -29,12 +29,11 @@ export const Inicio = () => {
       const { token, user } = JSON.parse(sessionStorage.getItem("usuario"));
       setStorageValues({
         token,
-        user: user?._id,
+        user: user?.id,
         state: user?.userAddress?.state,
       });
     }
   }, []);
-
 
   // Abertura do modal
   const [isOpen, setIsOpen] = useState(false);
@@ -118,9 +117,9 @@ export const Inicio = () => {
           onClick: () => {
             deletarDispositivo(
               storageValues?.token,
-              storageValues?.user,
-              objeto._id,
+              objeto.id,
               setLista,
+              storageValues?.user,
             );
             deleteDevice(objeto?.device?.name);
           },
@@ -137,22 +136,22 @@ export const Inicio = () => {
       <ConfirmStyle />
       <Modal open={isOpen} onClose={() => setIsOpen(false)} esconder={"none"}>
         <ModalContentInicio>
-          <h2>{modalInfo.device?.name}</h2>
-          <h3>{modalInfo.device?.madeBy}</h3>
+          <h2>{modalInfo?.name}</h2>
+          <h3>{modalInfo?.madeBy}</h3>
           <div className="device">
-            <img src={modalInfo.device?.photoUrl} alt=""></img>
-            <h2>Dispositivo: {!modalInfo.is_on ? "Desligado" : "Ligado"}</h2>
+            <img src={modalInfo?.photoUrl} alt=""></img>
+            <h2>Dispositivo: {!modalInfo.isOn ? "Desligado" : "Ligado"}</h2>
           </div>
           <div className="deviceInfo">
             <h2>Informações do dispositivo</h2>
             <hr />
-            <p> ID virtual: {modalInfo.device?.info?.virtual_id}</p>
+            <p> ID virtual: {modalInfo?.info?.virtual_id}</p>
             <p>
               Endereço IP:
-              {modalInfo.device?.info?.ip_address}
+              {modalInfo?.info?.ip_address}
             </p>
-            <p>Endereço MAC: {modalInfo.device?.info?.mac_address}</p>
-            <p>Força do sinal: {modalInfo.device?.info?.signal}</p>
+            <p>Endereço MAC: {modalInfo?.info?.mac_address}</p>
+            <p>Força do sinal: {modalInfo?.info?.signal}</p>
           </div>
           <div className="centerBtn">
             {" "}
@@ -201,7 +200,7 @@ export const Inicio = () => {
               <button
                 className="myButton"
                 onClick={(event) => {
-                  handleFiltro("Casa");
+                  handleFiltro("casa");
                 }}
               >
                 Casa
@@ -209,7 +208,7 @@ export const Inicio = () => {
               <button
                 className="myButton"
                 onClick={(event) => {
-                  handleFiltro("Escritório");
+                  handleFiltro("escritório");
                 }}
               >
                 Escritóro
@@ -217,7 +216,7 @@ export const Inicio = () => {
               <button
                 className="myButton"
                 onClick={(event) => {
-                  handleFiltro("Fábrica");
+                  handleFiltro("fábrica");
                 }}
               >
                 Fábrica
@@ -237,12 +236,12 @@ export const Inicio = () => {
                           <img
                             className="img"
                             alt="foto"
-                            src={objeto?.device?.photoUrl}
+                            src={objeto?.photoUrl}
                           />
                         </div>
 
                         <div className="infoText">
-                          <h2 className="infoTitulo">{objeto?.device?.name}</h2>
+                          <h2 className="infoTitulo">{objeto?.name}</h2>
                           <p>Local: {objeto.local?.description}</p>
                           <p>Cômodo: {objeto.room}</p>
                         </div>
@@ -254,18 +253,18 @@ export const Inicio = () => {
                                 storageValues?.token,
                                 storageValues?.user,
                                 setLista,
-                                objeto._id,
-                                !objeto.is_on,
+                                objeto.id,
+                                !objeto.isOn,
                               );
 
-                              if (!objeto.is_on) {
+                              if (!objeto.isOn) {
                                 notify("Ligado");
                               } else {
                                 notify("Desligado");
                               }
                             }}
                             style={{
-                              backgroundColor: objeto.is_on ? "green" : "gray",
+                              backgroundColor: objeto.isOn ? "green" : "gray",
                             }}
                           >
                             <i className="fa-solid fa-power-off"></i>

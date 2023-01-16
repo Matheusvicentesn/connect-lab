@@ -26,7 +26,7 @@ function AuthProvider({ children }) {
   }, [auth]);
 
   function handleLogin(email, password) {
-    fetch("https://connectlabapi.onrender.com/auth/login", {
+    fetch("http://localhost:3000/auth/signin", {
       method: "POST",
 
       headers: new Headers({

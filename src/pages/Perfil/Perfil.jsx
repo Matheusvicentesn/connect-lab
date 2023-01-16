@@ -8,7 +8,7 @@ import Modal from "../../components/Modal/Modal";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { validacoes } from "../../utils/validacoes";
+import { validacoes } from "../../utils/updateUser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -42,19 +42,19 @@ export const Perfil = () => {
       const { token, user } = JSON.parse(sessionStorage.getItem("usuario"));
       setStorageValues({
         token,
-        user: user?._id,
-        fullName: user?.fullName,
-        photoUrl: user?.photoUrl,
+        user: user?.id,
+        name: user?.name,
+        pic: user?.pic,
         email: user?.email,
         password: user?.password,
         phone: user?.phone,
-        zipCode: user?.userAddress?.zipCode,
-        street: user?.userAddress?.street,
-        number: user?.userAddress?.number,
-        neighborhood: user?.userAddress?.neighborhood,
-        city: user?.userAddress?.city,
-        state: user?.userAddress?.state,
-        complement: user?.userAddress?.complement,
+        zip_code: user?.address?.zip_code,
+        street: user?.address?.street,
+        number: user?.address?.number,
+        neighborhood: user?.address?.neighborhood,
+        city: user?.address?.city,
+        state: user?.address?.state,
+        complement: user?.address?.complement,
       });
     }
   }, []);
@@ -65,18 +65,18 @@ export const Perfil = () => {
   const [usuario, setUsuario] = useState();
   useEffect(() => {
     if (storageValues?.token && storageValues?.user) {
-      buscarPerfil(storageValues.token, storageValues.user, setUsuario);
+      buscarPerfil(storageValues.token, setUsuario);
     }
   }, [storageValues?.token, storageValues?.user, setUsuario]);
 
   // Preenchimento do Modal
 
   function HandleSelecionar() {
-    setValue("name", storageValues.fullName);
+    setValue("name", storageValues.name);
     setValue("email", storageValues.email);
-    setValue("pic", storageValues.photoUrl);
+    setValue("pic", storageValues.pic);
     setValue("phone", storageValues.phone);
-    setValue("zipCode", storageValues.zipCode);
+    setValue("zip_code", storageValues.zip_code);
     setValue("adress", storageValues.street);
     setValue("district", storageValues.neighborhood);
     setValue("state", storageValues.state);
@@ -85,7 +85,7 @@ export const Perfil = () => {
     setValue("city", storageValues.city);
   }
 
-  // auto fill input with zipcode
+  // auto fill input with zip_code
   const fillInfo = (e) => {
     const cep = e.target.value.replace(/\D/g, "");
     if (cep) {
@@ -102,10 +102,11 @@ export const Perfil = () => {
     atualizarUsuario(
       form?.email,
       form?.password,
+      form?.newPassword,
       form?.name,
       form?.pic,
       form?.phone,
-      form?.zipCode,
+      form?.zip_code,
       form?.adress,
       form?.houseNumber,
       form?.district,
@@ -185,24 +186,23 @@ export const Perfil = () => {
                     />
                   </li>
                   <li>
-                    <label htmlFor="confirmPassowrd">
-                      Confirmação da senha*{" "}
-                      <p>{errors.confirmPassowrd?.message}</p>
+                    <label htmlFor="newPassword">
+                      Nova senha* <p>{errors.newPassword?.message}</p>
                     </label>
                     <input
                       type="password"
-                      name="confirmPassowrd"
-                      {...register("confirmPassowrd")}
+                      name="newPassword"
+                      {...register("newPassword")}
                     />
                   </li>
                   <li>
-                    <label htmlFor="zipCode">
-                      CEP* <p>{errors.zipCode?.message}</p>
+                    <label htmlFor="zip_code">
+                      CEP* <p>{errors.zip_code?.message}</p>
                     </label>
                     <input
                       type="text"
-                      name="zipCode"
-                      {...register("zipCode")}
+                      name="zip_code"
+                      {...register("zip_code")}
                       onBlur={(e) => {
                         fillInfo(e);
                       }}
@@ -257,7 +257,14 @@ export const Perfil = () => {
                     />
                   </li>
                   <br></br>
-                  <button type="submit">Atualizar</button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      console.log(this);
+                    }}
+                  >
+                    Atualizar
+                  </button>
                   <button
                     onClick={() => {
                       setIsOpen(false);
@@ -274,24 +281,22 @@ export const Perfil = () => {
           </FormPerfil>
         </Modal>
       </>
-
       <Card>
         <CardStyled>
           <div className="container">
             <h2>Perfil</h2>
             <article>
-              <img src={usuario?.photoUrl} alt="" />
-              <p>{usuario?.fullName}</p>
-              <p>{usuario?.email}</p>
-              <p>{usuario?.phone}</p>
+              <img src={storageValues?.pic} alt="" />
+              <p>{storageValues?.name}</p>
+              <p>{storageValues?.email}</p>
+              <p>{storageValues?.phone}</p>
             </article>
             <h2>Endereço</h2>
             <hr />
             <p>
-              {usuario?.userAddress?.street} {usuario?.userAddress?.number}{" "}
-              {usuario?.userAddress?.complement} -{" "}
-              {usuario?.userAddress?.neighborhood} -{" "}
-              {usuario?.userAddress?.state} - {usuario?.userAddress?.city}{" "}
+              {storageValues?.street} {storageValues?.number}{" "}
+              {storageValues?.complement} - {storageValues?.neighborhood} -{" "}
+              {storageValues?.state} - {storageValues?.city}{" "}
             </p>
             <br />
             <div className="footer">

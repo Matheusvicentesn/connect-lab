@@ -1,5 +1,5 @@
-export function buscarPerfil(token, user, set) {
-  return fetch(`https://connectlabapi.onrender.com/users/${user}`, {
+export function buscarPerfil(token, set) {
+  return fetch(`http://localhost:3000/auth/signin`, {
     method: "get",
     headers: new Headers({
       Authorization: `Bearer ${token}`,
@@ -14,8 +14,9 @@ export function buscarPerfil(token, user, set) {
     });
 }
 
-export function buscarDispositivos(token, user, set) {
-  return fetch("https://connectlabapi.onrender.com/devices", {
+// check
+export function buscarDispositivos(token, set) {
+  return fetch("http://localhost:3000/devices", {
     method: "get",
     headers: new Headers({
       Authorization: `Bearer ${token}`,
@@ -30,8 +31,9 @@ export function buscarDispositivos(token, user, set) {
     });
 }
 
+// check
 export function buscarLocais(token, set) {
-  return fetch("https://connectlabapi.onrender.com/locals", {
+  return fetch("http://localhost:3000/locals", {
     method: "get",
     headers: new Headers({
       Authorization: `Bearer ${token}`,
@@ -45,9 +47,10 @@ export function buscarLocais(token, set) {
       return data;
     });
 }
-
+// check
 export function salvarDispositivos(token, user, data, local, room) {
-  return fetch("https://connectlabapi.onrender.com/userDevices", {
+  console.log(`Minha Template Literal ${local}`);
+  return fetch("http://localhost:3000/auth/linkdevice", {
     method: "POST",
 
     headers: new Headers({
@@ -56,17 +59,16 @@ export function salvarDispositivos(token, user, data, local, room) {
     }),
 
     body: JSON.stringify({
-      user,
-      device: data,
+      device_id: data.id,
       is_on: true,
       local,
       room,
     }),
   });
 }
-
+// check
 export function buscarDispositivosUsuario(token, user, set) {
-  return fetch(`https://connectlabapi.onrender.com/userDevices/user/${user}`, {
+  return fetch(`http://localhost:3000/auth/searchdevices/`, {
     method: "get",
     headers: new Headers({
       Authorization: `Bearer ${token}`,
@@ -80,9 +82,9 @@ export function buscarDispositivosUsuario(token, user, set) {
       return data;
     });
 }
-
+// check
 export function atualizarDispositivoUsuario(token, user, set, device, toggle) {
-  return fetch(`https://connectlabapi.onrender.com/userDevices/${device}`, {
+  return fetch(`http://localhost:3000/auth/switchdevice/${device}`, {
     method: "PUT",
     headers: new Headers({
       Authorization: `Bearer ${token}`,
@@ -107,7 +109,7 @@ export function buscaCep(cep) {
     return response.json();
   });
 }
-
+// Check
 export function cadastrarUsuario(
   email,
   password,
@@ -122,7 +124,7 @@ export function cadastrarUsuario(
   state,
   complement,
 ) {
-  return fetch("https://connectlabapi.onrender.com/auth/register", {
+  return fetch("http://localhost:3000/auth/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -130,11 +132,12 @@ export function cadastrarUsuario(
     body: JSON.stringify({
       email,
       password,
-      fullName: name,
-      photoUrl: pic,
+      confirm_password: password,
+      name,
+      profile_pic: pic,
       phone,
-      userAddress: {
-        zipCode,
+      address: {
+        zip_code: zipCode,
         street: adress,
         number: houseNumber,
         neighborhood: district,
@@ -155,6 +158,7 @@ export function cadastrarUsuario(
 export function atualizarUsuario(
   email,
   password,
+  newpassword,
   name,
   pic,
   phone,
@@ -168,7 +172,7 @@ export function atualizarUsuario(
   token,
   id,
 ) {
-  return fetch(`https://connectlabapi.onrender.com/users/${id}`, {
+  return fetch(`http://localhost:3000/auth/updateuser`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -177,11 +181,12 @@ export function atualizarUsuario(
     body: JSON.stringify({
       email,
       password,
-      fullName: name,
-      photoUrl: pic,
+      newpassword,
+      name,
+      profile_pic: pic,
       phone,
-      userAddress: {
-        zipCode,
+      address: {
+        zip_code: zipCode,
         street: adress,
         number: houseNumber,
         neighborhood: district,
@@ -199,8 +204,8 @@ export function atualizarUsuario(
     });
 }
 
-export function deletarDispositivo(token, user, device, set) {
-  return fetch(`https://connectlabapi.onrender.com/userDevices/${device}`, {
+export function deletarDispositivo(token, device, set, user) {
+  return fetch(`http://localhost:3000/auth/deleteuserdevice/${device}`, {
     method: "DELETE",
     headers: new Headers({
       Authorization: `Bearer ${token}`,

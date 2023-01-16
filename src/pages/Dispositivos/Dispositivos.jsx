@@ -22,7 +22,7 @@ export const Dispositivos = () => {
       const { token, user } = JSON.parse(sessionStorage.getItem("usuario"));
       setStorageValues({
         token,
-        user: user?._id,
+        user: user?.id,
       });
     }
   }, []);
@@ -31,9 +31,10 @@ export const Dispositivos = () => {
   const [lista, setLista] = useState();
   useEffect(() => {
     if (storageValues?.token && storageValues?.user) {
-      buscarDispositivos(storageValues.token, storageValues.user, setLista);
+      buscarDispositivos(storageValues.token, setLista);
     }
   }, [storageValues?.token, storageValues?.user, setLista]);
+  console.log(storageValues);
 
   // Buscar locais
   const [locais, setLocais] = useState();
@@ -67,6 +68,7 @@ export const Dispositivos = () => {
   const [data, setData] = useState(""); // definir qual é o dispositivo
   const [local, setLocal] = useState(""); // definir qual é o local
   const [room, setRoom] = useState(""); // definir qual é o  comodo
+
   const handleSalvar = async () => {
     const calculo = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
     setTimeOut(calculo);
@@ -103,11 +105,14 @@ export const Dispositivos = () => {
           </div>
           <form action="">
             <label htmlFor="local">Local:</label>
-            <select value={local} onChange={(e) => setLocal(e.target.value)}>
+            <select
+              value={local}
+              onChange={(e) => setLocal(e.target.value)}
+            >
               <option value="">Selecione um local</option>
               {locais?.map((objeto) => (
                 <Fragment key={objeto.description}>
-                  <option value={objeto._id}>{objeto.description}</option>
+                  <option value={objeto.description}>{objeto.description}</option>
                 </Fragment>
               ))}
             </select>
@@ -150,7 +155,7 @@ export const Dispositivos = () => {
             <div className="displaycards">
               <section className="cards">
                 {listaFiltradas.map((objeto) => (
-                  <Fragment key={objeto._id}>
+                  <Fragment key={objeto.id}>
                     <article className="card">
                       <div className="info">
                         <img className="img" alt="foto" src={objeto.photoUrl} />
